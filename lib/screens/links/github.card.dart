@@ -29,7 +29,8 @@ class _GitHubCardState extends State<GitHubCard> {
   late Future<ContributionData> _contributionData;
 
   
-  final String? githubToken = dotenv.env['TOKEN_GITHUB'];
+  // This reads the variable passed in by --dart-define=TOKEN_GITHUB=...
+final String githubToken = const String.fromEnvironment('TOKEN_GITHUB');
 
   @override
   void initState() {
@@ -39,6 +40,9 @@ class _GitHubCardState extends State<GitHubCard> {
 
   /// Fetches contribution data for the current year from the GitHub GraphQL API.
   Future<ContributionData> _fetchContributionData() async {
+    if (githubToken.isEmpty) {
+    throw Exception('Failed to load contribution data: The TOKEN_GITHUB was not provided during the build process.');
+  }
     final now = DateTime.now();
     final startDate = DateTime(now.year, 1, 1);
     final endDate = DateTime(now.year, 12, 31);

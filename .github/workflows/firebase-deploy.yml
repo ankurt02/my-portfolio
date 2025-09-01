@@ -1,0 +1,40 @@
+name: Deploy to Firebase Hosting
+
+on:
+  push:
+    branches:
+      - main  # This workflow runs on every push to the main branch
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout your repository code
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      # 2. Set up the Flutter SDK
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.0' # Or any recent stable version
+          channel: 'stable'
+
+      # 3. Get Flutter dependencies
+      - name: Get Dependencies
+        run: flutter pub get
+
+      # 4. Build the Flutter web app, passing the secret token
+      # This is the most important step for your API key!
+      - name: Build Web App
+        run: flutter build web --release --dart-define=TOKEN_GITHUB=${{ secrets.GH_PAT }}
+
+      # 5. Deploy the built app to Firebase Hosting
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          channelId: live
+          projectId: ankur-portfolio-d873f 

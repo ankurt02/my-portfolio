@@ -21,7 +21,7 @@ class ResumeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String? resumeUrl = dotenv.env['RESUME_URL'];
+    final String? resumeUrl = "https://resume-hosting-f1c9d.web.app/ankur_tiwary_resume.pdf";
 
     if (resumeUrl == null || resumeUrl.isEmpty) {
       return const Center(
