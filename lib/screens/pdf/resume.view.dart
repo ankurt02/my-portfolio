@@ -1,6 +1,5 @@
 import 'package:ankur_portfolio/widgets/buttons/resume.download.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:pdfrx/pdfrx.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:web/web.dart' as web;

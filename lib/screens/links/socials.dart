@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 
@@ -81,7 +80,7 @@ class GitHubProfile extends SocialProfile {
 
 
 class SocialsService {
-  static final String? _githubToken = dotenv.env['TOKEN_GITHUB'];
+  static final String _githubToken = const String.fromEnvironment('TOKEN_GITHUB');
 
   static Future<List<SocialProfile>> fetchProfiles() async {
     if (_githubToken == null || _githubToken!.isEmpty) {

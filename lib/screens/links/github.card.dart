@@ -4,9 +4,7 @@ import 'package:ankur_portfolio/widgets/buttons/github.button.dart';
 import 'package:ankur_portfolio/widgets/carousel/auto.carousel.dart';
 import 'package:ankur_portfolio/widgets/heatmap/heatmap.design.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gap/gap.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
