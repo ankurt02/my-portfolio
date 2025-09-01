@@ -1,0 +1,34 @@
+name: Deploy Flutter Web to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # deploy on push to main branch
+  workflow_dispatch:   # optional: allows manual deploy
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repo
+      - uses: actions/checkout@v4
+
+      # 2. Setup Flutter
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.2'
+
+      # 3. Get dependencies
+      - run: flutter pub get
+
+      # 4. Build web app with secrets
+      - run: flutter build web --release --dart-define=TOKEN_GITHUB=${{ secrets.GH_PAT }} --dart-define=RESUME_URL=${{ secrets.RESUME_URL }}
+
+      # 5. Deploy to GitHub Pages
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GH_PAT }}
+          publish_dir: ./build/web
+          # Optional: cname: 'yourdomain.com'

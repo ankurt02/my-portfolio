@@ -1,0 +1,129 @@
+ExplorerPanelCardOne(
+            iconName: FontAwesome.angle_down_solid,
+            tabName: "ABOUT"
+          ),
+
+          ExplorePanelCardTwo(
+            assetPath: "assets/svg/dart.svg", 
+            tabName: "index.dart"
+          ),
+
+          ExplorerPanelCardOne(
+            iconName: FontAwesome.angle_down_solid, 
+            tabName: "PROJECTS"
+          ),
+
+          ExplorerPanelCardOne(
+            iconName: FontAwesome.angle_down_solid, 
+            tabName: "MISC"
+          ),
+
+          ExplorerPanelCardOne(
+            iconName: FontAwesome.angle_down_solid, 
+            tabName: "LET'S CONNECT"
+          ),
+
+          ExplorePanelCardTwo(
+            assetPath: "assets/svg/gmail.svg", 
+            tabName: "Gmail",
+            hyperlink: "ankurt5202@gmail.com",
+          ),
+
+
+          ExplorePanelCardTwo(
+            assetPath: "assets/svg/linkedin.svg", 
+            tabName: "Linekedin",
+            hyperlink: "https://www.linkedin.com/in/ankur-tiwary-393479230/",
+          ),
+
+
+          ExplorePanelCardTwo(
+            assetPath: "assets/svg/twitter_org.svg", 
+            tabName: "X",
+            hyperlink: "https://x.com/_ankur2_",
+          ),
+
+          ExplorerPanelCardOne(
+            iconName: FontAwesome.angle_down_solid, 
+            tabName: "RESUME"
+          ),
+
+          ExplorePanelCardTwo(
+            assetPath: "assets/svg/pdf.svg", 
+            tabName: "Resume.pdf"
+          ),
+
+
+
+
+// this one is for the github pages ideas
+
+Got it 👍 You’ve got two yellow-highlighted containers (one above and one below your GitHub contribution section). Right now they’re empty, and you want UI ideas to make them visually appealing and useful for your portfolio. Here are some good options depending on the vibe you want:
+
+🔝 Top Yellow Container (Above GitHub section)
+
+This is prime space — it should grab attention but not overshadow your profile.
+
+Tech Stack Logos (Interactive / Animated)
+
+Add logos of the technologies you work with (Flutter, Python, Dart, JS, etc.).
+
+You can make them slightly animated (hover effects, glowing borders, or bouncing GIFs).
+
+Example: Row of icons with tooltips like "Flutter – Mobile Development".
+
+Mini “About Me” Card with GIF/Avatar
+
+Place a short 2-line intro (“I’m a CSE student passionate about Flutter & AI”).
+
+Add a developer-themed GIF (like coding animations, a laptop typing GIF, or your custom avatar).
+
+Stats Widgets / Badges
+
+Display coding stats (e.g., GitHub streaks, WakaTime coding hours, LeetCode progress).
+
+Or badges like “Flutter Developer | ML Enthusiast | Open Source Contributor”.
+
+Inspirational Quote / Motto Banner
+
+A clean banner with your personal motto or a favorite tech-related quote.
+
+Example: “Building ideas into apps 🚀” in stylish typography.
+
+🔻 Bottom Yellow Container (Below GitHub section)
+
+This can act as a “closing” section to leave a lasting impression.
+
+Contact Me Section with Icons
+
+Show clickable icons (Mail, LinkedIn, Twitter, GitHub).
+
+Stylish glowing effect on hover.
+
+Certifications / Achievements Showcase
+
+Small card-style badges for courses, hackathons, or achievements.
+
+Example: Google Cloud Badge, Hackathon Winner, etc.
+
+Fun Personal Touch (Anime/Gaming/Theme)
+
+Since you like anime, add a subtle looping anime GIF (like a character coding or thinking).
+
+Or a custom background image that represents your vibe.
+
+Future Projects / Blog Section Preview
+
+A simple carousel or grid showing thumbnails of upcoming projects or blogs.
+
+Example: “Coming Soon: Anime Recommendation App v2”.
+
+💡 Pro Combo Idea:
+
+Top Yellow → Professional (Tech stack, About, GIF/avatar)
+
+Bottom Yellow → Personal/Creative (Anime touch, contact links, or achievements)
+
+This way you balance professional + personal identity.
+
+Do you want me to mock up a design (in Figma style / HTML+CSS snippet) for one professional and one creative option so you can visualize before implementing?

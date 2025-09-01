@@ -1,0 +1,4 @@
+enum FaceType {
+  circle,
+  square,
+}
