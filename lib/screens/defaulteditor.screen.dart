@@ -83,7 +83,7 @@ class _DefaultEditorScreenState extends State<DefaultEditorScreen> {
                   Row(
                     children: [
                       SvgPicture.asset(
-                        'assets/svg/filemain2.svg',
+                        'assets/svg/folder.svg',
                         height: 16,
                         width: 16,
                         colorFilter: ColorFilter.mode(
@@ -102,11 +102,13 @@ class _DefaultEditorScreenState extends State<DefaultEditorScreen> {
                     ],
                   ),
 
+                  Gap(6),
+
                   // Projects
                   Row(
                     children: [
                       SvgPicture.asset(
-                        'assets/svg/filemain2.svg',
+                        'assets/svg/folder.svg',
                         height: 16,
                         width: 16,
                         colorFilter: ColorFilter.mode(
@@ -125,17 +127,19 @@ class _DefaultEditorScreenState extends State<DefaultEditorScreen> {
                     ],
                   ),
 
+                  Gap(6),
+
                   // Anime
                   Row(
                     children: [
                       SvgPicture.asset(
-                        'assets/svg/filemain2.svg',
+                        'assets/svg/folder.svg',
                         height: 16,
                         width: 16,
-                        colorFilter: ColorFilter.mode(
-                          Color(0xFF3B82F6),
-                          BlendMode.srcIn,
-                        ),
+                        // colorFilter: ColorFilter.mode(
+                        //   Color(0xFF3B82F6),
+                        //   BlendMode.srcIn,
+                        // ),
                       ),
                       Gap(2),
                       Text(
