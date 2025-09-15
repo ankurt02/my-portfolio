@@ -1,6 +1,9 @@
 import 'package:ankur_portfolio/models/editor.tab.dart';
+import 'package:ankur_portfolio/screens/about/index.html.dart';
 import 'package:ankur_portfolio/screens/links/socials.dart'; // Import your social profiles
 import 'package:ankur_portfolio/screens/links/twitter.screen.dart';
+import 'package:ankur_portfolio/screens/pdf/certificate.azure.dart';
+import 'package:ankur_portfolio/screens/pdf/certificate.oracle.dart';
 import 'package:ankur_portfolio/screens/pdf/resume.view.dart';
 import 'package:ankur_portfolio/widgets/explorer%20cards/explorepanel.cardtwo.dart';
 import 'package:ankur_portfolio/widgets/explorer%20cards/explorerpanel.cardone.dart';
@@ -63,7 +66,7 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
           }
 
           final profiles = snapshot.data!;
-          
+
           final linkedInProfile =
               profiles.firstWhere((p) => p is LinkedInProfile)
                   as LinkedInProfile;
@@ -72,7 +75,6 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
           final gitHubProfile =
               profiles.firstWhere((p) => p is GitHubProfile) as GitHubProfile;
 
-          
           return Column(
             children: [
               ExplorerPanelCardOne(
@@ -83,15 +85,16 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
               ExplorePanelCardTwo(
                 assetPath: "assets/svg/html5.svg",
                 tabName: "index.html",
+                onTap:
+                    () => widget.onOpenTab(
+                      EditorTab(title: "Index.html", content: IndexDotHtml()),
+                    ),
               ),
               ExplorePanelCardTwo(
                 assetPath: "assets/svg/css.svg",
                 tabName: "skills.css",
               ),
-              ExplorePanelCardTwo(
-                assetPath: "assets/svg/js.svg",
-                tabName: "project.js",
-              ),
+
               ExplorerPanelCardOne(
                 iconName: FontAwesome.angle_down_solid,
                 tabName: "PROJECTS",
@@ -150,6 +153,25 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
                         content: GitHubCard(profile: gitHubProfile),
                       ),
                     ),
+              ),
+
+              ExplorerPanelCardOne(
+                iconName: FontAwesome.angle_down_solid,
+                tabName: "CERTIFICATES",
+              ),
+              ExplorePanelCardTwo(
+                assetPath: "assets/svg/brave.svg",
+                tabName: "MS Azure AI-900",
+                onTap: () => widget.onOpenTab(
+                  EditorTab(title: "MS Azure AI-900", content: CertificateAzure())
+                ),
+              ),
+              ExplorePanelCardTwo(
+                assetPath: "assets/svg/chrome.svg",
+                tabName: "Oracle Cloud Infrastructure",
+                onTap: () => widget.onOpenTab(
+                  EditorTab(title: "Oracle Cloud Infrastructure", content: CertificateOracle())
+                ),
               ),
               ExplorerPanelCardOne(
                 iconName: FontAwesome.angle_down_solid,

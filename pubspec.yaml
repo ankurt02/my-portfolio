@@ -80,6 +80,8 @@ flutter:
     - .env
     - assets/socials.json
     - assets/svg/
+    - assets/images/
+
 
 
 

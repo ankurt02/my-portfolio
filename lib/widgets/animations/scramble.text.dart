@@ -43,7 +43,7 @@ class _HackerTextEffectState extends State<HackerTextEffect> {
     for (int i = 0; i <= widget.text.length; i++) {
 
       // This inner loop creates the rapid scrambling effect for the remaining letters.
-      for (int j = 0; j < 3; j++) { // Run the scramble effect a few times for each letter
+      for (int j = 0; j < 2; j++) { // Run the scramble effect a few times for each letter
         String scrambledPart = '';
         for (int k = i; k < widget.text.length; k++) {
           // Keep spaces as they are for better readability
@@ -59,7 +59,7 @@ class _HackerTextEffectState extends State<HackerTextEffect> {
           // Combine the "decoded" part with the scrambled part
           _currentText = widget.text.substring(0, i) + scrambledPart;
         });
-        await Future.delayed(const Duration(milliseconds: 20));
+        await Future.delayed(const Duration(milliseconds: 10));
       }
     }
     
@@ -80,7 +80,7 @@ class _HackerTextEffectState extends State<HackerTextEffect> {
         textAlign: TextAlign.center,
         style: GoogleFonts.ibmPlexMono(
           fontSize: 60,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w500,
           color: Colors.white,
           letterSpacing: -2,
         ),
