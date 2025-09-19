@@ -2,6 +2,8 @@ import 'package:ankur_portfolio/models/editor.tab.dart';
 import 'package:ankur_portfolio/screens/about/index.html.dart';
 import 'package:ankur_portfolio/screens/links/socials.dart'; // Import your social profiles
 import 'package:ankur_portfolio/screens/links/twitter.screen.dart';
+import 'package:ankur_portfolio/screens/misc/research.paper.dart';
+import 'package:ankur_portfolio/screens/misc/typing.screen.dart';
 import 'package:ankur_portfolio/screens/pdf/certificate.azure.dart';
 import 'package:ankur_portfolio/screens/pdf/certificate.oracle.dart';
 import 'package:ankur_portfolio/screens/pdf/resume.view.dart';
@@ -94,7 +96,10 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
                 assetPath: "assets/svg/css.svg",
                 tabName: "skills.css",
               ),
-
+              ExplorePanelCardTwo(
+                assetPath: "assets/svg/js.svg",
+                tabName: "education.js",
+              ),
               ExplorerPanelCardOne(
                 iconName: FontAwesome.angle_down_solid,
                 tabName: "PROJECTS",
@@ -162,16 +167,24 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
               ExplorePanelCardTwo(
                 assetPath: "assets/svg/brave.svg",
                 tabName: "MS Azure AI-900",
-                onTap: () => widget.onOpenTab(
-                  EditorTab(title: "MS Azure AI-900", content: CertificateAzure())
-                ),
+                onTap:
+                    () => widget.onOpenTab(
+                      EditorTab(
+                        title: "MS Azure AI-900",
+                        content: CertificateAzure(),
+                      ),
+                    ),
               ),
               ExplorePanelCardTwo(
                 assetPath: "assets/svg/chrome.svg",
                 tabName: "Oracle Cloud Infrastructure",
-                onTap: () => widget.onOpenTab(
-                  EditorTab(title: "Oracle Cloud Infrastructure", content: CertificateOracle())
-                ),
+                onTap:
+                    () => widget.onOpenTab(
+                      EditorTab(
+                        title: "Oracle Cloud Infrastructure",
+                        content: CertificateOracle(),
+                      ),
+                    ),
               ),
               ExplorerPanelCardOne(
                 iconName: FontAwesome.angle_down_solid,
@@ -180,6 +193,7 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
               ),
               ExplorePanelCardTwo(
                 assetPath: "assets/svg/crunchyroll001.svg",
+                customColor: const Color(0xFFF47521),
                 tabName: "Anime.mkv",
               ),
               ExplorePanelCardTwo(
@@ -187,9 +201,37 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
                 tabName: "Songs.mp3",
               ),
               ExplorePanelCardTwo(
-                assetPath: "assets/svg/netflixfull.svg",
+                assetPath: "assets/svg/netflix.svg",
+                customColor: Color(0xFFB2070F),
                 tabName: "Webseries.binge",
               ),
+              
+              ExplorePanelCardTwo(
+                assetPath: "assets/svg/paperclip01.svg",
+                customColor: Colors.grey.shade400,
+                tabName: "Research-paper",
+                onTap:
+                    () => widget.onOpenTab(
+                      EditorTab(
+                        title: "Research-paper",
+                        content: ResearchPaperView(),
+                      ),
+                    ),
+              ),
+
+              ExplorePanelCardTwo(
+                assetPath: "assets/svg/8008.svg",
+                // customColor: Color(0xFFf44c7f),
+                tabName: "monkeytype.mt",
+                onTap:
+                    () => widget.onOpenTab(
+                      EditorTab(
+                        title: "monkeytype.mt",
+                        content: HeatmapScreen(),
+                      ),
+                    ),
+              ),
+
               ExplorerPanelCardOne(
                 iconName: FontAwesome.angle_down_solid,
                 tabName: "RESUME",
