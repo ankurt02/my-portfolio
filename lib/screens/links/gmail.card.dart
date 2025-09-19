@@ -8,7 +8,7 @@ class GmailCard extends StatelessWidget {
     return Material(
       color: Color(0xFF000C18),
       child: Center(
-        child: Text("Under Progress", style: TextStyle(color: Colors.white54)),
+        child: Text("Gmail page is Under Progress", style: TextStyle(color: Colors.white54)),
       ),
     );
   }

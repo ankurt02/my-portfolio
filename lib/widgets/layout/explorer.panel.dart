@@ -219,18 +219,18 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
                     ),
               ),
 
-              ExplorePanelCardTwo(
-                assetPath: "assets/svg/8008.svg",
-                // customColor: Color(0xFFf44c7f),
-                tabName: "monkeytype.mt",
-                onTap:
-                    () => widget.onOpenTab(
-                      EditorTab(
-                        title: "monkeytype.mt",
-                        content: HeatmapScreen(),
-                      ),
-                    ),
-              ),
+              // ExplorePanelCardTwo(
+              //   assetPath: "assets/svg/8008.svg",
+              //   // customColor: Color(0xFFf44c7f),
+              //   tabName: "monkeytype.mt",
+              //   onTap:
+              //       () => widget.onOpenTab(
+              //         EditorTab(
+              //           title: "monkeytype.mt",
+              //           content: HeatmapScreen(),
+              //         ),
+              //       ),
+              // ),
 
               ExplorerPanelCardOne(
                 iconName: FontAwesome.angle_down_solid,

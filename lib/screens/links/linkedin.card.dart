@@ -102,7 +102,7 @@ class LinkedInCard extends StatelessWidget {
     Material(
       color: Color(0xFF000C18),
       child: Center(
-        child: Text("Under Progress", style: TextStyle(color: Colors.white54)),
+        child: Text("Linkedin page is Under Progress", style: TextStyle(color: Colors.white54)),
       ),
     );
   }
