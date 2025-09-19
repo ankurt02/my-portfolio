@@ -111,7 +111,7 @@ class _StatusBarState extends State<StatusBar> {
                 "v1.0-release",
                 style: GoogleFonts.robotoMono(
                   fontSize: 12,
-                  color: Colors.white70,
+                  color: Colors.grey.shade300,
                   letterSpacing: 0,
                 ),
               ),
@@ -122,7 +122,7 @@ class _StatusBarState extends State<StatusBar> {
                 "host:github-pages",
                 style: GoogleFonts.robotoMono(
                   fontSize: 12,
-                  color: Colors.white70,
+                  color: Colors.grey.shade300,
                   letterSpacing: 0,
                 ),
               ),

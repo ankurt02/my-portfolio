@@ -4,9 +4,7 @@ import 'package:ankur_portfolio/widgets/buttons/github.button.dart';
 import 'package:ankur_portfolio/widgets/carousel/auto.carousel.dart';
 import 'package:ankur_portfolio/widgets/heatmap/heatmap.design.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gap/gap.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -28,9 +26,8 @@ class GitHubCard extends StatefulWidget {
 class _GitHubCardState extends State<GitHubCard> {
   late Future<ContributionData> _contributionData;
 
-  
   // This reads the variable passed in by --dart-define=TOKEN_GITHUB=...
-final String githubToken = const String.fromEnvironment('TOKEN_GITHUB');
+  final String githubToken = const String.fromEnvironment('TOKEN_GITHUB');
 
   @override
   void initState() {
@@ -41,8 +38,10 @@ final String githubToken = const String.fromEnvironment('TOKEN_GITHUB');
   /// Fetches contribution data for the current year from the GitHub GraphQL API.
   Future<ContributionData> _fetchContributionData() async {
     if (githubToken.isEmpty) {
-    throw Exception('Failed to load contribution data: The TOKEN_GITHUB was not provided during the build process.');
-  }
+      throw Exception(
+        'Failed to load contribution data: The TOKEN_GITHUB was not provided during the build process.',
+      );
+    }
     final now = DateTime.now();
     final startDate = DateTime(now.year, 1, 1);
     final endDate = DateTime(now.year, 12, 31);
@@ -125,7 +124,7 @@ final String githubToken = const String.fromEnvironment('TOKEN_GITHUB');
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Gap(24),
-                      HackerTextEffect(text: 'Caffein and version-control!',),
+                      HackerTextEffect(text: 'Caffein and version-control!'),
 
                       Spacer(),
 
@@ -135,8 +134,7 @@ final String githubToken = const String.fromEnvironment('TOKEN_GITHUB');
                           Container(
                             height: 50,
                             alignment: Alignment.center,
-                            child: 
-                                GithubButton(
+                            child: GithubButton(
                               text: "Visit Source",
                               url: "https://github.com/ankurt02",
                             ),
@@ -175,7 +173,7 @@ final String githubToken = const String.fromEnvironment('TOKEN_GITHUB');
                           );
                         } else if (snapshot.hasData) {
                           final contributionData = snapshot.data!;
-                  
+
                           // --- Dynamic Color Calculation Logic ---
                           final maxCount =
                               (contributionData.datasets.values.isNotEmpty)
@@ -183,22 +181,22 @@ final String githubToken = const String.fromEnvironment('TOKEN_GITHUB');
                                     (a, b) => a > b ? a : b,
                                   )
                                   : 0;
-                  
+
                           // Dynamic colors based on contribution thresholds.
                           final Map<int, Color> dynamicColors = {
-                            1: const Color(0xFF0E4429), 
+                            1: const Color(0xFF0E4429),
                           };
-                  
+
                           if (maxCount > 0) {
                             // print(maxCount);
                             dynamicColors[(maxCount * 0.25)
                                 .ceil()] = const Color(0xFF006D32);
                             dynamicColors[(maxCount * 0.5)
                                 .ceil()] = const Color(0xFF26A641);
-                            dynamicColors[(maxCount * 0.75).ceil()] =
-                                const Color(0xFF39D353); 
+                            dynamicColors[(maxCount * 0.75)
+                                .ceil()] = const Color(0xFF39D353);
                           }
-                  
+
                           return Column(
                             children: [
                               // --- User Profile Section ---
@@ -249,7 +247,7 @@ final String githubToken = const String.fromEnvironment('TOKEN_GITHUB');
                                         widget.profile.followers.toString(),
                                       ),
                                       Gap(20),
-                                      
+
                                       _buildStat(
                                         'Contributions',
                                         contributionData.totalContributions
@@ -279,10 +277,7 @@ final String githubToken = const String.fromEnvironment('TOKEN_GITHUB');
                                 showColorTip: true,
                                 borderRadius: 4,
                                 borderWidth: 1.0,
-                                borderColor:
-                                    Colors
-                                        .grey
-                                        .shade600, 
+                                borderColor: Colors.grey.shade600,
                               ),
                             ],
                           );
