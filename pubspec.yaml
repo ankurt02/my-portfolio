@@ -51,6 +51,7 @@ dependencies:
   flutter_widget_from_html_core: ^0.9.0
   flutter_cached_pdfview: ^0.4.3
   pdfrx: ^2.1.9
+  lottie: ^3.3.2
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +81,7 @@ flutter:
     - assets/socials.json
     - assets/svg/
     - assets/images/
+    - assets/gif/
 
 
 
