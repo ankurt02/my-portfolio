@@ -52,15 +52,16 @@ class _SplashScreenState extends State<SplashScreen>
     return Scaffold(
       backgroundColor: Colors.black, 
       body: Center(
-        child: Lottie.asset(
-          'assets/gif/hello.json',
-          controller: _controller,
-          onLoaded: (composition) {
-            _controller
-              ..duration = composition.duration
-              ..forward().whenComplete(_onAnimationComplete);
-          },
-        ),
+        child: Lottie.network(
+  'assets/gif/hello.json',
+  controller: _controller,
+  onLoaded: (composition) {
+    _controller
+      ..duration = composition.duration
+      ..forward().whenComplete(_onAnimationComplete);
+  },
+)
+,
       ),
     );
   }
