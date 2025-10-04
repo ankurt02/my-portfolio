@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen>
       backgroundColor: Colors.black, 
       body: Center(
         child: Lottie.network(
-  'assets/gif/hello.json',
+  'https://resume-hosting-f1c9d.web.app/Hello.json',
   controller: _controller,
   onLoaded: (composition) {
     _controller

@@ -5,18 +5,18 @@ packages:
     dependency: "direct main"
     description:
       name: animated_analog_clock
-      sha256: cba33c31502225f4452daeae4dd9b7548fedb7ad153363d049f1b8667a68dd26
+      sha256: "8db7da3dd5b59c7e7c7a06652637ef86ccdde883b4611f9ed34059399080014c"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.1"
+    version: "0.2.2"
   animated_text_kit:
     dependency: "direct main"
     description:
       name: animated_text_kit
-      sha256: adba517adb7e6adeb1eb5e1c8a147dd7bc664dfdf2f5e92226b572a91393a93d
+      sha256: "1d41486860885321972dd332179357a535d50d4780fc2ba5e1805bde085c81f2"
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.3"
+    version: "4.3.0"
   archive:
     dependency: transitive
     description:
@@ -452,18 +452,18 @@ packages:
     dependency: "direct main"
     description:
       name: pdfrx
-      sha256: "0dd8a3e3a677669f48db561cdd627f922c578665d7b719fd48176f5690363b67"
+      sha256: f7e7476be717eb89e1616e614cde646b1e04dbd85d70a6e5c803594f8cde94e0
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.21"
+    version: "2.1.23"
   pdfrx_engine:
     dependency: transitive
     description:
       name: pdfrx_engine
-      sha256: c26309bb2edaf775e1c3a75d2bfdbfe0ae98515969d1f36e8bd38118688dc848
+      sha256: "7327361eb4e63660996a16773b6f57120a267796431cd29d7d3b1150d51934de"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.20"
+    version: "0.1.21"
   petitparser:
     dependency: transitive
     description:
@@ -713,10 +713,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_android
-      sha256: "199bc33e746088546a39cc5f36bac5a278c5e53b40cb3196f99e7345fdcfae6b"
+      sha256: c0fb544b9ac7efa10254efaf00a951615c362d1ea1877472f8f6c0fa00fcf15b
       url: "https://pub.dev"
     source: hosted
-    version: "6.3.22"
+    version: "6.3.23"
   url_launcher_ios:
     dependency: transitive
     description:
@@ -833,10 +833,10 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter_android
-      sha256: "3c4eb4fcc252b40c2b5ce7be20d0481428b70f3ff589b0a8b8aaeb64c6bed701"
+      sha256: "21507ea5a326ceeba4d29dea19e37d92d53d9959cfc746317b9f9f7a57418d87"
       url: "https://pub.dev"
     source: hosted
-    version: "4.10.2"
+    version: "4.10.3"
   webview_flutter_platform_interface:
     dependency: transitive
     description:
