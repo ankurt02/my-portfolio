@@ -80,7 +80,7 @@ class TimelineScreen extends StatelessWidget {
 
             // Header Section
             Padding(
-              padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
+              padding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
               child: Text(
                 'Education',
                 style: GoogleFonts.spaceGrotesk(
@@ -97,14 +97,14 @@ class TimelineScreen extends StatelessWidget {
                 children: [
                   // The continuous timeline line in the background.
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 40.0),
+                    padding: const EdgeInsets.symmetric(vertical: 24.0),
                     child: _buildContinuousTimeline(),
                   ),
 
                   // The list of timeline events on top
                   ListView.builder(
                     physics: const NeverScrollableScrollPhysics(), // disables scrolling
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
                     itemCount: _events.length,
                     itemBuilder: (context, index) {
                       final event = _events[index];
@@ -117,7 +117,7 @@ class TimelineScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const Gap(18)
+            const Gap(24)
           ],
         ),
       ),
