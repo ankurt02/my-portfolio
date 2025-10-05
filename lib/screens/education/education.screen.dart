@@ -216,7 +216,7 @@ class EventCard extends StatelessWidget {
         // This container reserves the vertical space in the Row.
         Container(height: 60),
         Positioned(
-          top: (60 - 130) / 2, // (cardHeight - boxHeight) / 2
+          top: (60 - 120) / 2, // (cardHeight - boxHeight) / 2
           child: Container(
             height: 120,
             width: 16, // colored-box width
