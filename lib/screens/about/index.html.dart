@@ -74,22 +74,26 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
               const Icon(
                 FontAwesome.circle_solid,
                 size: 9,
-                color: Color.fromARGB(255, 82, 246, 109),
+                // color: Color.fromARGB(255, 82, 246, 109),
+                color: Colors.yellowAccent,
               ),
               const Gap(8),
               ShaderMask(
                 shaderCallback: (Rect bounds) {
                   return const LinearGradient(
                     colors: [
-                      Color.fromARGB(255, 20, 235, 56),
-                      Color.fromARGB(255, 6, 232, 44),
+                      // Color.fromARGB(255, 20, 235, 56),
+                      // Color.fromARGB(255, 6, 232, 44),
+                      Colors.yellow,
+                      Colors.yellowAccent
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ).createShader(bounds);
                 },
                 child: Text(
-                  "Open to opportunities ...",
+                  // "Open to opportunities ...",
+                  "Android Developer - Device Platform Engineer",
                   style: GoogleFonts.robotoMono(
                     color: Colors.white,
                     fontSize: 14,

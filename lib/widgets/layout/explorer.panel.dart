@@ -1,6 +1,7 @@
 import 'package:ankur_portfolio/models/editor.tab.dart';
 import 'package:ankur_portfolio/screens/about/index.html.dart';
 import 'package:ankur_portfolio/screens/education/education.screen.dart';
+import 'package:ankur_portfolio/screens/job/android.developer.dart';
 import 'package:ankur_portfolio/screens/links/socials.dart';
 import 'package:ankur_portfolio/screens/links/twitter.screen.dart';
 import 'package:ankur_portfolio/screens/misc/research.paper.dart';
@@ -43,6 +44,9 @@ class ExplorerPanel extends StatelessWidget {
       height: screenHeight - 48,
       child: Column(
         children: [
+
+
+          // ABOUT
           ExplorerPanelCardOne(
             iconName: FontAwesome.angle_down_solid,
             tabName: 'ABOUT',
@@ -65,10 +69,32 @@ class ExplorerPanel extends StatelessWidget {
             onTap: () => onOpenTab(
               EditorTab(
                 title: "education.js",
-                content: TimelinePage(),
+                content: TimelineScreen(),
               ),
             ),
           ),
+
+
+          // EXPERIENCE
+          ExplorerPanelCardOne(
+            iconName: FontAwesome.angle_down_solid,
+            tabName: 'EXPERIENCE',
+            assetPath: 'assets/svg/folder.svg',
+          ),
+
+          ExplorePanelCardTwo(
+            assetPath: "assets/svg/androidfull01.svg",
+            tabName: "android-developer.java",
+            onTap: () => onOpenTab(
+              EditorTab(
+                title: "android-developer.java",
+                content: AndroidDev42Gears(),
+              ),
+            ),
+          ),
+
+
+          // PROJECTS
           ExplorerPanelCardOne(
             iconName: FontAwesome.angle_down_solid,
             tabName: "PROJECTS",
@@ -79,9 +105,17 @@ class ExplorerPanel extends StatelessWidget {
             tabName: "ShikamaruAI.dart",
           ),
           ExplorePanelCardTwo(
+            assetPath: "assets/svg/jupyter.svg",
+            tabName: "PriceLens.ipynb",
+          ),
+          ExplorePanelCardTwo(
             assetPath: "assets/svg/python.svg",
             tabName: "EncryptIt.py",
           ),
+
+
+
+          // SOCIAL LINKS
           ExplorerPanelCardOne(
             iconName: FontAwesome.angle_down_solid,
             tabName: "SOCIAL LINKS",
@@ -124,6 +158,11 @@ class ExplorerPanel extends StatelessWidget {
               ),
             ),
           ),
+
+
+
+
+          // CERTIFICATES
           ExplorerPanelCardOne(
             iconName: FontAwesome.angle_down_solid,
             tabName: "CERTIFICATES",
@@ -148,6 +187,10 @@ class ExplorerPanel extends StatelessWidget {
               ),
             ),
           ),
+
+
+
+          // MISCELLENEOUS
           ExplorerPanelCardOne(
             iconName: FontAwesome.angle_down_solid,
             tabName: "MISC",
@@ -178,6 +221,11 @@ class ExplorerPanel extends StatelessWidget {
               ),
             ),
           ),
+
+
+
+
+          // RESUME
           ExplorerPanelCardOne(
             iconName: FontAwesome.angle_down_solid,
             tabName: "RESUME",
