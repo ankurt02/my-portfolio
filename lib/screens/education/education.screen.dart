@@ -80,7 +80,7 @@ class TimelineScreen extends StatelessWidget {
 
             // Header Section
             Padding(
-              padding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
+              padding: const EdgeInsets.fromLTRB(24, 12, 24, 8),
               child: Text(
                 'Education',
                 style: GoogleFonts.spaceGrotesk(
@@ -97,14 +97,14 @@ class TimelineScreen extends StatelessWidget {
                 children: [
                   // The continuous timeline line in the background.
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 24.0),
+                    padding: const EdgeInsets.symmetric(vertical: 18.0),
                     child: _buildContinuousTimeline(),
                   ),
 
                   // The list of timeline events on top
                   ListView.builder(
                     physics: const NeverScrollableScrollPhysics(), // disables scrolling
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
                     itemCount: _events.length,
                     itemBuilder: (context, index) {
                       final event = _events[index];
@@ -117,7 +117,7 @@ class TimelineScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const Gap(24)
+            const Gap(30)
           ],
         ),
       ),
@@ -158,10 +158,10 @@ class TimelineItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double circleRadius = 8.0;
-    const double cardPadding = 16.0;
+    const double cardPadding = 12.0;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -218,7 +218,7 @@ class EventCard extends StatelessWidget {
         Positioned(
           top: (60 - 130) / 2, // (cardHeight - boxHeight) / 2
           child: Container(
-            height: 130,
+            height: 120,
             width: 16, // colored-box width
             decoration: BoxDecoration(
               color: event.color,
@@ -272,7 +272,7 @@ class EventCard extends StatelessWidget {
     // The main card widget
     return Container(
       width: 420, // card width
-      height: 160,
+      height: 150,
       decoration: BoxDecoration(
         color: const Color(0xFF1E1E1E),
         borderRadius: BorderRadius.circular(12),
