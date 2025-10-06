@@ -83,7 +83,7 @@ class SocialsService {
   static final String _githubToken = const String.fromEnvironment('TOKEN_GITHUB');
 
   static Future<List<SocialProfile>> fetchProfiles() async {
-    if (_githubToken == null || _githubToken!.isEmpty) {
+    if (_githubToken.isEmpty) {
       throw Exception('TOKEN_GITHUB not found in .env file.');
     }
 

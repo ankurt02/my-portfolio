@@ -11,7 +11,6 @@ class ActivityBar extends StatefulWidget {
 class _ActivityBarState extends State<ActivityBar> {
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return Container(
       decoration: BoxDecoration(color: const Color(0xFF333333)),

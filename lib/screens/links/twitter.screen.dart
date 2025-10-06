@@ -1,6 +1,5 @@
 import 'package:ankur_portfolio/screens/links/socials.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class TwitterCard extends StatelessWidget {
   final XProfile profile;
