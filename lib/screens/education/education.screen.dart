@@ -102,22 +102,22 @@ class TimelineScreen extends StatelessWidget {
                   ),
 
                   // The list of timeline events on top
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(), // disables scrolling
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    itemCount: _events.length,
-                    itemBuilder: (context, index) {
-                      final event = _events[index];
-
-                      // to alternate the alignment of timeline cards
-                      final isLeftAligned = index.isEven;
-                      return TimelineItem(event: event, isLeftAligned: isLeftAligned);
-                    },
+                  Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min, // Make column only as tall as its children
+                      children: [
+                        // Use a for-loop inside the list to generate items
+                        for (int index = 0; index < _events.length; index++)
+                          TimelineItem(
+                            event: _events[index],
+                            isLeftAligned: index.isEven,
+                          ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-            const Gap(30)
           ],
         ),
       ),

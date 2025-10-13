@@ -23,6 +23,7 @@ class CarouselScreen extends StatelessWidget {
     SkillData(assetPath: "assets/svg/figma.svg", skillName: "Figma"),
     SkillData(assetPath: "assets/svg/git_icon01.svg", skillName: "Git"),
     SkillData(assetPath: "assets/svg/androidfull01.svg", skillName: "Android"),
+    SkillData(assetPath: "assets/svg/kotlin01.svg", skillName: "Kotlin"),
   ];
 
   @override

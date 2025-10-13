@@ -49,19 +49,24 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidht = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.black, 
+      backgroundColor: Colors.black,
       body: Center(
-        child: Lottie.network(
-  'https://resume-hosting-f1c9d.web.app/Hello.json',
-  controller: _controller,
-  onLoaded: (composition) {
-    _controller
-      ..duration = composition.duration
-      ..forward().whenComplete(_onAnimationComplete);
-  },
-)
-,
+        child: Container(
+          height: screenHeight,
+          width: screenWidht,
+          child: Lottie.network(
+            'https://resume-hosting-f1c9d.web.app/Hello.json',
+            controller: _controller,
+            onLoaded: (composition) {
+              _controller
+                ..duration = composition.duration
+                ..forward().whenComplete(_onAnimationComplete);
+            },
+          ),
+        ),
       ),
     );
   }

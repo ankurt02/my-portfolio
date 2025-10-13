@@ -38,31 +38,23 @@ class _GlowingBlinkingDotState extends State<GlowingBlinkingDot>
       vsync: this,
     );
 
-    // 2. Set up the first color animation
     _setupAnimation();
 
-    // 3. Add a listener to loop the animations
     _controller.addStatusListener((status) {
-      // When one transition completes...
       if (status == AnimationStatus.completed) {
-        // ...move to the next color in the list
         setState(() {
           _currentColorIndex = (_currentColorIndex + 1) % widget.colors.length;
-          _setupAnimation(); // Set up the next tween
+          _setupAnimation(); 
         });
-        // and start the animation again from the beginning
         _controller.forward(from: 0.0);
       }
     });
 
-    // 4. Start the first animation
     _controller.forward();
   }
 
-  // Helper method to create the ColorTween for the current transition
   void _setupAnimation() {
     final beginColor = widget.colors[_currentColorIndex];
-    // The 'end' color is the next one in the list, wrapping around
     final endColor = widget.colors[(_currentColorIndex + 1) % widget.colors.length];
 
     _colorAnimation = ColorTween(
@@ -74,14 +66,12 @@ class _GlowingBlinkingDotState extends State<GlowingBlinkingDot>
 
   @override
   void dispose() {
-    // Always dispose of the controller
     _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // 5. Use AnimatedBuilder for efficiency
     return AnimatedBuilder(
       animation: _colorAnimation,
       builder: (context, child) {
@@ -90,7 +80,7 @@ class _GlowingBlinkingDotState extends State<GlowingBlinkingDot>
           width: widget.size,
           height: widget.size,
           decoration: BoxDecoration(
-            color: currentColor, // The color now comes from the animation
+            color: currentColor, 
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
@@ -106,7 +96,6 @@ class _GlowingBlinkingDotState extends State<GlowingBlinkingDot>
   }
 }
 
-// Your original widget, no changes needed here.
 class IndexDotHtml extends StatefulWidget {
   const IndexDotHtml({super.key});
 
@@ -176,7 +165,7 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
             children: [
               const Gap(16),
               const GlowingBlinkingDot(
-                // add more colors here 
+                // Colors to be added here
                 colors: [
                   Colors.yellowAccent,
                   Color.fromARGB(255, 224, 202, 8),
@@ -206,7 +195,6 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
           ),
           const Gap(32),
           Padding(
-            // Added padding for overall alignment
             padding: const EdgeInsets.only(left: 16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -241,7 +229,8 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
                 ),
                 const Gap(16),
                 FractionallySizedBox(
-                  widthFactor: 0.7,
+                  alignment: Alignment.center,
+                  widthFactor: 0.8,
                   child: Text(
                     "Hey there, I'm Ankur! I just wrapped up my degree in Computer Science and currently working as an Android Developer - Device Platform Engineer at 42Gears. My true passion is building attractive and engaging user interfaces. I'm the kind of developer who will happily spend time perfecting the details, making sure every pixel, font, and color choice contributes to a seamless user experience.",
                     textAlign: TextAlign.justify,

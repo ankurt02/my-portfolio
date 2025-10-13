@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pdfrx/pdfrx.dart';
+import 'package:device_preview/device_preview.dart';
 
 Future<void> main() async {
   if (kIsWeb) {
@@ -12,8 +13,13 @@ Future<void> main() async {
       return null;
     });
   }
+
+  // runApp(MyApp());
   
-  runApp(MyApp());
+  runApp(DevicePreview(
+    enabled: !kReleaseMode,
+    builder: (context) => MyApp(), // Wrap your app
+  ),);
 }
 
 

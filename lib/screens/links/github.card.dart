@@ -26,7 +26,6 @@ class GitHubCard extends StatefulWidget {
 class _GitHubCardState extends State<GitHubCard> {
   late Future<ContributionData> _contributionData;
 
-  // This reads the variable passed in by --dart-define=TOKEN_GITHUB=...
   final String githubToken = const String.fromEnvironment('TOKEN_GITHUB');
 
   @override
@@ -106,6 +105,7 @@ class _GitHubCardState extends State<GitHubCard> {
   @override
   Widget build(BuildContext context) {
     final currentYearStart = DateTime(DateTime.now().year, 1, 1);
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Card(
       elevation: 0,
@@ -124,7 +124,7 @@ class _GitHubCardState extends State<GitHubCard> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Gap(24),
-                      HackerTextEffect(text: 'Caffein and version-control!'),
+                      HackerTextEffect(text: 'Caffeine and version-control!'),
 
                       Spacer(),
 
@@ -149,6 +149,7 @@ class _GitHubCardState extends State<GitHubCard> {
                 ),
                 Gap(16),
                 Container(
+                  height: screenHeight/2,
                   // decoration: BoxDecoration(
                   //   border: Border.all(color: Colors.pinkAccent, width: 2),
                   // ),
@@ -203,7 +204,7 @@ class _GitHubCardState extends State<GitHubCard> {
                               Row(
                                 children: [
                                   CircleAvatar(
-                                    radius: 30,
+                                    radius: 36,
                                     backgroundImage: NetworkImage(
                                       widget.profile.profilePicUrl,
                                     ),
@@ -271,7 +272,7 @@ class _GitHubCardState extends State<GitHubCard> {
                                 colorMode: ColorMode.color,
                                 defaultColor: Color(0xFF000C18),
                                 scrollable: true,
-                                size: 14,
+                                size: 16,
                                 textColor: Colors.white70,
                                 showText: false,
                                 showColorTip: true,
