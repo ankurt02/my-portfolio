@@ -16,7 +16,7 @@ class LinkedInCard extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.only(top: 12),
+          padding: EdgeInsets.only(top: 8),
           // decoration: BoxDecoration(
           //   border: Border.all(
           //     color: Colors.pink,
@@ -39,9 +39,9 @@ class LinkedInCard extends StatelessWidget {
             ],
           ),
         ),
-        Gap(16),
+        Gap(8),
         Container(
-          margin: const EdgeInsets.only(top: 12, left: 72, right: 72, bottom: 24),
+          margin: const EdgeInsets.only(top: 8, left: 72, right: 72, bottom: 12),
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             color: Theme.of(context).cardColor,
