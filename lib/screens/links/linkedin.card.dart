@@ -39,7 +39,7 @@ class LinkedInCard extends StatelessWidget {
             ],
           ),
         ),
-        Gap(24),
+        Gap(16),
         Container(
           margin: const EdgeInsets.only(top: 12, left: 72, right: 72, bottom: 24),
           clipBehavior: Clip.antiAlias,
@@ -78,7 +78,8 @@ class LinkedInCard extends StatelessWidget {
           ),
         ),
         Gap(12),
-        LinkedinButton(text: 'Visit Profile', url: 'https://www.linkedin.com/in/ankur-tiwary-393479230/',)
+        LinkedinButton(text: 'Visit Profile', url: 'https://www.linkedin.com/in/ankur-tiwary-393479230/',),
+        Spacer(),
       ],
     );
   }
