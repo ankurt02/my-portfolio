@@ -14,12 +14,12 @@ Future<void> main() async {
     });
   }
 
-  // runApp(MyApp());
+  runApp(MyApp());
   
-  runApp(DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) => MyApp(), // Wrap your app
-  ),);
+  // runApp(DevicePreview(
+  //   enabled: !kReleaseMode,
+  //   builder: (context) => MyApp(), // Wrap your app
+  // ),);
 }
 
 

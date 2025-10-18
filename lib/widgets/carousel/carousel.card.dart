@@ -27,7 +27,7 @@ class CarouselCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 30),
       padding: EdgeInsets.only(left: 30, right: 30),
       height: 50,
-      width: 200,
+      width: 250,
       // decoration: BoxDecoration(
       //   color: Colors.transparent,
       //   border: Border.all(

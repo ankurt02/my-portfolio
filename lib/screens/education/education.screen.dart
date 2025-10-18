@@ -19,8 +19,10 @@ class TimelineEvent {
 }
 
 // Screen that displays the timeline
-class TimelineScreen extends StatelessWidget {
+class TimelineScreen extends StatefulWidget {
+  
   const TimelineScreen({super.key});
+  
 
   static const List<TimelineEvent> _events = [
     TimelineEvent(
@@ -43,10 +45,18 @@ class TimelineScreen extends StatelessWidget {
     ),
   ];
 
-  /// Builds the continuous timeline graphic that sits in the background.
+  @override
+  State<TimelineScreen> createState() => _TimelineScreenState();
+}
+
+class _TimelineScreenState extends State<TimelineScreen> {
+  
+  /// Builds the continuous timeline graphic in the background.
   Widget _buildContinuousTimeline() {
+    final screenHeight = MediaQuery.of(context).size.height;
     const double lineWidth = 3.0;
-    // A list of colors for the gradient line.
+    
+    // List of colors for the gradient line
     final List<Color> gradientColors = [
       const Color.fromARGB(255, 18, 15, 114),
       const Color.fromARGB(255, 89, 42, 155),
@@ -57,6 +67,7 @@ class TimelineScreen extends StatelessWidget {
     return Center(
       child: Container(
         width: lineWidth,
+        height: screenHeight*0.75,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: gradientColors,
@@ -107,9 +118,9 @@ class TimelineScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min, // Make column only as tall as its children
                       children: [
                         // Use a for-loop inside the list to generate items
-                        for (int index = 0; index < _events.length; index++)
+                        for (int index = 0; index < TimelineScreen._events.length; index++)
                           TimelineItem(
-                            event: _events[index],
+                            event: TimelineScreen._events[index],
                             isLeftAligned: index.isEven,
                           ),
                       ],
@@ -208,6 +219,8 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     // The overlapping colored box, wrapped in a Stack to allow it to overflow.
     final colorBox = Stack(
       alignment: Alignment.center,
@@ -216,9 +229,9 @@ class EventCard extends StatelessWidget {
         // This container reserves the vertical space in the Row.
         Container(height: 60),
         Positioned(
-          top: (60 - 120) / 2, // (cardHeight - boxHeight) / 2
+          top: (60 - screenHeight/6) / 2, // (cardHeight - boxHeight) / 2
           child: Container(
-            height: 120,
+            height: screenHeight/6,
             width: 16, // colored-box width
             decoration: BoxDecoration(
               color: event.color,
@@ -271,8 +284,8 @@ class EventCard extends StatelessWidget {
 
     // The main card widget
     return Container(
-      width: 420, // card width
-      height: 150,
+      width: screenWidth/4, // card width
+      height: screenHeight/5,
       decoration: BoxDecoration(
         color: const Color(0xFF1E1E1E),
         borderRadius: BorderRadius.circular(12),

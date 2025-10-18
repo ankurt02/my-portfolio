@@ -3,7 +3,6 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 
-
 class SocialProfile {
   final String platform;
   final String name;
@@ -29,29 +28,39 @@ class XProfile extends SocialProfile {
     required String profilePicUrl,
     required this.bannerUrl,
   }) : super(
-          platform: 'X',
-          name: name,
-          username: username,
-          profilePicUrl: profilePicUrl,
-          profileUrl: 'https://x.com/$username',
-        );
+         platform: 'X',
+         name: name,
+         username: username,
+         profilePicUrl: profilePicUrl,
+         profileUrl: 'https://x.com/$username',
+       );
 }
 
 class LinkedInProfile extends SocialProfile {
+  String workingat;
+  final String location;
   final String connections;
+  final String bannerImageUrl;
+  final bool isVerified;
 
   LinkedInProfile({
     required String name,
     required String username,
     required String profilePicUrl,
+    required this.workingat,
+    required this.location,
     required this.connections,
+    required this.bannerImageUrl,
+    this.isVerified = false,
   }) : super(
-          platform: 'LinkedIn',
-          name: name,
-          username: username,
-          profilePicUrl: profilePicUrl,
-          profileUrl: 'https://linkedin.com/in/$username',
-        );
+         platform: 'LinkedIn',
+         name: name,
+         username: username,
+         profilePicUrl: profilePicUrl,
+         profileUrl: 'https://www.linkedin.com/in/$username',
+       );
+
+  String get profileImageUrl => profilePicUrl;
 }
 
 // Model updated to use totalRepos
@@ -70,59 +79,70 @@ class GitHubProfile extends SocialProfile {
     required this.totalContributions,
     this.location,
   }) : super(
-          platform: 'GitHub',
-          name: name,
-          username: username,
-          profilePicUrl: profilePicUrl,
-          profileUrl: 'https://github.com/$username',
-        );
+         platform: 'GitHub',
+         name: name,
+         username: username,
+         profilePicUrl: profilePicUrl,
+         profileUrl: 'https://github.com/$username',
+       );
 }
 
-
 class SocialsService {
-  static final String _githubToken = const String.fromEnvironment('TOKEN_GITHUB');
+  static final String _githubToken = const String.fromEnvironment(
+    'TOKEN_GITHUB',
+  );
 
   static Future<List<SocialProfile>> fetchProfiles() async {
     if (_githubToken.isEmpty) {
       throw Exception('TOKEN_GITHUB not found in .env file.');
     }
 
-    final String jsonString = await rootBundle.loadString('assets/socials.json');
+    final String jsonString = await rootBundle.loadString(
+      'assets/socials.json',
+    );
     final Map<String, dynamic> jsonData = jsonDecode(jsonString);
 
     final List<SocialProfile> profiles = [];
 
-    
     try {
       final ghProfile = await _fetchGitHubData();
       profiles.add(ghProfile);
     } catch (e) {
       var logger = Logger();
-logger.e('Failed to load GitHub profile', error: e);
+      logger.e('Failed to load GitHub profile', error: e);
     }
 
     // Parse static profiles from JSON
     for (var item in jsonData['socials']) {
       if (item['platform'] == 'X') {
-        profiles.add(XProfile(
-          name: item['name'],
-          username: item['username'],
-          profilePicUrl: item['profile_pic_url'],
-          bannerUrl: item['banner_url'],
-        ));
+        profiles.add(
+          XProfile(
+            name: item['name'],
+            username: item['username'],
+            profilePicUrl: item['profile_pic_url'],
+            bannerUrl: item['banner_url'],
+          ),
+        );
       } else if (item['platform'] == 'LinkedIn') {
-        profiles.add(LinkedInProfile(
-          name: item['name'],
-          username: item['username'],
-          profilePicUrl: item['profile_pic_url'],
-          connections: item['connections'],
-        ));
+        profiles.add(
+          LinkedInProfile(
+            name: 'Ankur Tiwary',
+            profilePicUrl:
+                "https://resume-hosting-f1c9d.web.app/filBangaloreOrange.jpg",
+            workingat: 'Android Device Platform Engineer @42Gears',
+            location: 'Bengaluru, India',
+            connections: '100+ connections',
+            bannerImageUrl:
+                'https://resume-hosting-f1c9d.web.app/linkedBanner.jpeg',
+            isVerified: false,
+            username: 'ankur-tiwary-393479230/',
+          ),
+        );
       }
     }
     return profiles;
   }
 
- 
   static Future<GitHubProfile> _fetchGitHubData() async {
     final DateTime now = DateTime.now();
     final String startDate = DateTime(now.year, 1, 1).toIso8601String();
@@ -159,16 +179,13 @@ logger.e('Failed to load GitHub profile', error: e);
       },
       body: jsonEncode({
         'query': query,
-        'variables': {
-          'from': startDate,
-          'to': endDate,
-        },
+        'variables': {'from': startDate, 'to': endDate},
       }),
     );
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body)['data']['viewer'];
-      
+
       return GitHubProfile(
         name: data['name'] ?? 'No Name',
         username: data['login'],
@@ -176,7 +193,9 @@ logger.e('Failed to load GitHub profile', error: e);
         totalRepos: data['repositories']['totalCount'] ?? 0,
         followers: data['followers']['totalCount'] ?? 0,
         location: data['location'],
-        totalContributions: data['contributionsCollection']['contributionCalendar']['totalContributions'] ?? 0,
+        totalContributions:
+            data['contributionsCollection']['contributionCalendar']['totalContributions'] ??
+            0,
       );
     } else {
       throw Exception('Failed to load GitHub profile data: ${response.body}');

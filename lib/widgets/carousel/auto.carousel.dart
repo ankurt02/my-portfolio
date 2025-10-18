@@ -24,6 +24,7 @@ class CarouselScreen extends StatelessWidget {
     SkillData(assetPath: "assets/svg/git_icon01.svg", skillName: "Git"),
     SkillData(assetPath: "assets/svg/androidfull01.svg", skillName: "Android"),
     SkillData(assetPath: "assets/svg/kotlin01.svg", skillName: "Kotlin"),
+    SkillData(assetPath: "assets/svg/androidStudio.svg", skillName: "Android Studio"),
   ];
 
   @override
@@ -53,7 +54,7 @@ class ScrollLoop extends StatefulWidget {
     required this.sourceList,
     this.height = 150,
     // this.cardWidth = 150,
-    this.scrollSpeed = 1.5, 
+    this.scrollSpeed = 2, 
     this.initialDelay = const Duration(seconds: 1),
     this.pauseOnHover = true,
   }) : super(key: key);
