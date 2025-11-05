@@ -1,0 +1,32 @@
+CustomInfoCard(
+                    imagePath: 'assets/images/yuta01.jpeg',
+                    title: 'Anime',
+                    description: 'My top watched anime and thoughts.',
+                    onTap: () {
+                      Navigator.pushNamed(context, '/animeScreen');
+                    },
+                  ),
+                  CustomInfoCard(
+                    imagePath: 'assets/images/movie.jpeg',
+                    title: 'Movies',
+                    description: 'Movies that inspired me or made me think.',
+                    onTap: () {
+                      Navigator.pushNamed(context, '/moviesScreen');
+                    },
+                  ),
+                  CustomInfoCard(
+                    imagePath: 'assets/images/music.jpeg',
+                    title: 'Music',
+                    description: 'A playlist of soundtracks and songs I love.',
+                    onTap: () {
+                      Navigator.pushNamed(context, '/musicScreen');
+                    },
+                  ),
+                  CustomInfoCard(
+                    imagePath: 'assets/images/research.jpg',
+                    title: 'Research Papers',
+                    description: 'My academic interests and paper summaries.',
+                    onTap: () {
+                      Navigator.pushNamed(context, '/researchScreen');
+                    },
+                  ),

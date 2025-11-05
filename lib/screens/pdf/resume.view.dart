@@ -12,7 +12,7 @@ class ResumeView extends StatelessWidget {
       final anchor = web.HTMLAnchorElement()
         ..href = url
         ..target= '_new'
-        ..download = 'Ankur_Tiwary_Resume.pdf'; // Suggested filename
+        ..download = 'Ankur_Tiwary_Resume.pdf'; // Suggested filename for download
     
       anchor.click();
     }

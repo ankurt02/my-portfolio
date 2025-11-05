@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pdfrx/pdfrx.dart';
 
-class CertificateOracle extends StatelessWidget {
-  const CertificateOracle({super.key});
+class CertificateOracleAI extends StatelessWidget {
+  const CertificateOracleAI({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final String? certificateUrl = "https://resume-hosting-f1c9d.web.app/oci_certificate_fa.pdf";
+    final String? certificateUrl = "https://resume-hosting-f1c9d.web.app/oci_certificate_ai.pdf";
 
     if (certificateUrl == null || certificateUrl.isEmpty) {
       return const Center(

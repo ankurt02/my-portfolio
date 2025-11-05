@@ -4,17 +4,15 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
 
-// --- MODIFIED WIDGET ---
-// This version uses an AnimationController for smooth transitions.
 class GlowingBlinkingDot extends StatefulWidget {
   final List<Color> colors;
-  final Duration duration; // Now controls the duration of ONE color transition
+  final Duration duration;
   final double size;
 
   const GlowingBlinkingDot({
     super.key,
     this.colors = const [Color.fromARGB(255, 248, 236, 131), Color.fromARGB(255, 240, 228, 1), Color.fromARGB(255, 255, 196, 17)],
-    this.duration = const Duration(milliseconds: 1200), // A slightly longer duration feels smoother
+    this.duration = const Duration(milliseconds: 1200), 
     this.size = 9.0,
   });
 
@@ -22,7 +20,6 @@ class GlowingBlinkingDot extends StatefulWidget {
   State<GlowingBlinkingDot> createState() => _GlowingBlinkingDotState();
 }
 
-// Add 'SingleTickerProviderStateMixin' for the AnimationController
 class _GlowingBlinkingDotState extends State<GlowingBlinkingDot>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
@@ -32,7 +29,6 @@ class _GlowingBlinkingDotState extends State<GlowingBlinkingDot>
   @override
   void initState() {
     super.initState();
-    // 1. Initialize the AnimationController
     _controller = AnimationController(
       duration: widget.duration,
       vsync: this,
@@ -107,19 +103,19 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(8.0),
       color: Colors.transparent,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Gap(32),
+          Gap(32),
           Container(
             width: double.infinity,
             alignment: Alignment.center,
             child: Row(
               children: [
-                const Gap(16),
+                Gap(16),
                 Stack(
                   clipBehavior: Clip.none,
                   children: [
@@ -147,7 +143,7 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
                     ),
                   ],
                 ),
-                const Spacer(),
+                Spacer(),
                 Text(
                   "About Me",
                   style: GoogleFonts.robotoMono(
@@ -156,14 +152,14 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
                     color: Colors.white,
                   ),
                 ),
-                const Spacer(),
+                Spacer(),
               ],
             ),
           ),
-          const Gap(18),
+          Gap(18),
           Row(
             children: [
-              const Gap(16),
+              Gap(16),
               const GlowingBlinkingDot(
                 // Colors to be added here
                 colors: [
@@ -173,7 +169,7 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
                 ],
                 size: 9,
               ),
-              const Gap(8),
+              Gap(8),
               ShaderMask(
                 shaderCallback: (Rect bounds) {
                   return const LinearGradient(

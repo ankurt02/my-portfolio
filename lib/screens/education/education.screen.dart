@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-// model class for data of each timeline event
 class TimelineEvent {
   final String year;
   final String title;
@@ -18,12 +16,10 @@ class TimelineEvent {
   });
 }
 
-// Screen that displays the timeline
 class TimelineScreen extends StatefulWidget {
   
   const TimelineScreen({super.key});
   
-
   static const List<TimelineEvent> _events = [
     TimelineEvent(
       year: '2025',
@@ -88,8 +84,6 @@ class _TimelineScreenState extends State<TimelineScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
 
-
-            // Header Section
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 12, 24, 8),
               child: Text(
@@ -112,12 +106,10 @@ class _TimelineScreenState extends State<TimelineScreen> {
                     child: _buildContinuousTimeline(),
                   ),
 
-                  // The list of timeline events on top
                   Center(
                     child: Column(
-                      mainAxisSize: MainAxisSize.min, // Make column only as tall as its children
+                      mainAxisSize: MainAxisSize.min, 
                       children: [
-                        // Use a for-loop inside the list to generate items
                         for (int index = 0; index < TimelineScreen._events.length; index++)
                           TimelineItem(
                             event: TimelineScreen._events[index],
@@ -135,8 +127,6 @@ class _TimelineScreenState extends State<TimelineScreen> {
     );
   }
 }
-
-// Widget for a single item in the timeline
 class TimelineItem extends StatelessWidget {
   final TimelineEvent event;
   final bool isLeftAligned;
@@ -147,14 +137,13 @@ class TimelineItem extends StatelessWidget {
     required this.isLeftAligned,
   });
 
-  /// dot graphic on the timeline.
   Widget _buildTimelineDot(double circleRadius) {
     return Container(
       width: circleRadius * 1.5,
       height: circleRadius * 1.5,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: event.color, // Dot color now matches the card's color
+        color: event.color, // the Dot color now matches the card's color
         boxShadow: [
           BoxShadow(
             color: event.color.withOpacity(0.5),
@@ -186,7 +175,7 @@ class TimelineItem extends StatelessWidget {
                 : const SizedBox(),
           ),
 
-          // The central gutter with the dot
+          // central gutter with the dot
           const Gap(cardPadding),
           _buildTimelineDot(circleRadius),
           const Gap(cardPadding),
@@ -206,7 +195,6 @@ class TimelineItem extends StatelessWidget {
   }
 }
 
-// Widget for the new event card design
 class EventCard extends StatelessWidget {
   final TimelineEvent event;
   final bool isLeftAligned;
@@ -221,12 +209,10 @@ class EventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-    // The overlapping colored box, wrapped in a Stack to allow it to overflow.
     final colorBox = Stack(
       alignment: Alignment.center,
       clipBehavior: Clip.none,
       children: [
-        // This container reserves the vertical space in the Row.
         Container(height: 60),
         Positioned(
           top: (60 - screenHeight/6) / 2, // (cardHeight - boxHeight) / 2

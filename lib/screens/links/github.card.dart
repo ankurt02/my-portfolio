@@ -175,7 +175,7 @@ class _GitHubCardState extends State<GitHubCard> {
                         } else if (snapshot.hasData) {
                           final contributionData = snapshot.data!;
 
-                          // --- Dynamic Color Calculation Logic ---
+                          // dynamic Color Calculation Logic 
                           final maxCount =
                               (contributionData.datasets.values.isNotEmpty)
                                   ? contributionData.datasets.values.reduce(
@@ -183,7 +183,7 @@ class _GitHubCardState extends State<GitHubCard> {
                                   )
                                   : 0;
 
-                          // Dynamic colors based on contribution thresholds.
+                          // dynamic colors based on contribution thresholds.
                           final Map<int, Color> dynamicColors = {
                             1: const Color(0xFF0E4429),
                           };
@@ -200,7 +200,6 @@ class _GitHubCardState extends State<GitHubCard> {
 
                           return Column(
                             children: [
-                              // --- User Profile Section ---
                               Row(
                                 children: [
                                   CircleAvatar(
@@ -210,7 +209,7 @@ class _GitHubCardState extends State<GitHubCard> {
                                     ),
                                     backgroundColor: const Color(0xFF24292e),
                                   ),
-                                  const SizedBox(width: 16),
+                                  Gap(18),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,

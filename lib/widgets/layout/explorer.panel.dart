@@ -4,9 +4,10 @@ import 'package:ankur_portfolio/screens/education/education.screen.dart';
 import 'package:ankur_portfolio/screens/job/android.developer.dart';
 import 'package:ankur_portfolio/screens/links/socials.dart';
 import 'package:ankur_portfolio/screens/links/twitter.screen.dart';
-import 'package:ankur_portfolio/screens/misc/research.paper.dart';
+import 'package:ankur_portfolio/screens/misc/miscellaneous.screen.dart';
 import 'package:ankur_portfolio/screens/pdf/certificate.azure.dart';
 import 'package:ankur_portfolio/screens/pdf/certificate.oracle.dart';
+import 'package:ankur_portfolio/screens/pdf/certificateAI.oracle.dart';
 import 'package:ankur_portfolio/screens/pdf/resume.view.dart';
 import 'package:ankur_portfolio/widgets/explorer%20cards/explorepanel.cardtwo.dart';
 import 'package:ankur_portfolio/widgets/explorer%20cards/explorerpanel.cardone.dart';
@@ -187,7 +188,16 @@ class ExplorerPanel extends StatelessWidget {
               ),
             ),
           ),
-
+          ExplorePanelCardTwo(
+            assetPath: "assets/svg/edge01.svg",
+            tabName: "Oracle Cloud Infrastructure - AI",
+            onTap: () => onOpenTab(
+              EditorTab(
+                title: "Oracle Cloud Infrastructure",
+                content: CertificateOracleAI(),
+              ),
+            ),
+          ),
 
 
           // MISCELLENEOUS
@@ -196,31 +206,40 @@ class ExplorerPanel extends StatelessWidget {
             tabName: "MISC",
             assetPath: 'assets/svg/folder.svg',
           ),
+
           ExplorePanelCardTwo(
-            assetPath: "assets/svg/crunchyroll001.svg",
-            customColor: const Color(0xFFF47521),
-            tabName: "Anime.mkv",
-          ),
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/spotify-color-svgrepo-com.svg",
-            tabName: "Songs.mp3",
-          ),
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/netflix.svg",
-            customColor: Color(0xFFB2070F),
-            tabName: "Webseries.binge",
-          ),
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/paperclip01.svg",
-            customColor: Colors.grey.shade400,
-            tabName: "Research-paper",
+            assetPath: "assets/svg/folder3.svg",
+            // customColor: const Color(0xFFF47521),
+            tabName: "Miscellaneous",
             onTap: () => onOpenTab(
-              EditorTab(
-                title: "Research-paper",
-                content: ResearchPaperView(),
-              ),
+              EditorTab(title: "Misc", content: MiscellaneousScreen(onOpenTab: onOpenTab,))
             ),
           ),
+          // ExplorePanelCardTwo(
+          //   assetPath: "assets/svg/crunchyroll001.svg",
+          //   customColor: const Color(0xFFF47521),
+          //   tabName: "Anime.mkv",
+          // ),
+          // ExplorePanelCardTwo(
+          //   assetPath: "assets/svg/spotify-color-svgrepo-com.svg",
+          //   tabName: "Songs.mp3",
+          // ),
+          // ExplorePanelCardTwo(
+          //   assetPath: "assets/svg/netflix.svg",
+          //   customColor: Color(0xFFB2070F),
+          //   tabName: "Webseries.binge",
+          // ),
+          // ExplorePanelCardTwo(
+          //   assetPath: "assets/svg/paperclip01.svg",
+          //   customColor: Colors.grey.shade400,
+          //   tabName: "Research-paper",
+          //   onTap: () => onOpenTab(
+          //     EditorTab(
+          //       title: "Research-paper",
+          //       content: ResearchPaperView(),
+          //     ),
+          //   ),
+          // ),
 
 
 
