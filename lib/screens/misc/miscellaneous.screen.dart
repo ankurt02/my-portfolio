@@ -43,7 +43,7 @@ class _MiscellaneousScreenState extends State<MiscellaneousScreen> {
                   CustomInfoCard(
                     imagePath: 'assets/images/anime01.jpg',
                     title: 'Anime',
-                    description: 'Collection of anime watched and reviewed.',
+                    description: 'My late-night watchlist of Anime',
                     gradientColors: [
                       const Color.fromARGB(255, 250, 120, 163), 
                       Colors.pinkAccent, 
@@ -54,7 +54,7 @@ class _MiscellaneousScreenState extends State<MiscellaneousScreen> {
                   CustomInfoCard(
                     imagePath: 'assets/images/movie.jpeg',
                     title: 'Movies',
-                    description: 'List of movies with stories worth noting.',
+                    description: 'Weekend escapes with Snacks and beverages.',
                     gradientColors: [
                       Colors.orangeAccent, 
                       Colors.redAccent
@@ -64,7 +64,7 @@ class _MiscellaneousScreenState extends State<MiscellaneousScreen> {
                   CustomInfoCard(
                     imagePath: 'assets/images/music02.jpeg',
                     title: 'Music',
-                    description: 'Selection of songs and soundtracks.',
+                    description: '...',
                     gradientColors: [
                       const Color.fromARGB(255, 5, 202, 126), 
                       const Color.fromARGB(255, 24, 193, 255), 
@@ -72,9 +72,9 @@ class _MiscellaneousScreenState extends State<MiscellaneousScreen> {
                     onTap: () {},
                   ),
                   CustomInfoCard(
-                    imagePath: 'assets/images/yuta01.jpeg',
+                    imagePath: 'assets/images/researchPaper02.png',
                     title: 'Research Papers',
-                    description: 'Summaries of selected research works.',
+                    description: 'Things I Googled too much — turned into research.',
                     gradientColors: [
                       const Color.fromARGB(255, 96, 151, 247),
                       const Color.fromARGB(255, 59, 92, 235),

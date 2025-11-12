@@ -103,8 +103,14 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        // border: Border.all(
+        //   color: Colors.pink,
+        //   width: 2
+        // ),
       color: Colors.transparent,
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,8 +129,8 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
                       backgroundColor: Colors.grey,
                       radius: 82,
                       child: CircleAvatar(
-                        backgroundImage: AssetImage(
-                          'assets/images/fil_bangalore01.png',
+                        backgroundImage: NetworkImage(
+                          'https://resume-hosting-f1c9d.web.app/fil.png',
                         ),
                         radius: 80,
                       ),
@@ -160,7 +166,7 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
           Row(
             children: [
               Gap(16),
-              const GlowingBlinkingDot(
+              GlowingBlinkingDot(
                 // Colors to be added here
                 colors: [
                   Colors.yellowAccent,
@@ -189,21 +195,21 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
               ),
             ],
           ),
-          const Gap(32),
+          Gap(32),
           Padding(
-            padding: const EdgeInsets.only(left: 16.0),
+            padding: EdgeInsets.only(left: 16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    const Icon(
+                    Icon(
                       FontAwesome.angle_right_solid,
                       color: Colors.grey,
                       size: 34,
                     ),
-                    const Gap(4),
+                    Gap(4),
                     Text(
                       "Ankur Tiwary",
                       style: GoogleFonts.spaceMono(
@@ -212,7 +218,7 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
                         fontSize: 32,
                       ),
                     ),
-                    const Gap(6),
+                    Gap(6),
                     Text(
                       "_",
                       style: GoogleFonts.spaceMono(
@@ -223,14 +229,14 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
                     ),
                   ],
                 ),
-                const Gap(16),
+                Gap(16),
                 FractionallySizedBox(
                   alignment: Alignment.center,
-                  widthFactor: 0.8,
+                  widthFactor: 0.85,
                   child: Text(
                     "Hey there, I'm Ankur! I just wrapped up my degree in Computer Science and currently working as an Android Developer - Device Platform Engineer at 42Gears. My true passion is building attractive and engaging user interfaces. I'm the kind of developer who will happily spend time perfecting the details, making sure every pixel, font, and color choice contributes to a seamless user experience.",
                     textAlign: TextAlign.justify,
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.robotoFlex(
                         color: Colors.grey.shade300,
                         fontSize: 16,
                         height: 1.35,

@@ -63,14 +63,14 @@ class _AndroidDev42GearsState extends State<AndroidDev42Gears> {
                 "Role: ",
                 style: GoogleFonts.robotoMono(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 16,
                   // fontWeight: FontWeight.bold
                 ),
               ),
               Gap(12),
               Text(
                 "Android - Device Platform Engineer",
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.robotoMono(
                   color: Colors.white,
                   fontSize: 16,
                 ),
@@ -85,14 +85,14 @@ class _AndroidDev42GearsState extends State<AndroidDev42Gears> {
                 "Duration: ",
                 style: GoogleFonts.robotoMono(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 16,
                   // fontWeight: FontWeight.bold
                 ),
               ),
               Gap(12),
               Text(
                 "Oct 2025 - Present",
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.robotoMono(
                   color: Colors.white,
                   fontSize: 16,
                   fontStyle: FontStyle.italic
@@ -122,14 +122,14 @@ class _AndroidDev42GearsState extends State<AndroidDev42Gears> {
                 "Tech-stack: ",
                 style: GoogleFonts.robotoMono(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 16,
                   // fontWeight: FontWeight.bold
                 ),
               ),
               Gap(12),
               Text(
                 "Java, Android",
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.robotoMono(
                   color: Colors.white,
                   fontSize: 16,
                   fontStyle: FontStyle.italic

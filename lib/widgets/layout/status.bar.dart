@@ -118,7 +118,7 @@ class _StatusBarState extends State<StatusBar> {
               Gap(30),
 
               Text(
-                "host:github-pages / firebase",
+                "host : github-pages / firebase",
                 style: GoogleFonts.robotoMono(
                   fontSize: 12,
                   color: Colors.grey.shade300,
