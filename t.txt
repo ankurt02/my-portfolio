@@ -30,3 +30,660 @@ CustomInfoCard(
                       Navigator.pushNamed(context, '/researchScreen');
                     },
                   ),
+
+
+
+
+
+                  import 'dart:math' as math;
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: AntigravityJellyfishPage(),
+    debugShowCheckedModeBanner: false,
+  ));
+}
+
+class AntigravityJellyfishPage extends StatelessWidget {
+  const AntigravityJellyfishPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          // 1. The Jellyfish/Streak Layer
+          const Positioned.fill(
+            child: JellyfishField(),
+          ),
+          
+          // 2. Foreground Content
+          Center(
+            child: PointerInterceptor(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.change_history, size: 28, color: Colors.grey[800]),
+                      const SizedBox(width: 8),
+                      Text(
+                        "Google Antigravity",
+                        style: TextStyle(
+                          color: Colors.grey[800],
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: -0.5,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 30),
+                  const Text(
+                    "Experience liftoff",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 64,
+                      fontWeight: FontWeight.bold,
+                      height: 1.0,
+                      letterSpacing: -2.0,
+                    ),
+                  ),
+                  const Text(
+                    "with the next-generation IDE",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xFF444444),
+                      fontSize: 64,
+                      fontWeight: FontWeight.w300, 
+                      height: 1.1,
+                      letterSpacing: -2.0,
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 18),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.window, color: Colors.white, size: 22),
+                        SizedBox(width: 12),
+                        Text(
+                          "Download for Windows",
+                          style: TextStyle(
+                            color: Colors.white, 
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PointerInterceptor extends StatelessWidget {
+  final Widget child;
+  const PointerInterceptor({super.key, required this.child});
+  @override
+  Widget build(BuildContext context) {
+    return IgnorePointer(child: child);
+  }
+}
+
+class JellyfishField extends StatefulWidget {
+  const JellyfishField({super.key});
+
+  @override
+  State<JellyfishField> createState() => _JellyfishFieldState();
+}
+
+class _JellyfishFieldState extends State<JellyfishField>
+    with SingleTickerProviderStateMixin {
+  List<Offset> _dots = [];
+  
+  // FLUIDITY UPGRADE: Separate Target (Real Mouse) from Current (Visual)
+  Offset _targetMousePos = const Offset(-1000, -1000); 
+  Offset _currentMousePos = const Offset(-1000, -1000); 
+  
+  late AnimationController _controller;
+  Size? _lastSize;
+
+  final double _gridSpacing = 40.0; 
+  final double _jitterAmount = 18.0; 
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this, 
+      duration: const Duration(seconds: 6) 
+    )..repeat();
+    
+    // Add a listener to handle the smooth interpolation every frame
+    _controller.addListener(_updateMousePhysics);
+  }
+
+  void _updateMousePhysics() {
+    // Fluid Drag: Move visual mouse position towards real mouse position
+    if (_currentMousePos != _targetMousePos) {
+       double dist = (_currentMousePos - _targetMousePos).distance;
+       if (dist > 0.5) {
+         setState(() {
+           _currentMousePos = Offset.lerp(_currentMousePos, _targetMousePos, 0.1)!;
+         });
+       } else {
+         _currentMousePos = _targetMousePos;
+       }
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.removeListener(_updateMousePhysics);
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _initDots(Size size) {
+    if (_dots.isNotEmpty && _lastSize == size) return;
+    _lastSize = size;
+    _dots.clear();
+
+    final random = math.Random(42); 
+
+    int cols = (size.width / _gridSpacing).ceil() + 2;
+    int rows = (size.height / _gridSpacing).ceil() + 2;
+
+    for (int i = -1; i < cols; i++) {
+      for (int j = -1; j < rows; j++) {
+        double x = i * _gridSpacing;
+        double y = j * _gridSpacing;
+
+        x += (random.nextDouble() - 0.5) * 2 * _jitterAmount;
+        y += (random.nextDouble() - 0.5) * 2 * _jitterAmount;
+
+        _dots.add(Offset(x, y));
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        _initDots(Size(constraints.maxWidth, constraints.maxHeight));
+
+        return MouseRegion(
+          onHover: (event) {
+            _targetMousePos = event.localPosition;
+          },
+          onExit: (event) {
+             // Optional: drift away
+          },
+          child: AnimatedBuilder(
+            animation: _controller,
+            builder: (context, child) {
+              return CustomPaint(
+                painter: JellyfishPainter(
+                  points: _dots, 
+                  mousePos: _currentMousePos, 
+                  animationValue: _controller.value
+                ),
+                size: Size.infinite,
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+}
+
+class JellyfishPainter extends CustomPainter {
+  final List<Offset> points;
+  final Offset mousePos;
+  final double animationValue;
+
+  JellyfishPainter({
+    required this.points, 
+    required this.mousePos, 
+    required this.animationValue
+  });
+
+  final double peakRadius = 220.0;   
+  final double outerRadius = 500.0;  
+
+  final double baseLength = 6.0;     
+  final double baseWidth = 3.0;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = const Color(0xFF4285F4)
+      ..strokeCap = StrokeCap.round;
+
+    final double time = animationValue * 2 * math.pi;
+    
+    for (var origin in points) {
+      // --- 1. AMPLIFIED FLUID MOTION ---
+      // Increased multipliers for more idle movement
+      
+      double w1 = math.sin(time * 0.5 + (origin.dx * 0.01));
+      double w2 = math.cos(time * 0.8 + (origin.dy * 0.015));
+      
+      // Multiplier increased from 6.0 to 14.0 for bigger wandering
+      double floatX = (w1 + w2) * 14.0; 
+      double floatY = (math.cos(time * 0.5 + origin.dy * 0.01) + math.sin(time + origin.dx * 0.01)) * 14.0;
+      
+      Offset currentPos = origin + Offset(floatX, floatY);
+
+      // --- 2. PUMP / HEARTBEAT EFFECT ---
+      // Calculate a pulsing value between -1 and 1
+      double pulse = math.sin(time * 2.0 + (origin.dx * 0.02) + (origin.dy * 0.02));
+      
+      // Make the length change drastic:
+      // Goes from 0.4x length to 1.8x length
+      double lenMult = 1.1 + (pulse * 0.7); 
+
+      // --- 3. DISTANCE CHECK ---
+      double dx = currentPos.dx - mousePos.dx;
+      double dy = currentPos.dy - mousePos.dy;
+      double dist = math.sqrt(dx * dx + dy * dy);
+
+      if (dist > outerRadius) continue;
+
+      // --- 4. DIMINISHING & CALCULATIONS ---
+      double scaleFactor = 0.0;
+
+      if (dist < peakRadius) {
+        scaleFactor = dist / peakRadius; 
+        scaleFactor = math.pow(scaleFactor, 1.5).toDouble();
+      } else {
+        scaleFactor = 1.0 - ((dist - peakRadius) / (outerRadius - peakRadius));
+      }
+
+      double actualLen = baseLength * lenMult * scaleFactor;
+      double actualWidth = baseWidth * scaleFactor; 
+
+      if (actualWidth < 0.5 || actualLen < 0.5) continue;
+
+      paint.strokeWidth = actualWidth;
+
+      // --- 5. JELLYFISH WOBBLE (ROTATION) ---
+      // Instead of pointing perfectly straight, add a rotational vibration
+      double baseAngle = math.atan2(dy, dx);
+      
+      // Create a "wobble" offset angle.
+      // Using time * 3.0 for faster vibration than the movement.
+      // 0.35 radians is approx 20 degrees of wiggle.
+      double wobble = math.sin(time * 3.0 + (origin.dy * 0.05)) * 0.35;
+      
+      double finalAngle = baseAngle + wobble;
+
+      double cosA = math.cos(finalAngle);
+      double sinA = math.sin(finalAngle);
+
+      // --- 6. DRAW ---
+      Offset start = Offset(
+        currentPos.dx - (cosA * actualLen * 0.5),
+        currentPos.dy - (sinA * actualLen * 0.5),
+      );
+      Offset end = Offset(
+        currentPos.dx + (cosA * actualLen * 0.5),
+        currentPos.dy + (sinA * actualLen * 0.5),
+      );
+
+      paint.color = const Color(0xFF4285F4).withOpacity((scaleFactor * 0.9).clamp(0.0, 1.0));
+      
+      canvas.drawLine(start, end, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant JellyfishPainter oldDelegate) {
+    return oldDelegate.animationValue != animationValue ||
+           oldDelegate.mousePos != mousePos;
+  }
+}
+
+
+
+
+// favoured one below 
+import 'dart:math' as math;
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: AntigravityJellyfishPage(),
+    debugShowCheckedModeBanner: false,
+  ));
+}
+
+class AntigravityJellyfishPage extends StatelessWidget {
+  const AntigravityJellyfishPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          // 1. The Jellyfish/Streak Layer
+          const Positioned.fill(
+            child: JellyfishField(),
+          ),
+          
+          // 2. Foreground Content
+          Center(
+            child: PointerInterceptor(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.change_history, size: 28, color: Colors.grey[800]),
+                      const SizedBox(width: 8),
+                      Text(
+                        "Google Antigravity",
+                        style: TextStyle(
+                          color: Colors.grey[800],
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: -0.5,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 30),
+                  const Text(
+                    "Experience liftoff",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 64,
+                      fontWeight: FontWeight.bold,
+                      height: 1.0,
+                      letterSpacing: -2.0,
+                    ),
+                  ),
+                  const Text(
+                    "with the next-generation IDE",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xFF444444),
+                      fontSize: 64,
+                      fontWeight: FontWeight.w300, 
+                      height: 1.1,
+                      letterSpacing: -2.0,
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 18),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.window, color: Colors.white, size: 22),
+                        SizedBox(width: 12),
+                        Text(
+                          "Download for Windows",
+                          style: TextStyle(
+                            color: Colors.white, 
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PointerInterceptor extends StatelessWidget {
+  final Widget child;
+  const PointerInterceptor({super.key, required this.child});
+  @override
+  Widget build(BuildContext context) {
+    return IgnorePointer(child: child);
+  }
+}
+
+class JellyfishField extends StatefulWidget {
+  const JellyfishField({super.key});
+
+  @override
+  State<JellyfishField> createState() => _JellyfishFieldState();
+}
+
+class _JellyfishFieldState extends State<JellyfishField>
+    with SingleTickerProviderStateMixin {
+  List<Offset> _dots = [];
+  
+  // FLUIDITY UPGRADE: Separate Target (Real Mouse) from Current (Visual)
+  Offset _targetMousePos = const Offset(-1000, -1000); 
+  Offset _currentMousePos = const Offset(-1000, -1000); 
+  
+  late AnimationController _controller;
+  Size? _lastSize;
+
+  final double _gridSpacing = 40.0; 
+  final double _jitterAmount = 18.0; 
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this, 
+      duration: const Duration(seconds: 6) 
+    )..repeat();
+    
+    // Add a listener to handle the smooth interpolation every frame
+    _controller.addListener(_updateMousePhysics);
+  }
+
+  void _updateMousePhysics() {
+    // This creates the "Fluid Drag" effect.
+    // Instead of snapping instantly, the field position moves 10% closer
+    // to the real mouse position every frame.
+    if (_currentMousePos != _targetMousePos) {
+       // Check distance to avoid infinite tiny calculations
+       double dist = (_currentMousePos - _targetMousePos).distance;
+       if (dist > 0.5) {
+         setState(() {
+           _currentMousePos = Offset.lerp(_currentMousePos, _targetMousePos, 0.1)!;
+         });
+       } else {
+         _currentMousePos = _targetMousePos;
+       }
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.removeListener(_updateMousePhysics);
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _initDots(Size size) {
+    if (_dots.isNotEmpty && _lastSize == size) return;
+    _lastSize = size;
+    _dots.clear();
+
+    final random = math.Random(42); 
+
+    int cols = (size.width / _gridSpacing).ceil() + 2;
+    int rows = (size.height / _gridSpacing).ceil() + 2;
+
+    for (int i = -1; i < cols; i++) {
+      for (int j = -1; j < rows; j++) {
+        double x = i * _gridSpacing;
+        double y = j * _gridSpacing;
+
+        x += (random.nextDouble() - 0.5) * 2 * _jitterAmount;
+        y += (random.nextDouble() - 0.5) * 2 * _jitterAmount;
+
+        _dots.add(Offset(x, y));
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        _initDots(Size(constraints.maxWidth, constraints.maxHeight));
+
+        return MouseRegion(
+          onHover: (event) {
+            // Update target, let the physics loop handle the smoothing
+            _targetMousePos = event.localPosition;
+          },
+          onExit: (event) {
+             // Optional: drift away
+          },
+          child: AnimatedBuilder(
+            animation: _controller,
+            builder: (context, child) {
+              return CustomPaint(
+                // Pass the SMOOTHED position, not the raw one
+                painter: JellyfishPainter(
+                  points: _dots, 
+                  mousePos: _currentMousePos, 
+                  animationValue: _controller.value
+                ),
+                size: Size.infinite,
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+}
+
+class JellyfishPainter extends CustomPainter {
+  final List<Offset> points;
+  final Offset mousePos;
+  final double animationValue;
+
+  JellyfishPainter({
+    required this.points, 
+    required this.mousePos, 
+    required this.animationValue
+  });
+
+  final double peakRadius = 220.0;   
+  final double outerRadius = 500.0;  
+
+  final double baseLength = 6.0;     
+  final double baseWidth = 3.0;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = const Color(0xFF4285F4)
+      ..strokeCap = StrokeCap.round;
+
+    final double time = animationValue * 2 * math.pi;
+    
+    for (var origin in points) {
+      // --- 1. FLUID MOTION (Compound Waves) ---
+      // We combine two sine waves at different frequencies.
+      // This breaks the "circular" look and makes it look like water currents.
+      
+      // Wave 1: Slow, large movement
+      double w1 = math.sin(time * 0.5 + (origin.dx * 0.01));
+      // Wave 2: Faster, perpendicular ripple
+      double w2 = math.cos(time * 0.8 + (origin.dy * 0.015));
+      
+      // Combined drift
+      double floatX = (w1 + w2) * 6.0; 
+      double floatY = (math.cos(time * 0.5 + origin.dy * 0.01) + math.sin(time + origin.dx * 0.01)) * 6.0;
+      
+      Offset currentPos = origin + Offset(floatX, floatY);
+
+      // --- 2. DYNAMIC PULSE ---
+      // Dots breathe based on the composite wave too
+      double pulse = math.sin(time + (origin.dx * 0.02) + (origin.dy * 0.02));
+      double lenMult = 1.0 + (pulse * 0.25); 
+
+      // --- 3. DISTANCE & VISIBILITY ---
+      double dx = currentPos.dx - mousePos.dx;
+      double dy = currentPos.dy - mousePos.dy;
+      double dist = math.sqrt(dx * dx + dy * dy);
+
+      if (dist > outerRadius) continue;
+
+      // --- 4. DIMINISHING LOGIC ---
+      double scaleFactor = 0.0;
+
+      if (dist < peakRadius) {
+        scaleFactor = dist / peakRadius; 
+        scaleFactor = math.pow(scaleFactor, 1.5).toDouble();
+      } else {
+        scaleFactor = 1.0 - ((dist - peakRadius) / (outerRadius - peakRadius));
+      }
+
+      double actualLen = baseLength * lenMult * scaleFactor;
+      double actualWidth = baseWidth * scaleFactor; 
+
+      if (actualWidth < 0.5 || actualLen < 0.5) continue;
+
+      paint.strokeWidth = actualWidth;
+
+      // --- 5. DRAW ---
+      double angle = math.atan2(dy, dx);
+      double cosA = math.cos(angle);
+      double sinA = math.sin(angle);
+
+      Offset start = Offset(
+        currentPos.dx - (cosA * actualLen * 0.5),
+        currentPos.dy - (sinA * actualLen * 0.5),
+      );
+      Offset end = Offset(
+        currentPos.dx + (cosA * actualLen * 0.5),
+        currentPos.dy + (sinA * actualLen * 0.5),
+      );
+
+      paint.color = const Color(0xFF4285F4).withOpacity((scaleFactor * 0.9).clamp(0.0, 1.0));
+      
+      canvas.drawLine(start, end, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant JellyfishPainter oldDelegate) {
+    return oldDelegate.animationValue != animationValue ||
+           oldDelegate.mousePos != mousePos;
+  }
+}
