@@ -9,21 +9,24 @@ class ExplorePanelCardTwo extends StatelessWidget {
   final String tabName;
   final VoidCallback? onTap;
   final Color? customColor;
+  final bool isSelected;
 
   const ExplorePanelCardTwo({
     super.key,
     required this.assetPath,
     required this.tabName,
     this.onTap,
-    this.customColor, 
+    this.customColor,
+    this.isSelected = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final Color iconColor = customColor ?? Colors.white70;
+    const selectedColor = Color(0xFF37373D);
 
     return Material(
-      color: Colors.transparent,
+      color: isSelected ? selectedColor : Colors.transparent,
       child: GestureDetector(
         onTap: onTap,
         child: Container(
@@ -35,9 +38,10 @@ class ExplorePanelCardTwo extends StatelessWidget {
                 assetPath,
                 height: 18,
                 width: 18,
-                colorFilter: customColor != null
-                    ? ColorFilter.mode(customColor!, BlendMode.srcIn)
-                    : null,
+                colorFilter:
+                    customColor != null
+                        ? ColorFilter.mode(customColor!, BlendMode.srcIn)
+                        : null,
               ),
               const Gap(8),
               Expanded(

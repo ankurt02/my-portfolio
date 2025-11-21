@@ -2,27 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class InfoCard extends StatefulWidget {
+class ResearchPaperCard extends StatefulWidget {
   final String imagePath;
   final String title;
-  final String description;
+  final String conference;
   final VoidCallback? onTap;
   final List<Color> gradientColors;
 
-  const InfoCard({
+  const ResearchPaperCard({
     super.key,
     required this.imagePath,
     required this.title,
-    required this.description,
+    required this.conference,
     required this.gradientColors,
     this.onTap,
   });
 
   @override
-  State<InfoCard> createState() => _InfoCardState();
+  State<ResearchPaperCard> createState() => _ResearchPaperCardState();
 }
 
-class _InfoCardState extends State<InfoCard> {
+class _ResearchPaperCardState extends State<ResearchPaperCard> {
   bool _isHovered = false;
 
   @override
@@ -32,16 +32,15 @@ class _InfoCardState extends State<InfoCard> {
       onExit: (_) => setState(() => _isHovered = false),
       cursor: SystemMouseCursors.click,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        transform: _isHovered
-            ? (Matrix4.identity()
-              ..translate(0, -8, 0)
-              ..scale(1.05))
-            : Matrix4.identity(),
+        duration: const Duration(milliseconds: 160),
+        transform:
+            _isHovered
+                ? (Matrix4.identity()
+                  ..translate(0, -4, 0)
+                  ..scale(1.02))
+                : Matrix4.identity(),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: widget.gradientColors,
-          ),
+          gradient: LinearGradient(colors: widget.gradientColors),
           borderRadius: BorderRadius.circular(16),
         ),
         margin: const EdgeInsets.all(8),
@@ -59,17 +58,21 @@ class _InfoCardState extends State<InfoCard> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ClipRRect(
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(8)),
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(8),
+                  ),
                   child: Image.asset(
                     widget.imagePath,
                     fit: BoxFit.cover,
-                    height: 240,
+                    height: 360,
                     width: double.infinity,
                   ),
                 ),
                 const Gap(12),
                 Text(
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   widget.title,
                   style: GoogleFonts.jetBrainsMono(
                     fontSize: 16,
@@ -77,15 +80,17 @@ class _InfoCardState extends State<InfoCard> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Gap(8),
+
+                Gap(24),
+
                 Text(
-                  widget.description,
+                  widget.conference,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.spaceGrotesk(
                     fontSize: 12,
                     color: Colors.white70,
                   ),
-                  maxLines: 2,
+                  maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],

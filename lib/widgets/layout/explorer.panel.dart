@@ -9,6 +9,8 @@ import 'package:ankur_portfolio/screens/pdf/certificate.azure.dart';
 import 'package:ankur_portfolio/screens/pdf/certificate.oracle.dart';
 import 'package:ankur_portfolio/screens/pdf/certificateAI.oracle.dart';
 import 'package:ankur_portfolio/screens/pdf/resume.view.dart';
+import 'package:ankur_portfolio/screens/projects/shikamaru.ai.dart';
+import 'package:ankur_portfolio/screens/skills/my.skills.dart';
 import 'package:ankur_portfolio/widgets/explorer%20cards/explorepanel.cardtwo.dart';
 import 'package:ankur_portfolio/widgets/explorer%20cards/explorerpanel.cardone.dart';
 import 'package:ankur_portfolio/screens/links/github.card.dart';
@@ -17,7 +19,7 @@ import 'package:ankur_portfolio/screens/links/linkedin.card.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
-class ExplorerPanel extends StatelessWidget {
+class ExplorerPanel extends StatefulWidget {
   final void Function(EditorTab tab) onOpenTab;
   final List<SocialProfile> profiles;
 
@@ -28,239 +30,186 @@ class ExplorerPanel extends StatelessWidget {
   });
 
   @override
+  State<ExplorerPanel> createState() => _ExplorerPanelState();
+}
+
+class _ExplorerPanelState extends State<ExplorerPanel> {
+  String _selectedFileName = "";
+
+  void _handleFileTap(String fileName, Widget content) {
+    setState(() {
+      _selectedFileName = fileName;
+    });
+    widget.onOpenTab(EditorTab(title: fileName, content: content));
+  }
+
+  void _handlePlaceholderTap(String fileName) {
+    setState(() {
+      _selectedFileName = fileName;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    // The Future is already completed, so we can directly access the data
-    final linkedInProfile =
-        profiles.firstWhere((p) => p is LinkedInProfile) as LinkedInProfile;
-    final xProfile = profiles.firstWhere((p) => p is XProfile) as XProfile;
-    final gitHubProfile =
-        profiles.firstWhere((p) => p is GitHubProfile) as GitHubProfile;
+    final linkedInProfile = widget.profiles.firstWhere((p) => p is LinkedInProfile) as LinkedInProfile;
+    final xProfile = widget.profiles.firstWhere((p) => p is XProfile) as XProfile;
+    final gitHubProfile = widget.profiles.firstWhere((p) => p is GitHubProfile) as GitHubProfile;
 
     return Container(
       decoration: const BoxDecoration(color: Color(0xFF252526)),
       width: screenWidth * (320 / 1920),
       height: screenHeight - 48,
-      child: Column(
-        children: [
-
-
-          // ABOUT
-          ExplorerPanelCardOne(
-            iconName: FontAwesome.angle_down_solid,
-            tabName: 'ABOUT',
-            assetPath: 'assets/svg/folder.svg',
-          ),
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/html5.svg",
-            tabName: "index.html",
-            onTap: () => onOpenTab(
-              EditorTab(title: "Index.html", content: IndexDotHtml()),
+      child: SingleChildScrollView( // Added scroll view for safety
+        child: Column(
+          children: [
+            // --- ABOUT ---
+            ExplorerPanelCardOne(
+              iconName: FontAwesome.angle_down_solid,
+              tabName: 'ABOUT',
+              assetPath: 'assets/svg/folder.svg',
             ),
-          ),
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/css.svg",
-            tabName: "skills.css",
-          ),
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/js.svg",
-            tabName: "education.js",
-            onTap: () => onOpenTab(
-              EditorTab(
-                title: "education.js",
-                content: TimelineScreen(),
-              ),
+            ExplorePanelCardTwo(
+              assetPath: "assets/svg/html5.svg",
+              tabName: "index.html",
+              isSelected: _selectedFileName == "index.html",
+              onTap: () => _handleFileTap("index.html", IndexDotHtml()),
             ),
-          ),
-
-
-          // EXPERIENCE
-          ExplorerPanelCardOne(
-            iconName: FontAwesome.angle_down_solid,
-            tabName: 'EXPERIENCE',
-            assetPath: 'assets/svg/folder.svg',
-          ),
-
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/androidfull01.svg",
-            tabName: "android-developer.java",
-            onTap: () => onOpenTab(
-              EditorTab(
-                title: "android-developer.java",
-                content: AndroidDev42Gears(),
-              ),
+            ExplorePanelCardTwo(
+              assetPath: "assets/svg/css.svg",
+              tabName: "skills.css",
+              isSelected: _selectedFileName == "skills.css",
+              onTap: () => _handleFileTap("skills.css", SkillsScreen()),
             ),
-          ),
-
-
-          // PROJECTS
-          ExplorerPanelCardOne(
-            iconName: FontAwesome.angle_down_solid,
-            tabName: "PROJECTS",
-            assetPath: 'assets/svg/folder.svg',
-          ),
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/dart.svg",
-            tabName: "ShikamaruAI.dart",
-          ),
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/jupyter.svg",
-            tabName: "PriceLens.ipynb",
-          ),
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/python.svg",
-            tabName: "EncryptIt.py",
-          ),
-
-
-
-          // SOCIAL LINKS
-          ExplorerPanelCardOne(
-            iconName: FontAwesome.angle_down_solid,
-            tabName: "SOCIAL LINKS",
-            assetPath: 'assets/svg/folder.svg',
-          ),
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/linkedin.svg",
-            tabName: "LinkedIn.url",
-            onTap: () => onOpenTab(
-              EditorTab(
-                title: "LinkedIn.url",
-                content: LinkedInCard(profile: linkedInProfile),
-              ),
+            ExplorePanelCardTwo(
+              assetPath: "assets/svg/js.svg",
+              tabName: "education.js",
+              isSelected: _selectedFileName == "education.js",
+              onTap: () => _handleFileTap("education.js", TimelineScreen()),
             ),
-          ),
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/twitter.svg",
-            tabName: "Twitter.json",
-            onTap: () => onOpenTab(
-              EditorTab(
-                title: "Twitter.json",
-                content: TwitterCard(profile: xProfile),
-              ),
+
+            // --- EXPERIENCE ---
+            ExplorerPanelCardOne(
+              iconName: FontAwesome.angle_down_solid,
+              tabName: 'EXPERIENCE',
+              assetPath: 'assets/svg/folder.svg',
             ),
-          ),
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/gmail.svg",
-            tabName: "Gmail.eml",
-            onTap: () => onOpenTab(
-              EditorTab(title: "Gmail.eml", content: const GmailCard()),
+            ExplorePanelCardTwo(
+              assetPath: "assets/svg/androidfull01.svg",
+              tabName: "android-developer.java",
+              isSelected: _selectedFileName == "android-developer.java",
+              onTap: () => _handleFileTap("android-developer.java", AndroidDev42Gears()),
             ),
-          ),
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/github.svg",
-            tabName: "Github.md",
-            onTap: () => onOpenTab(
-              EditorTab(
-                title: "Github.md",
-                content: GitHubCard(profile: gitHubProfile),
-              ),
+
+            // --- PROJECTS ---
+            ExplorerPanelCardOne(
+              iconName: FontAwesome.angle_down_solid,
+              tabName: "PROJECTS",
+              assetPath: 'assets/svg/folder.svg',
             ),
-          ),
-
-
-
-
-          // CERTIFICATES
-          ExplorerPanelCardOne(
-            iconName: FontAwesome.angle_down_solid,
-            tabName: "CERTIFICATES",
-          ),
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/brave.svg",
-            tabName: "MS Azure AI-900",
-            onTap: () => onOpenTab(
-              EditorTab(
-                title: "MS Azure AI-900",
-                content: CertificateAzure(),
-              ),
+            ExplorePanelCardTwo(
+              assetPath: "assets/svg/dart.svg",
+              tabName: "ShikamaruAI.dart",
+              isSelected: _selectedFileName == "ShikamaruAI.dart",
+              onTap: () => _handleFileTap("ShikamaruAI.dart", ShikamaruAI()),
             ),
-          ),
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/chrome.svg",
-            tabName: "Oracle Cloud Infrastructure",
-            onTap: () => onOpenTab(
-              EditorTab(
-                title: "Oracle Cloud Infrastructure",
-                content: CertificateOracle(),
-              ),
+            ExplorePanelCardTwo(
+              assetPath: "assets/svg/jupyter.svg",
+              tabName: "PriceLens.ipynb",
+              isSelected: _selectedFileName == "PriceLens.ipynb",
+              onTap: () => _handlePlaceholderTap("PriceLens.ipynb"),
             ),
-          ),
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/edge01.svg",
-            tabName: "Oracle Cloud Infrastructure - AI",
-            onTap: () => onOpenTab(
-              EditorTab(
-                title: "Oracle Cloud Infrastructure",
-                content: CertificateOracleAI(),
-              ),
+            ExplorePanelCardTwo(
+              assetPath: "assets/svg/python.svg",
+              tabName: "EncryptIt.py",
+              isSelected: _selectedFileName == "EncryptIt.py",
+              onTap: () => _handlePlaceholderTap("EncryptIt.py"),
             ),
-          ),
 
-
-          // MISCELLENEOUS
-          ExplorerPanelCardOne(
-            iconName: FontAwesome.angle_down_solid,
-            tabName: "MISC",
-            assetPath: 'assets/svg/folder.svg',
-          ),
-
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/folder3.svg",
-            // customColor: const Color(0xFFF47521),
-            tabName: "Miscellaneous",
-            onTap: () => onOpenTab(
-              EditorTab(title: "Misc", content: MiscellaneousScreen(onOpenTab: onOpenTab,))
+            // --- SOCIAL LINKS ---
+            ExplorerPanelCardOne(
+              iconName: FontAwesome.angle_down_solid,
+              tabName: "SOCIAL LINKS",
+              assetPath: 'assets/svg/folder.svg',
             ),
-          ),
-          // ExplorePanelCardTwo(
-          //   assetPath: "assets/svg/crunchyroll001.svg",
-          //   customColor: const Color(0xFFF47521),
-          //   tabName: "Anime.mkv",
-          // ),
-          // ExplorePanelCardTwo(
-          //   assetPath: "assets/svg/spotify-color-svgrepo-com.svg",
-          //   tabName: "Songs.mp3",
-          // ),
-          // ExplorePanelCardTwo(
-          //   assetPath: "assets/svg/netflix.svg",
-          //   customColor: Color(0xFFB2070F),
-          //   tabName: "Webseries.binge",
-          // ),
-          // ExplorePanelCardTwo(
-          //   assetPath: "assets/svg/paperclip01.svg",
-          //   customColor: Colors.grey.shade400,
-          //   tabName: "Research-paper",
-          //   onTap: () => onOpenTab(
-          //     EditorTab(
-          //       title: "Research-paper",
-          //       content: ResearchPaperView(),
-          //     ),
-          //   ),
-          // ),
-
-
-
-
-          // RESUME
-          ExplorerPanelCardOne(
-            iconName: FontAwesome.angle_down_solid,
-            tabName: "RESUME",
-            assetPath: 'assets/svg/folder.svg',
-          ),
-          ExplorePanelCardTwo(
-            assetPath: "assets/svg/pdf.svg",
-            tabName: "Resume.pdf",
-            onTap: () => onOpenTab(
-              EditorTab(
-                title: "Resume.pdf",
-                content: const ResumeView(),
-              ),
+            ExplorePanelCardTwo(
+              assetPath: "assets/svg/linkedin.svg",
+              tabName: "LinkedIn.url",
+              isSelected: _selectedFileName == "LinkedIn.url",
+              onTap: () => _handleFileTap("LinkedIn.url", LinkedInCard(profile: linkedInProfile)),
             ),
-          ),
-        ],
+            ExplorePanelCardTwo(
+              assetPath: "assets/svg/twitter.svg",
+              tabName: "Twitter.json",
+              isSelected: _selectedFileName == "Twitter.json",
+              onTap: () => _handleFileTap("Twitter.json", TwitterCard(profile: xProfile)),
+            ),
+            ExplorePanelCardTwo(
+              assetPath: "assets/svg/gmail.svg",
+              tabName: "Gmail.eml",
+              isSelected: _selectedFileName == "Gmail.eml",
+              onTap: () => _handleFileTap("Gmail.eml", const GmailCard()),
+            ),
+            ExplorePanelCardTwo(
+              assetPath: "assets/svg/github.svg",
+              tabName: "Github.md",
+              isSelected: _selectedFileName == "Github.md",
+              onTap: () => _handleFileTap("Github.md", GitHubCard(profile: gitHubProfile)),
+            ),
+
+            // --- CERTIFICATES ---
+            ExplorerPanelCardOne(
+              iconName: FontAwesome.angle_down_solid,
+              tabName: "CERTIFICATES",
+            ),
+            ExplorePanelCardTwo(
+              assetPath: "assets/svg/brave.svg",
+              tabName: "MS Azure AI-900",
+              isSelected: _selectedFileName == "MS Azure AI-900",
+              onTap: () => _handleFileTap("MS Azure AI-900", CertificateAzure()),
+            ),
+            ExplorePanelCardTwo(
+              assetPath: "assets/svg/chrome.svg",
+              tabName: "Oracle Cloud Infrastructure",
+              isSelected: _selectedFileName == "Oracle Cloud Infrastructure",
+              onTap: () => _handleFileTap("Oracle Cloud Infrastructure", CertificateOracle()),
+            ),
+            ExplorePanelCardTwo(
+              assetPath: "assets/svg/edge01.svg",
+              tabName: "Oracle Cloud Infrastructure - AI",
+              isSelected: _selectedFileName == "Oracle Cloud Infrastructure - AI",
+              onTap: () => _handleFileTap("Oracle Cloud Infrastructure - AI", CertificateOracleAI()),
+            ),
+
+            // --- MISC ---
+            ExplorerPanelCardOne(
+              iconName: FontAwesome.angle_down_solid,
+              tabName: "MISC",
+              assetPath: 'assets/svg/folder.svg',
+            ),
+            ExplorePanelCardTwo(
+              assetPath: "assets/svg/folder3.svg",
+              tabName: "Miscellaneous",
+              isSelected: _selectedFileName == "Miscellaneous",
+              onTap: () => _handleFileTap("Miscellaneous", MiscellaneousScreen(onOpenTab: widget.onOpenTab)),
+            ),
+
+            // --- RESUME ---
+            ExplorerPanelCardOne(
+              iconName: FontAwesome.angle_down_solid,
+              tabName: "RESUME",
+              assetPath: 'assets/svg/folder.svg',
+            ),
+            ExplorePanelCardTwo(
+              assetPath: "assets/svg/pdf.svg",
+              tabName: "Resume.pdf",
+              isSelected: _selectedFileName == "Resume.pdf",
+              onTap: () => _handleFileTap("Resume.pdf", const ResumeView()),
+            ),
+          ],
+        ),
       ),
     );
   }

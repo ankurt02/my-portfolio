@@ -1,6 +1,5 @@
+import 'package:ankur_portfolio/widgets/cards/researchPaper.card.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ResearchPaperView extends StatefulWidget {
   const ResearchPaperView({super.key});
@@ -13,121 +12,44 @@ class _ResearchPaperViewState extends State<ResearchPaperView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right: 30, left: 20),
-      // decoration: BoxDecoration(
-      //   // color: Colors.white,
-      //   border: Border.all(color: Colors.pink, width: 2),
-      // ),
-      child: Column(
+      alignment: Alignment.center,
+      child: Wrap(
+        direction: Axis.horizontal,
+        alignment: WrapAlignment.center,
+        spacing: 60,
+        runSpacing: 40,
         children: [
-          Gap(24),
-          Text("Research papers",
-            style: GoogleFonts.gideonRoman(
-              fontSize: 54,
-              color: Colors.white,
-            ),
-          ),
-          Gap(36),
           Container(
-            // height: 220,
-            padding: EdgeInsets.all(12),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              border: Border.all(color: const Color.fromARGB(255, 105, 105, 105), width: 1), borderRadius: BorderRadius.circular(12)
-            ),
-            child: Column(
-              children: [
-                Text("Content-Based Anime Recommendation Using BERT & TF-IDF",
-                textAlign: TextAlign.start,
-                  style: GoogleFonts.gideonRoman(
-                    fontSize: 24,
-                    color: Colors.grey.shade200
-                  ),
-                ),
-
-                Gap(12),
-
-                Row(
-                  children: [
-                    Spacer(),
-                    InkWell(
-                      onTap: () {},
-                      child : Container(
-                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: Colors.grey,
-                          )
-                        ),
-                        child: Text(
-                          "View Paper ->",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ),
-                    ),
-                    Gap(24)
-                  ],
-                ),
+            width: 396,
+            height: 540,
+            child: ResearchPaperCard(
+              imagePath: "assets/images/gemini02.png",
+              title:
+                  "Anime Recommendations: Beyond Euclidean, Leveraging Distance Metrics for Better Suggestions",
+              conference:
+                  "5th International Conference on Emerging research in electronics, computer science and technology (ICERECT-2025) - IEEE",
+              gradientColors: [
+                Colors.grey.shade800,
+                Colors.grey.shade500,
+                Colors.grey.shade200,
               ],
             ),
           ),
-
-          Gap(24),
-
           Container(
-            // height: 220,
-            padding: EdgeInsets.all(12),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              border: Border.all(color: const Color.fromARGB(255, 105, 105, 105), width: 1), borderRadius: BorderRadius.circular(12)
-            ),
-            child: Column(
-              children: [
-                Text("Anime Recommendation : Beyond Euclidean, Leveraging Distance Metrices for Better Suggestions",
-                textAlign: TextAlign.start,
-                  style: GoogleFonts.gideonRoman(
-                    fontSize: 24,
-                    color: Colors.grey.shade200
-                  ),
-                ),
-
-                Gap(12),
-
-                Row(
-                  children: [
-                    Spacer(),
-                    InkWell(
-                      onTap: () {},
-                      child : Container(
-                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: Colors.grey,
-                          )
-                        ),
-                        child: Text(
-                          "View Paper ->",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ),
-                    ),
-                    Gap(24)
-                  ],
-                ),
+            width: 396,
+            height: 540,
+            child: ResearchPaperCard(
+              imagePath: "assets/images/download.jpeg",
+              title: "Content-Based Anime Recommendation Using BERT & TF-IDF",
+              conference:
+                  "International Conference on Grid and Parallel Computing (ICGPC-2025) - Springer",
+              gradientColors: [
+                Colors.grey.shade200,
+                Colors.grey.shade800,
+                Colors.grey.shade500,
               ],
             ),
           ),
-
         ],
       ),
     );

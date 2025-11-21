@@ -1,3 +1,4 @@
+import 'package:ankur_portfolio/screens/misc/research.paper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gap/gap.dart';
@@ -40,48 +41,52 @@ class _MiscellaneousScreenState extends State<MiscellaneousScreen> {
                 mainAxisSpacing: 8,
                 childAspectRatio: 0.7,
                 children: [
-                  CustomInfoCard(
+                  InfoCard(
                     imagePath: 'assets/images/anime01.jpg',
                     title: 'Anime',
                     description: 'My late-night watchlist of Anime',
                     gradientColors: [
-                      const Color.fromARGB(255, 250, 120, 163), 
-                      Colors.pinkAccent, 
-                      const Color.fromARGB(255, 236, 7, 179)
+                      const Color.fromARGB(255, 250, 120, 163),
+                      Colors.pinkAccent,
+                      const Color.fromARGB(255, 236, 7, 179),
                     ],
                     onTap: () {},
                   ),
-                  CustomInfoCard(
+                  InfoCard(
                     imagePath: 'assets/images/movie.jpeg',
                     title: 'Movies',
                     description: 'Weekend escapes with Snacks and beverages.',
-                    gradientColors: [
-                      Colors.orangeAccent, 
-                      Colors.redAccent
-                    ],
+                    gradientColors: [Colors.orangeAccent, Colors.redAccent],
                     onTap: () {},
                   ),
-                  CustomInfoCard(
+                  InfoCard(
                     imagePath: 'assets/images/music02.jpeg',
                     title: 'Music',
                     description: '...',
                     gradientColors: [
-                      const Color.fromARGB(255, 5, 202, 126), 
-                      const Color.fromARGB(255, 24, 193, 255), 
+                      const Color.fromARGB(255, 5, 202, 126),
+                      const Color.fromARGB(255, 24, 193, 255),
                     ],
                     onTap: () {},
                   ),
-                  CustomInfoCard(
+                  InfoCard(
                     imagePath: 'assets/images/researchPaper02.png',
                     title: 'Research Papers',
-                    description: 'Things I Googled too much — turned into research.',
+                    description:
+                        'Things I Googled too much — turned into research.',
                     gradientColors: [
                       const Color.fromARGB(255, 96, 151, 247),
                       const Color.fromARGB(255, 59, 92, 235),
                       Colors.deepPurpleAccent,
                       const Color.fromARGB(255, 84, 32, 225),
                     ],
-                    onTap: () {},
+                    onTap:
+                        () => widget.onOpenTab(
+                          EditorTab(
+                            title: "researchpaper.ieee",
+                            content: ResearchPaperView(),
+                          ),
+                        ),
                   ),
                 ],
               ),

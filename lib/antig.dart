@@ -1,7 +1,6 @@
-
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart'; // Needed for smooth infinite animation
+import 'package:flutter/scheduler.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -19,95 +18,86 @@ class AntigravityJellyfishPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          // 1. The Jellyfish/Streak Layer
+          // 1. The Jellyfish Background Layer
+          // We use Positioned.fill so it covers the whole screen area
+          // The widget itself now centers the effect automatically.
           const Positioned.fill(
             child: JellyfishField(),
           ),
           
-          // 2. Foreground Content
+          // 2. Foreground Content (The Page)
           Center(
-            child: PointerInterceptor(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.change_history, size: 28, color: Colors.grey[800]),
+                    const SizedBox(width: 8),
+                    Text(
+                      "Google Antigravity",
+                      style: TextStyle(
+                        color: Colors.grey[800],
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: -0.5,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 30),
+                const Text(
+                  "Experience liftoff",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 64,
+                    fontWeight: FontWeight.bold,
+                    height: 1.0,
+                    letterSpacing: -2.0,
+                  ),
+                ),
+                const Text(
+                  "with the next-generation IDE",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xFF444444),
+                    fontSize: 64,
+                    fontWeight: FontWeight.w300, 
+                    height: 1.1,
+                    letterSpacing: -2.0,
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 18),
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.change_history, size: 28, color: Colors.grey[800]),
-                      const SizedBox(width: 8),
+                      Icon(Icons.window, color: Colors.white, size: 22),
+                      SizedBox(width: 12),
                       Text(
-                        "Google Antigravity",
+                        "Download for Windows",
                         style: TextStyle(
-                          color: Colors.grey[800],
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: -0.5,
+                          color: Colors.white, 
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 30),
-                  const Text(
-                    "Experience liftoff",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 64,
-                      fontWeight: FontWeight.bold,
-                      height: 1.0,
-                      letterSpacing: -2.0,
-                    ),
-                  ),
-                  const Text(
-                    "with the next-generation IDE",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color(0xFF444444),
-                      fontSize: 64,
-                      fontWeight: FontWeight.w300, 
-                      height: 1.1,
-                      letterSpacing: -2.0,
-                    ),
-                  ),
-                  const SizedBox(height: 40),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 18),
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.window, color: Colors.white, size: 22),
-                        SizedBox(width: 12),
-                        Text(
-                          "Download for Windows",
-                          style: TextStyle(
-                            color: Colors.white, 
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
           ),
         ],
       ),
     );
-  }
-}
-
-class PointerInterceptor extends StatelessWidget {
-  final Widget child;
-  const PointerInterceptor({super.key, required this.child});
-  @override
-  Widget build(BuildContext context) {
-    return IgnorePointer(child: child);
   }
 }
 
@@ -122,34 +112,21 @@ class _JellyfishFieldState extends State<JellyfishField>
     with SingleTickerProviderStateMixin {
   List<Offset> _dots = [];
   
-  // PHYSICS STATE
-  Offset _targetMousePos = const Offset(-1000, -1000); 
-  Offset _currentMousePos = const Offset(-1000, -1000); 
-  
   late Ticker _ticker;
   double _time = 0.0;
-  
   Size? _lastSize;
 
-  // INCREASED DENSITY: Reduced spacing from 45.0 to 24.0 to get more dots at border
-  final double _gridSpacing = 40.0; 
-  final double _jitterAmount = 12.0; // Slightly reduced jitter to prevent overlap with tighter grid
+  // High density for visible border dots
+  final double _gridSpacing = 36.0; 
+  final double _jitterAmount = 12.0; 
 
   @override
   void initState() {
     super.initState();
+    // Ticker is only needed for Time now, no mouse interpolation
     _ticker = createTicker((elapsed) {
       setState(() {
         _time = elapsed.inMilliseconds / 1000.0;
-
-        if (_currentMousePos != _targetMousePos) {
-           double dist = (_currentMousePos - _targetMousePos).distance;
-           if (dist > 0.5) {
-             _currentMousePos = Offset.lerp(_currentMousePos, _targetMousePos, 0.15)!;
-           } else {
-             _currentMousePos = _targetMousePos;
-           }
-        }
       });
     });
     _ticker.start();
@@ -188,23 +165,20 @@ class _JellyfishFieldState extends State<JellyfishField>
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
+        // 1. Initialize Grid
         _initDots(Size(constraints.maxWidth, constraints.maxHeight));
+        
+        // 2. Calculate Center Fixed Position
+        final center = Offset(constraints.maxWidth / 2, constraints.maxHeight / 2);
 
-        return MouseRegion(
-          onHover: (event) {
-            _targetMousePos = event.localPosition;
-          },
-          onExit: (event) {
-             // Optional: drift away
-          },
-          child: CustomPaint(
-            painter: JellyfishPainter(
-              points: _dots, 
-              mousePos: _currentMousePos, 
-              time: _time
-            ),
-            size: Size.infinite,
+        // 3. Return Painter with fixed center (No MouseRegion)
+        return CustomPaint(
+          painter: JellyfishPainter(
+            points: _dots, 
+            centerPos: center, // Pass center instead of mouse
+            time: _time
           ),
+          size: Size.infinite,
         );
       },
     );
@@ -213,24 +187,23 @@ class _JellyfishFieldState extends State<JellyfishField>
 
 class JellyfishPainter extends CustomPainter {
   final List<Offset> points;
-  final Offset mousePos;
+  final Offset centerPos; // Renamed from mousePos for clarity
   final double time;
 
   JellyfishPainter({
     required this.points, 
-    required this.mousePos, 
+    required this.centerPos, 
     required this.time
   });
 
-  // ZONES
-  final double centerZoneRadius = 120.0 * 0.65; 
-  final double peakRadius = 260.0 * 0.65;       
-  // Lowered contraction start to widen the active border zone
-  final double contractionRadius = 340.0 * 0.65; 
-  final double outerRadius = 500.0 * 0.65;       
+  // ZONES (Scaled for screen fit + visual balance)
+  final double centerZoneRadius = 75.0; 
+  final double peakRadius = 160.0;       
+  final double contractionRadius = 220.0; 
+  final double outerRadius = 360.0;       
 
   final double baseLength = 5.0;     
-  final double baseWidth = 4.0;
+  final double baseWidth = 3.5;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -248,9 +221,9 @@ class JellyfishPainter extends CustomPainter {
       
       Offset currentPos = origin + Offset(floatX, floatY);
 
-      // --- DISTANCE CHECK ---
-      double dx = currentPos.dx - mousePos.dx;
-      double dy = currentPos.dy - mousePos.dy;
+      // --- DISTANCE CHECK (From Center) ---
+      double dx = currentPos.dx - centerPos.dx;
+      double dy = currentPos.dy - centerPos.dy;
       double dist = math.sqrt(dx * dx + dy * dy);
 
       if (dist > outerRadius) continue;
@@ -263,54 +236,47 @@ class JellyfishPainter extends CustomPainter {
         }
       }
 
-      // --- 3. OUTER CONTRACTION (Increased Movement) ---
+      // --- 3. OUTER CONTRACTION ---
       if (dist > contractionRadius) {
-        double angleToMouse = math.atan2(dy, dx);
+        double angleToCenter = math.atan2(dy, dx);
         double outwardFactor = (dist - contractionRadius) / (outerRadius - contractionRadius);
         
-        // Add sine wave for rhythmic "swimming" contraction
         double swimCycle = math.sin(time * 2.0 + (origin.dy * 0.05));
         
-        // Increased pullAmount to 220.0 for VERY strong inward movement
+        // Strong pull (220.0) so dots clearly move inward at borders
         double pullAmount = 220.0 * outwardFactor * swimCycle; 
         
-        // Important: Subtract to pull inward
         currentPos -= Offset(
-          math.cos(angleToMouse) * pullAmount,
-          math.sin(angleToMouse) * pullAmount
+          math.cos(angleToCenter) * pullAmount,
+          math.sin(angleToCenter) * pullAmount
         );
       }
 
-      // --- 4. DYNAMIC PULSE SPEED ---
+      // --- 4. DYNAMIC PULSE ---
       double speedBlend = (dist / outerRadius).clamp(0.0, 1.0);
       double phase = (origin.dx * 0.02) + (origin.dy * 0.02);
       double combinedPulse = (math.sin(time * 1.5 + phase) * (1.0 - speedBlend)) + 
                              (math.sin(time * 6.0 + phase) * speedBlend);
       double lenMult = 1.3 + (combinedPulse * 0.5); 
 
-      // --- 5. DIMINISHING & SHAPE LOGIC ---
+      // --- 5. DIMINISHING & SHAPE ---
       double scaleFactor = 1.0;
       double actualLen = baseLength;
 
       if (dist < centerZoneRadius) {
-        // ZONE 1: CENTER
         actualLen = 0.1; 
         scaleFactor = 0.6; 
         
       } else if (dist < peakRadius) {
-        // ZONE 2: TRANSITION
         double t = (dist - centerZoneRadius) / (peakRadius - centerZoneRadius);
         t = t * t * (3 - 2 * t); 
-        
         actualLen = 0.1 + (baseLength * lenMult * t);
         scaleFactor = 0.6 + (0.4 * t); 
         
       } else if (dist > contractionRadius) {
-        // ZONE 3: OUTER FADE
         scaleFactor = 1.0 - ((dist - contractionRadius) / (outerRadius - contractionRadius));
         actualLen = baseLength * lenMult * scaleFactor;
       } else {
-        // ZONE 4: PLATEAU
         actualLen = baseLength * lenMult;
       }
 
@@ -320,7 +286,7 @@ class JellyfishPainter extends CustomPainter {
 
       paint.strokeWidth = actualWidth;
 
-      // --- 6. ROTATION (WOBBLE) ---
+      // --- 6. WOBBLE ---
       double baseAngle = math.atan2(dy, dx);
       double wobble = math.sin(time * 3.0 + (origin.dy * 0.05)) * 0.12;
       double finalAngle = baseAngle + wobble;
@@ -347,6 +313,6 @@ class JellyfishPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant JellyfishPainter oldDelegate) {
     return oldDelegate.time != time ||
-           oldDelegate.mousePos != mousePos;
+           oldDelegate.centerPos != centerPos;
   }
 }
