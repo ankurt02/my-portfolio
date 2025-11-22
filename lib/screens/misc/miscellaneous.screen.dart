@@ -1,5 +1,6 @@
 import 'package:ankur_portfolio/screens/misc/research.paper.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gap/gap.dart';
 import 'package:ankur_portfolio/models/editor.tab.dart';
@@ -80,13 +81,9 @@ class _MiscellaneousScreenState extends State<MiscellaneousScreen> {
                       Colors.deepPurpleAccent,
                       const Color.fromARGB(255, 84, 32, 225),
                     ],
-                    onTap:
-                        () => widget.onOpenTab(
-                          EditorTab(
-                            title: "researchpaper.ieee",
-                            content: ResearchPaperView(),
-                          ),
-                        ),
+                    onTap: () {
+                      context.go('/misc/research');
+                    },
                   ),
                 ],
               ),

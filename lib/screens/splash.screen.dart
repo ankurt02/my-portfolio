@@ -1,7 +1,9 @@
-import 'package:ankur_portfolio/screens/home.screen.dart';
+import 'package:ankur_portfolio/screens/exp.homescreen.dart';
 import 'package:ankur_portfolio/screens/links/socials.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:go_router/go_router.dart';
+import 'package:ankur_portfolio/routing/app_router.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -31,12 +33,9 @@ class _SplashScreenState extends State<SplashScreen>
   void _onAnimationComplete() async {
     try {
       final profiles = await _dataFuture;
+      ProfileStore.profiles = profiles; // Store profiles globally for the ShellRoute
       if (mounted) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => HomeScereen(profiles: profiles),
-          ),
-        );
+        context.replace('/');
       }
     } catch (e) {
       if (mounted) {
