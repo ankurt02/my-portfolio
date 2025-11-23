@@ -19,36 +19,35 @@ class DateContainer extends StatelessWidget {
     String daySuffix = getDaySuffix(dayNumber);
 
     return Container(
+      padding: EdgeInsets.all(8),
       // height: 120,
       // width: 120,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         // color: Colors.white.withOpacity(0.9),
       ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Day of week
-            Text(
-              dayName,
-              style: GoogleFonts.jetBrainsMono(
-                fontSize: 40,
-                fontWeight: FontWeight.w700,
-                color: Colors.black87,
-              ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          // Day of week
+          Text(
+            dayName,
+            style: GoogleFonts.jetBrainsMono(
+              fontSize: 40,
+              fontWeight: FontWeight.w700,
+              color: Colors.grey.shade800,
             ),
-            
-            // Date of month with suffix
-            Text(
-              '$dayNumber$daySuffix',
-              style: GoogleFonts.jetBrainsMono(
-                fontSize: 32,
-                color: Colors.grey[700],
-              ),
+          ),
+          
+          // Date of month with suffix
+          Text(
+            '$dayNumber$daySuffix',
+            style: GoogleFonts.jetBrainsMono(
+              fontSize: 32,
+              color: Colors.grey[700],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

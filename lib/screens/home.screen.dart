@@ -1,8 +1,7 @@
-import 'package:ankur_portfolio/screens/misc/blur.container.dart';
 import 'package:ankur_portfolio/widgets/clock/current.time.dart';
 import 'package:ankur_portfolio/widgets/clock/date.timec.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,10 +16,21 @@ class _HomeScreenState extends State<HomeScreen> {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
 
-    double sWidth = 280;
+    double sWidth = 272;
+
+    // final now = DateTime.now();
+    // String suffix = 'th';
+    // int day = now.day;
+    // if (day % 10 == 1 && day != 11) suffix = 'st';
+    // else if (day % 10 == 2 && day != 12) suffix = 'nd';
+    // else if (day % 10 == 3 && day != 13) suffix = 'rd';
+    // // Format: "25th Nov, 25"
+    // String formattedDate = "${day}${suffix} ${DateFormat('MMM, yy').format(now)}";
+   
 
     return Container(
       decoration: BoxDecoration(
+        color: Color(0xFF121212),
         // image: DecorationImage(
         //   image: AssetImage("assets/images/gemini01.png"),
         //   fit: BoxFit.cover, // optional but recommended
@@ -35,29 +45,113 @@ class _HomeScreenState extends State<HomeScreen> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                height: 340,
-                width: sWidth,
-                decoration: BoxDecoration(
-                  // border: Border.all(color: Colors.pink, width: 2),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-              ),
 
-              Gap(12),
+              // moon container
+              // Container(
+              //   height: 472,
+              //   width: sWidth,
+              //   decoration: BoxDecoration(
+              //     // border: Border.all(color: Colors.pink, width: 2),
+              //     borderRadius: BorderRadius.circular(16),
+              //   ),
+              //   child: Column(
+              //     children: [
+                    
+              //       MoonWidget(width: sWidth),
+              //       // Spacer(),
+              //       Container(
+              //         // height: 120,
+              //         width: sWidth,
+              //         // decoration: BoxDecoration(
+              //         //   border: Border.all(
+              //         //     color: Colors.yellow,
+              //         //     width: 2
+              //         //   )
+              //         // ),
+              //         child:
+              //         Column(
+              //           mainAxisAlignment: MainAxisAlignment.center,
+              //           crossAxisAlignment: CrossAxisAlignment.center,
+              //           children: [
+              //             Text(
+              //               "Moon as on",
+              //               style: GoogleFonts.jetBrainsMono(
+              //                 color: Colors.grey.shade600,
+              //                 fontSize: 12,
+              //                 fontWeight: FontWeight.bold
+              //               )
+              //             ),
+              //             Text(
+              //               "$formattedDate",
+              //               style: GoogleFonts.jetBrainsMono(
+              //                 color: Colors.grey.shade300,
+              //                 fontSize: 24,
+              //                 fontWeight: FontWeight.bold
+              //               )
+              //             ),
+              //             Row(
+              //               children: [
+              //                 Spacer(),
+              //                 Text(
+              //                   "- Kolkata, India",
+              //                   style: GoogleFonts.jetBrainsMono(
+              //                 color: Colors.grey.shade300,
+              //                 fontSize: 12,
+              //                 fontWeight: FontWeight.bold
+              //               )
+              //                 )
+              //               ],
+              //             )
+              //           ],
+              //         )
+                      //  Text.rich(
+                      //   TextSpan(children: [
+                      //     TextSpan(
+                      //       text: "Moon as on\n",
+                      //       style: GoogleFonts.jetBrainsMono(
+                      //         color: Colors.grey.shade600,
+                      //         fontSize: 12,
+                      //         fontWeight: FontWeight.bold
+                      //       )
+                      //     ),
+                      //     TextSpan(
+                      //       text: "$formattedDate\n",
+                      //       style: GoogleFonts.jetBrainsMono(
+                      //         color: Colors.grey.shade400,
+                      //         fontSize: 24,
+                      //         fontWeight: FontWeight.w800,
+                      //       )
+                      //     ),
+                      //     TextSpan(
+                      //       text: "- Kolkata",
+                      //       style: GoogleFonts.jetBrainsMono(
+                      //         color: Colors.grey.shade400,
+                      //         fontSize: 16,
+                      //         fontWeight: FontWeight.w800,
+                      //       )
+                      //     )
+                      //   ])
+                      // ),
+              //       ),
 
-              Container(
-                height: 120,
-                width: sWidth,
-                decoration: BoxDecoration(
-                  // border: Border.all(color: Colors.green, width: 2),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-              ),
+              //     ],
+              //   ),
+              // ),
+
+              // Gap(12),
+
+              // Container(
+              //   height: 120,
+              //   width: sWidth,
+              //   decoration: BoxDecoration(
+              //     // border: Border.all(color: Colors.green, width: 2),
+              //     borderRadius: BorderRadius.circular(16),
+              //   ),
+              // ),
             ],
           ),
 
-          Gap(16),
+          // Gap(64),
 
           // column - 2 - time and clob
           Column(
@@ -74,25 +168,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: Stack(
                   children: [
-                    Center(
-                      child: Container(
-                        height: 180,
-                        width: 180,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              const Color.fromARGB(255, 246, 174, 79),
-                              const Color.fromARGB(255, 251, 105, 60),
-                            ],
-                          ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: Center(
+                        child: ClipRRect(
+                          borderRadius: BorderRadiusGeometry.circular(10),
+                          child: Image.asset("assets/images/download (1).jpeg"),
                         ),
                       ),
                     ),
+                    // Center(
+                    //   child: Container(
+                    //     height: 180,
+                    //     width: 180,
+                    //     decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(100),
+                    //       gradient: LinearGradient(
+                    //         begin: Alignment.topLeft,
+                    //         end: Alignment.bottomRight,
+                    //         colors: [
+                    //           const Color.fromARGB(255, 246, 174, 79),
+                    //           const Color.fromARGB(255, 251, 105, 60),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
 
-                    BlurContainer(width: sWidth / 2),
+                    // BlurContainer(width: sWidth),
                     // Container(width: sWidth).blurry(
                     //   blur: 12,
                     //   width: 120,
@@ -106,26 +209,66 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       // padding: EdgeInsets.only(top: 10),
                       // height: 1,
-                      width: sWidth / 2,
+                      width: sWidth,
                       decoration: BoxDecoration(
                         // border: Border.all(color: Colors.red, width: 2),
                       ),
-                      child: Column(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          DateContainer(),
-                          Spacer(),
+                          
                           Container(
-                            height: 120,
-                            width: sWidth / 2,
+                            padding: EdgeInsets.all(8),
+                            // height: 120,
+                            // width: sWidth ,
                             // decoration: BoxDecoration(
                             //   border: Border.all(
-                                // color: Colors.yellow,
+                            // color: Colors.yellow,
                             //     width: 2,
                             //   ),
                             // ),
-                            child: Center(
-                              child: LiveClock(),
+                            child: Column(
+                              children: [
+                                LiveClock(),
+                                Text.rich(
+                                  TextSpan(
+                                    text: '+05:30 GMT, ', 
+                                    style: GoogleFonts.jetBrainsMono(
+                                    color: Colors.grey.shade800,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                    children: <InlineSpan>[
+                                      TextSpan(
+                                        text: 'India',
+                                        style: GoogleFonts.jetBrainsMono(
+                                    color: Colors.grey.shade800,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                // Spacer()
+
+                                // Text(
+                                //   "India",
+                                  // style: GoogleFonts.jetBrainsMono(
+                                  //   color: Colors.grey.shade800,
+                                  //   fontSize: 16,
+                                  //   fontWeight: FontWeight.bold,
+                                  // ),
+                                // ),
+                              ],
                             ),
+                          ),
+                          Spacer(),
+                          Column(
+                            children: [
+                              Spacer(),
+                              DateContainer(),
+                            ],
                           ),
                           // Spacer(),
                           // Container(

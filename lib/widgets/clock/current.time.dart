@@ -41,13 +41,16 @@ class _LiveClockState extends State<LiveClock> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        _timeString, // updates live
-        style: GoogleFonts.jetBrainsMono(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: Colors.grey.shade800
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Center(
+        child: Text(
+          _timeString, // updates live
+          style: GoogleFonts.jetBrainsMono(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: Colors.grey.shade800
+          ),
         ),
       ),
     );

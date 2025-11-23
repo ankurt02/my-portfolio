@@ -13,12 +13,12 @@ class BlurContainer extends StatelessWidget {
       borderRadius: BorderRadius.circular(14),
       child: BackdropFilter(
         blendMode: BlendMode.srcIn,
-        filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+        filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
         child: Container(
           width: width,
           height: size.height,
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.02),
+            color: Colors.white.withOpacity(0.01),
             // borderRadius: BorderRadius.circular(12),
            
           ),
