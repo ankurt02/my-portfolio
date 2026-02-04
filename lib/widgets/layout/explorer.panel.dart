@@ -18,14 +18,13 @@ class ExplorerPanel extends StatefulWidget {
 }
 
 class _ExplorerPanelState extends State<ExplorerPanel> {
-  // Removed local state _selectedFileName
 
   void _handleFileTap(String routePath) {
     context.go(routePath);
   }
 
   void _handlePlaceholderTap(String fileName) {
-    // Placeholder logic if needed, or just show a snackbar
+    // Placeholder logic, or just show a snackbar
   }
 
   @override
@@ -33,7 +32,6 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     
-    // Get current location to determine selection
     final String currentLocation = GoRouterState.of(context).uri.toString();
 
     return Container(

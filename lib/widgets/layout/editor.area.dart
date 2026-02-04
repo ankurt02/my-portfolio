@@ -5,12 +5,10 @@ import 'package:ankur_portfolio/screens/links/github.card.dart';
 import 'package:ankur_portfolio/screens/links/linkedin.card.dart';
 import 'package:ankur_portfolio/screens/links/socials.dart';
 import 'package:ankur_portfolio/screens/misc/miscellaneous.screen.dart';
-// ignore_for_file: unused_import
 import 'package:flutter/material.dart';
 import 'package:ankur_portfolio/models/editor.tab.dart';
 import 'package:ankur_portfolio/screens/links/twitter.screen.dart';
 
-// Converted to a StatelessWidget for better performance as it no longer manages its own state.
 class EditorArea extends StatelessWidget {
   final Widget child;
 

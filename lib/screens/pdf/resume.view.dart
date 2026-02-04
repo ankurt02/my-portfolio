@@ -20,7 +20,7 @@ class ResumeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String? resumeUrl = "https://resume-hosting-f1c9d.web.app/ankur_tiwary_resume.pdf";
+    final String? resumeUrl = "https://resume-hosting-f1c9d.web.app/Ankur_Tiwary_resume_ftg_exp.pdf";
 
     if (resumeUrl == null || resumeUrl.isEmpty) {
       return const Center(
