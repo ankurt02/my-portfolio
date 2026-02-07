@@ -88,14 +88,14 @@ class GitHubProfile extends SocialProfile {
 }
 
 class SocialsService {
-  static final String _githubToken = const String.fromEnvironment(
-    'TOKEN_GITHUB',
-  );
+  // static final String _githubToken = const String.fromEnvironment(
+  //   'TOKEN_GITHUB',
+  // );
 
   static Future<List<SocialProfile>> fetchProfiles() async {
-    if (_githubToken.isEmpty) {
-      throw Exception('TOKEN_GITHUB not found in .env file.');
-    }
+    // if (_githubToken.isEmpty) {
+    //   throw Exception('TOKEN_GITHUB not found in .env file.');
+    // }
 
     final String jsonString = await rootBundle.loadString(
       'assets/socials.json',
@@ -172,9 +172,8 @@ class SocialsService {
     """;
 
     final response = await http.post(
-      Uri.parse('https://api.github.com/graphql'),
+      Uri.parse('https://git-hub-proxy-mu.vercel.app/api/github'),
       headers: {
-        'Authorization': 'Bearer $_githubToken',
         'Content-Type': 'application/json',
       },
       body: jsonEncode({
