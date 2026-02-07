@@ -173,7 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Center(
                         child: ClipRRect(
                           borderRadius: BorderRadiusGeometry.circular(10),
-                          child: Image(image: NetworkImage("https://resume-hosting-f1c9d.web.app/download (1).jpeg")),
+                          child: Image(image: NetworkImage("https://resume-hosting-f1c9d.web.app/background001.jpeg")),
                         ),
                       ),
                     ),
