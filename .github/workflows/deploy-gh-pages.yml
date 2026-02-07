@@ -23,7 +23,7 @@ jobs:
       - run: flutter pub get
 
       # 4. Build web app with secrets
-      - run: flutter build web --release --dart-define=TOKEN_GITHUB=${{ secrets.GH_PAT }} --dart-define=RESUME_URL=${{ secrets.RESUME_URL }}
+      - run: flutter build web --release --dart-define=RESUME_URL=${{ secrets.RESUME_URL }}
 
       # 5. Deploy to GitHub Pages
       - name: Deploy

@@ -68,7 +68,7 @@ class GitHubProfile extends SocialProfile {
   final String? location;
   final int totalRepos;
   final int followers;
-  final int totalContributions;
+  final int? totalContributions;
 
   GitHubProfile({
     required String name,
@@ -76,7 +76,7 @@ class GitHubProfile extends SocialProfile {
     required String profilePicUrl,
     required this.totalRepos,
     required this.followers,
-    required this.totalContributions,
+    this.totalContributions,
     this.location,
   }) : super(
          platform: 'GitHub',

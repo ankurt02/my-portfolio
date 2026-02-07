@@ -28,7 +28,7 @@ jobs:
       # 4. Build the Flutter web app, passing the secret token
       # This is the most important step for your API key!
       - name: Build Web App
-        run: flutter build web --release --dart-define=TOKEN_GITHUB=${{ secrets.GH_PAT }}
+        run: flutter build web --release --dart-define=RESUME_URL=${{ secrets.RESUME_URL }} 
 
       # 5. Deploy the built app to Firebase Hosting
       - name: Deploy to Firebase
