@@ -1,96 +1,11 @@
+import 'package:ankur_portfolio/widgets/blink/blinking.dot.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
 
-class GlowingBlinkingDot extends StatefulWidget {
-  final List<Color> colors;
-  final Duration duration;
-  final double size;
 
-  const GlowingBlinkingDot({
-    super.key,
-    this.colors = const [Color.fromARGB(255, 248, 236, 131), Color.fromARGB(255, 240, 228, 1), Color.fromARGB(255, 255, 196, 17)],
-    this.duration = const Duration(milliseconds: 1200), 
-    this.size = 9.0,
-  });
-
-  @override
-  State<GlowingBlinkingDot> createState() => _GlowingBlinkingDotState();
-}
-
-class _GlowingBlinkingDotState extends State<GlowingBlinkingDot>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late Animation<Color?> _colorAnimation;
-  int _currentColorIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
-    );
-
-    _setupAnimation();
-
-    _controller.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        setState(() {
-          _currentColorIndex = (_currentColorIndex + 1) % widget.colors.length;
-          _setupAnimation(); 
-        });
-        _controller.forward(from: 0.0);
-      }
-    });
-
-    _controller.forward();
-  }
-
-  void _setupAnimation() {
-    final beginColor = widget.colors[_currentColorIndex];
-    final endColor = widget.colors[(_currentColorIndex + 1) % widget.colors.length];
-
-    _colorAnimation = ColorTween(
-      begin: beginColor,
-      end: endColor,
-    ).animate(_controller);
-  }
-
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _colorAnimation,
-      builder: (context, child) {
-        final currentColor = _colorAnimation.value;
-        return Container(
-          width: widget.size,
-          height: widget.size,
-          decoration: BoxDecoration(
-            color: currentColor, 
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: (currentColor ?? Colors.transparent).withOpacity(0.75),
-                blurRadius: widget.size,
-                spreadRadius: widget.size * 0.1,
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
 
 class IndexDotHtml extends StatefulWidget {
   const IndexDotHtml({super.key});
@@ -165,27 +80,33 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
           Gap(18),
           Row(
             children: [
-              Gap(16),
-              GlowingBlinkingDot(
-                // Colors to be added here
-                colors: [
-                  Colors.yellowAccent,
-                  Color.fromARGB(255, 224, 202, 8),
-                  Colors.amber,
-                ],
-                size: 9,
-              ),
+              // Gap(16),
+              // GlowingBlinkingDot(
+              //   // Colors to be added here
+              //   colors: [
+              //     Colors.yellowAccent,
+              //     Color.fromARGB(255, 224, 202, 8),
+              //     Colors.amber,
+              //   ],
+              //   size: 9,
+              // ),
               Gap(8),
               ShaderMask(
                 shaderCallback: (Rect bounds) {
                   return const LinearGradient(
-                    colors: [Colors.yellow, Colors.yellowAccent],
+                    colors: [
+                      Colors.green, 
+                      Colors.lightGreen, 
+                      Colors.blue, 
+                      Colors.blueAccent
+                    ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ).createShader(bounds);
                 },
                 child: Text(
-                  "Android Developer - Device Platform Engineer",
+                  // "Android Developer - Device Platform Engineer",
+                  "Android Developer | Flutter",
                   style: GoogleFonts.robotoMono(
                     color: Colors.white,
                     fontSize: 14,
@@ -230,11 +151,25 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
                   ],
                 ),
                 Gap(16),
+                
                 FractionallySizedBox(
                   alignment: Alignment.center,
                   widthFactor: 0.85,
                   child: Text(
-                    "Hey there, I'm Ankur! I just wrapped up my degree in Computer Science and currently working as an Android Developer - Device Platform Engineer at 42Gears. My true passion is building attractive and engaging user interfaces. I'm the kind of developer who will happily spend time perfecting the details, making sure every pixel, font, and color choice contributes to a seamless user experience.",
+                    "Hi there,\n",
+                    textAlign: TextAlign.justify,
+                    style: GoogleFonts.spaceMono(
+                        color: Colors.grey.shade200,
+                        fontSize: 24,
+                        height: 1.35,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                FractionallySizedBox(
+                  alignment: Alignment.center,
+                  widthFactor: 0.85,
+                  child: Text(
+                    "I’m a Computer Science graduate and an Android & Flutter developer with hands-on experience building scalable mobile and device-level solutions. I’ve worked on bridging native Android services with Flutter, automating device workflows, and solving real production issues in enterprise environments.\n\nBeyond mobile development, I enjoy working at the intersection of UI engineering and machine learning, having built end-to-end ML-powered applications using Python, Flutter, and modern ML techniques. I care deeply about clean architecture, thoughtful UI design, and building products that feel solid, fast, and intuitive to use.\n\nI’m currently exploring opportunities where I can grow as a mobile or platform engineer while continuing to build impactful, user-focused products.",
                     textAlign: TextAlign.justify,
                     style: GoogleFonts.robotoFlex(
                         color: Colors.grey.shade300,
