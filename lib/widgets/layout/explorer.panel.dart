@@ -1,9 +1,12 @@
+
+import 'package:ankur_portfolio/providers/tab.management.dart';
 import 'package:ankur_portfolio/screens/links/socials.dart';
 import 'package:ankur_portfolio/widgets/explorer%20cards/explorepanel.cardtwo.dart';
 import 'package:ankur_portfolio/widgets/explorer%20cards/explorerpanel.cardone.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class ExplorerPanel extends StatefulWidget {
   final List<SocialProfile> profiles;
@@ -18,20 +21,26 @@ class ExplorerPanel extends StatefulWidget {
 }
 
 class _ExplorerPanelState extends State<ExplorerPanel> {
-
-  void _handleFileTap(String routePath) {
+  void _handleFileTap(BuildContext context, {
+    required String routePath,
+    required String title,
+    required String iconPath,
+  }) {
+    context.read<TabManager>().openTab(
+          id: routePath,
+          title: title,
+          route: routePath,
+          iconPath: iconPath,
+        );
+    
     context.go(routePath);
-  }
-
-  void _handlePlaceholderTap(String fileName) {
-    // Placeholder logic, or just show a snackbar
   }
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    
+
     final String currentLocation = GoRouterState.of(context).uri.toString();
 
     return Container(
@@ -46,24 +55,41 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
               iconName: FontAwesome.angle_down_solid,
               tabName: 'ABOUT',
               assetPath: 'assets/svg/folder.svg',
-            ),
-            ExplorePanelCardTwo(
-              assetPath: "assets/svg/html5.svg",
-              tabName: "index.html",
-              isSelected: currentLocation == "/about/index.html",
-              onTap: () => _handleFileTap('/about/index.html'),
-            ),
-            ExplorePanelCardTwo(
-              assetPath: "assets/svg/css.svg",
-              tabName: "skills.css",
-              isSelected: currentLocation == "/about/skills.css",
-              onTap: () => _handleFileTap('/about/skills.css'),
-            ),
-            ExplorePanelCardTwo(
-              assetPath: "assets/svg/js.svg",
-              tabName: "education.js",
-              isSelected: currentLocation == "/about/education.js",
-              onTap: () => _handleFileTap('/about/education.js'),
+              children: [
+                ExplorePanelCardTwo(
+                  assetPath: "assets/svg/html5.svg",
+                  tabName: "index.html",
+                  isSelected: currentLocation == "/about/index.html",
+                  onTap: () => _handleFileTap(
+                    context,
+                    routePath: '/about/index.html',
+                    title: 'index.html',
+                    iconPath: 'assets/svg/html5.svg',
+                  ),
+                ),
+                ExplorePanelCardTwo(
+                  assetPath: "assets/svg/css.svg",
+                  tabName: "skills.css",
+                  isSelected: currentLocation == "/about/skills.css",
+                  onTap: () => _handleFileTap(
+                    context,
+                    routePath: '/about/skills.css',
+                    title: 'skills.css',
+                    iconPath: 'assets/svg/css.svg',
+                  ),
+                ),
+                ExplorePanelCardTwo(
+                  assetPath: "assets/svg/js.svg",
+                  tabName: "education.js",
+                  isSelected: currentLocation == "/about/education.js",
+                  onTap: () => _handleFileTap(
+                    context,
+                    routePath: '/about/education.js',
+                    title: 'education.js',
+                    iconPath: 'assets/svg/js.svg',
+                  ),
+                ),
+              ],
             ),
 
             // --- EXPERIENCE ---
@@ -71,12 +97,19 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
               iconName: FontAwesome.angle_down_solid,
               tabName: 'EXPERIENCE',
               assetPath: 'assets/svg/folder.svg',
-            ),
-            ExplorePanelCardTwo(
-              assetPath: "assets/svg/androidfull01.svg",
-              tabName: "android-developer.java",
-              isSelected: currentLocation == "/experience/android",
-              onTap: () => _handleFileTap('/experience/android'),
+              children: [
+                ExplorePanelCardTwo(
+                  assetPath: "assets/svg/androidfull01.svg",
+                  tabName: "android-developer.java",
+                  isSelected: currentLocation == "/experience/android",
+                  onTap: () => _handleFileTap(
+                    context,
+                    routePath: '/experience/android',
+                    title: 'android-developer.java',
+                    iconPath: 'assets/svg/androidfull01.svg',
+                  ),
+                ),
+              ],
             ),
 
             // --- PROJECTS ---
@@ -84,24 +117,41 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
               iconName: FontAwesome.angle_down_solid,
               tabName: "PROJECTS",
               assetPath: 'assets/svg/folder.svg',
-            ),
-            ExplorePanelCardTwo(
-              assetPath: "assets/svg/dart.svg",
-              tabName: "ShikamaruAI.dart",
-              isSelected: currentLocation == "/projects/shikamaru",
-              onTap: () => _handleFileTap('/projects/shikamaru'),
-            ),
-            ExplorePanelCardTwo(
-              assetPath: "assets/svg/jupyter.svg",
-              tabName: "PriceLens.ipynb",
-              isSelected: false, // Placeholder
-              onTap: () => _handlePlaceholderTap("PriceLens.ipynb"),
-            ),
-            ExplorePanelCardTwo(
-              assetPath: "assets/svg/python.svg",
-              tabName: "EncryptIt.py",
-              isSelected: false, // Placeholder
-              onTap: () => _handlePlaceholderTap("EncryptIt.py"),
+              children: [
+                ExplorePanelCardTwo(
+                  assetPath: "assets/svg/dart.svg",
+                  tabName: "ShikamaruAI.dart",
+                  isSelected: currentLocation == "/projects/shikamaruAi",
+                  onTap: () => _handleFileTap(
+                    context,
+                    routePath: '/projects/shikamaruAi',
+                    title: 'ShikamaruAI.dart',
+                    iconPath: 'assets/svg/dart.svg',
+                  ),
+                ),
+                ExplorePanelCardTwo(
+                  assetPath: "assets/svg/jupyter.svg",
+                  tabName: "PriceLens.ipynb",
+                  isSelected: currentLocation == "/projects/priceLense",
+                  onTap: () => _handleFileTap(
+                    context,
+                    routePath: '/projects/priceLense',
+                    title: 'PriceLens.ipynb',
+                    iconPath: 'assets/svg/jupyter.svg',
+                  ),
+                ),
+                ExplorePanelCardTwo(
+                  assetPath: "assets/svg/python.svg",
+                  tabName: "EncryptIt.py",
+                  isSelected: currentLocation == "/projects/encryptIt",
+                  onTap: () => _handleFileTap(
+                    context,
+                    routePath: '/projects/encryptIt',
+                    title: 'EncryptIt.py',
+                    iconPath: 'assets/svg/python.svg',
+                  ),
+                ),
+              ],
             ),
 
             // --- SOCIAL LINKS ---
@@ -109,30 +159,52 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
               iconName: FontAwesome.angle_down_solid,
               tabName: "SOCIAL LINKS",
               assetPath: 'assets/svg/folder.svg',
-            ),
-            ExplorePanelCardTwo(
-              assetPath: "assets/svg/linkedin.svg",
-              tabName: "LinkedIn.url",
-              isSelected: currentLocation == "/social/linkedin",
-              onTap: () => _handleFileTap('/social/linkedin'),
-            ),
-            ExplorePanelCardTwo(
-              assetPath: "assets/svg/twitter.svg",
-              tabName: "Twitter.json",
-              isSelected: currentLocation == "/social/twitter",
-              onTap: () => _handleFileTap('/social/twitter'),
-            ),
-            ExplorePanelCardTwo(
-              assetPath: "assets/svg/gmail.svg",
-              tabName: "Gmail.eml",
-              isSelected: currentLocation == "/social/gmail",
-              onTap: () => _handleFileTap('/social/gmail'),
-            ),
-            ExplorePanelCardTwo(
-              assetPath: "assets/svg/github.svg",
-              tabName: "Github.md",
-              isSelected: currentLocation == "/social/github",
-              onTap: () => _handleFileTap('/social/github'),
+              children: [
+                ExplorePanelCardTwo(
+                  assetPath: "assets/svg/linkedin.svg",
+                  tabName: "LinkedIn.url",
+                  isSelected: currentLocation == "/social/linkedin",
+                  onTap: () => _handleFileTap(
+                    context,
+                    routePath: '/social/linkedin',
+                    title: 'LinkedIn.url',
+                    iconPath: 'assets/svg/linkedin.svg',
+                  ),
+                ),
+                ExplorePanelCardTwo(
+                  assetPath: "assets/svg/twitter.svg",
+                  tabName: "Twitter.json",
+                  isSelected: currentLocation == "/social/twitter",
+                  onTap: () => _handleFileTap(
+                    context,
+                    routePath: '/social/twitter',
+                    title: 'Twitter.json',
+                    iconPath: 'assets/svg/twitter.svg',
+                  ),
+                ),
+                ExplorePanelCardTwo(
+                  assetPath: "assets/svg/gmail.svg",
+                  tabName: "Gmail.eml",
+                  isSelected: currentLocation == "/social/gmail",
+                  onTap: () => _handleFileTap(
+                    context,
+                    routePath: '/social/gmail',
+                    title: 'Gmail.eml',
+                    iconPath: 'assets/svg/gmail.svg',
+                  ),
+                ),
+                ExplorePanelCardTwo(
+                  assetPath: "assets/svg/github.svg",
+                  tabName: "Github.md",
+                  isSelected: currentLocation == "/social/github",
+                  onTap: () => _handleFileTap(
+                    context,
+                    routePath: '/social/github',
+                    title: 'Github.md',
+                    iconPath: 'assets/svg/github.svg',
+                  ),
+                ),
+              ],
             ),
 
             // --- CERTIFICATES ---
@@ -140,24 +212,41 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
               iconName: FontAwesome.angle_down_solid,
               tabName: "CERTIFICATES",
               assetPath: 'assets/svg/folder.svg',
-            ),
-            ExplorePanelCardTwo(
-              assetPath: "assets/svg/brave.svg",
-              tabName: "MS Azure AI-900",
-              isSelected: currentLocation == "/certificates/azure",
-              onTap: () => _handleFileTap('/certificates/azure'),
-            ),
-            ExplorePanelCardTwo(
-              assetPath: "assets/svg/chrome.svg",
-              tabName: "Oracle Cloud Infrastructure",
-              isSelected: currentLocation == "/certificates/oracle",
-              onTap: () => _handleFileTap('/certificates/oracle'),
-            ),
-            ExplorePanelCardTwo(
-              assetPath: "assets/svg/edge01.svg",
-              tabName: "Oracle Cloud Infrastructure - AI",
-              isSelected: currentLocation == "/certificates/oracle-ai",
-              onTap: () => _handleFileTap('/certificates/oracle-ai'),
+              children: [
+                ExplorePanelCardTwo(
+                  assetPath: "assets/svg/brave.svg",
+                  tabName: "MS Azure AI-900",
+                  isSelected: currentLocation == "/certificates/azure",
+                  onTap: () => _handleFileTap(
+                    context,
+                    routePath: '/certificates/azure',
+                    title: 'MS Azure AI-900',
+                    iconPath: 'assets/svg/brave.svg',
+                  ),
+                ),
+                ExplorePanelCardTwo(
+                  assetPath: "assets/svg/chrome.svg",
+                  tabName: "Oracle Cloud Infrastructure",
+                  isSelected: currentLocation == "/certificates/oracle",
+                  onTap: () => _handleFileTap(
+                    context,
+                    routePath: '/certificates/oracle',
+                    title: 'Oracle Cloud Infrastructure',
+                    iconPath: 'assets/svg/chrome.svg',
+                  ),
+                ),
+                ExplorePanelCardTwo(
+                  assetPath: "assets/svg/edge01.svg",
+                  tabName: "Oracle Cloud Infrastructure - AI",
+                  isSelected: currentLocation == "/certificates/oracle-ai",
+                  onTap: () => _handleFileTap(
+                    context,
+                    routePath: '/certificates/oracle-ai',
+                    title: 'Oracle Cloud Infrastructure - AI',
+                    iconPath: 'assets/svg/edge01.svg',
+                  ),
+                ),
+              ],
             ),
 
             // --- MISC ---
@@ -165,12 +254,19 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
               iconName: FontAwesome.angle_down_solid,
               tabName: "MISC",
               assetPath: 'assets/svg/folder.svg',
-            ),
-            ExplorePanelCardTwo(
-              assetPath: "assets/svg/folder3.svg",
-              tabName: "Miscellaneous",
-              isSelected: currentLocation.startsWith("/misc"),
-              onTap: () => _handleFileTap('/misc'),
+              children: [
+                ExplorePanelCardTwo(
+                  assetPath: "assets/svg/folder3.svg",
+                  tabName: "Miscellaneous",
+                  isSelected: currentLocation.startsWith("/misc"),
+                  onTap: () => _handleFileTap(
+                    context,
+                    routePath: '/misc',
+                    title: 'Miscellaneous',
+                    iconPath: 'assets/svg/folder3.svg',
+                  ),
+                ),
+              ],
             ),
 
             // --- RESUME ---
@@ -178,12 +274,19 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
               iconName: FontAwesome.angle_down_solid,
               tabName: "RESUME",
               assetPath: 'assets/svg/folder.svg',
-            ),
-            ExplorePanelCardTwo(
-              assetPath: "assets/svg/pdf.svg",
-              tabName: "Resume.pdf",
-              isSelected: currentLocation == "/resume",
-              onTap: () => _handleFileTap('/resume'),
+              children: [
+                ExplorePanelCardTwo(
+                  assetPath: "assets/svg/pdf.svg",
+                  tabName: "Resume.pdf",
+                  isSelected: currentLocation == "/resume",
+                  onTap: () => _handleFileTap(
+                    context,
+                    routePath: '/resume',
+                    title: 'Resume.pdf',
+                    iconPath: 'assets/svg/pdf.svg',
+                  ),
+                ),
+              ],
             ),
           ],
         ),

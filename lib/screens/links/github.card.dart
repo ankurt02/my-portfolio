@@ -33,8 +33,8 @@ class _GitHubCardState extends State<GitHubCard> {
     _githubData = _fetchAllGitHubData();
   }
 
-  /// Fetches both profile and contribution data together from GitHub GraphQL API
-  /// Fetches both profile and contribution data from Vercel proxy API
+  // Fetch both profile and contribution data together from GitHub GraphQL API
+  // Fetch both profile and contribution data from Vercel proxy API
 Future<Map<String, dynamic>> _fetchAllGitHubData() async {
   final now = DateTime.now();
   final startDate = DateTime(now.year, 1, 1);
@@ -134,10 +134,10 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
     final currentYearStart = DateTime(DateTime.now().year, 1, 1);
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return Card(
-      elevation: 0,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    return Container(
+      // elevation: 0,
+      // clipBehavior: Clip.antiAlias,
+      // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
       child: Material(
         color: Color(0xFF000C18),
         child: FutureBuilder<Map<String, dynamic>>(
@@ -253,7 +253,7 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Gap(24),
+                  Gap(20),
                   HackerTextEffect(text: 'Caffeine and version-control!'),
                   Spacer(),
                   Row(
@@ -267,10 +267,10 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
                           url: "https://github.com/${profile.username}",
                         ),
                       ),
-                      Gap(60),
+                      Gap(54),
                     ],
                   ),
-                  Gap(10),
+                  // Gap(10),
                 ],
               ),
             ),
@@ -280,7 +280,7 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
             Container(
               height: screenHeight / 2,
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
                     // Profile Row
@@ -328,14 +328,14 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
                               'Repositories',
                               profile.totalRepos.toString(),
                             ),
-                            Gap(20),
+                            // Gap(20),
+                            // _buildStat(
+                            //   'Followers',
+                            //   profile.followers.toString(),
+                            // ),
+                            Gap(24),
                             _buildStat(
-                              'Followers',
-                              profile.followers.toString(),
-                            ),
-                            Gap(20),
-                            _buildStat(
-                              'Contributions',
+                              'Commits (2026)',
                               contributionData.totalContributions.toString(),
                               isLive: true,
                             ),
@@ -344,9 +344,9 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
                         ),
                       ],
                     ),
-                    Gap(16),
-                    const Divider(color: Colors.white24),
-                    Gap(16),
+                    Gap(12),
+                    const Divider(color: Colors.white24, height: 1.6,),
+                    Gap(12),
                     
                     // Contribution Heatmap
                     HeatMap(
@@ -378,7 +378,7 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
               child: CarouselScreen(),
             ),
 
-            Gap(48),
+            Gap(36),
           ],
         );
       },
@@ -392,11 +392,11 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
           value,
           style: TextStyle(
             color: isLive ? Colors.greenAccent : Colors.white,
-            fontSize: 20,
+            fontSize: 22,
             fontWeight: FontWeight.bold,
           ),
         ),
-        Gap(6),
+        Gap(8),
         Text(
           label,
           style: const TextStyle(color: Colors.white70, fontSize: 12),

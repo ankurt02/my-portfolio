@@ -14,6 +14,8 @@ import 'package:ankur_portfolio/screens/pdf/certificate.azure.dart';
 import 'package:ankur_portfolio/screens/pdf/certificate.oracle.dart';
 import 'package:ankur_portfolio/screens/pdf/certificateAI.oracle.dart';
 import 'package:ankur_portfolio/screens/pdf/resume.view.dart';
+import 'package:ankur_portfolio/screens/projects/encrypt.it.dart';
+import 'package:ankur_portfolio/screens/projects/price.lense.dart';
 import 'package:ankur_portfolio/screens/projects/shikamaru.ai.dart';
 import 'package:ankur_portfolio/screens/skills/my.skills.dart';
 import 'package:ankur_portfolio/screens/splash.screen.dart';
@@ -65,8 +67,16 @@ final router = GoRouter(
           pageBuilder: (context, state) => NoTransitionPage(child: const AndroidDev42Gears()),
         ),
         GoRoute(
-          path: '/projects/shikamaru',
-          pageBuilder: (context, state) => NoTransitionPage(child: const ShikamaruAI()),
+          path: '/projects/shikamaruAi',
+          pageBuilder: (context, state) => NoTransitionPage(child:  ShikamaruAI()),
+        ),
+        GoRoute(
+          path: '/projects/priceLense',
+          pageBuilder: (context, state) => NoTransitionPage(child:  PriceLense()),
+        ),
+        GoRoute(
+          path: '/projects/encryptIt',
+          pageBuilder: (context, state) => NoTransitionPage(child:  EncryptIt()),
         ),
         GoRoute(
           path: '/social/linkedin',

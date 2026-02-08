@@ -1,10 +1,12 @@
 // import 'package:ankur_portfolio/screens/splash.screen.dart';
+import 'package:ankur_portfolio/providers/tab.management.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pdfrx/pdfrx.dart';
 // import 'package:device_preview/device_preview.dart';
 import 'package:ankur_portfolio/routing/app_router.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   if (kIsWeb) {
@@ -15,7 +17,13 @@ Future<void> main() async {
     });
   }
 
-  runApp(MyApp());
+  // runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => TabManager(),
+      child: const MyApp(),
+    ),
+  );
   
   // runApp(DevicePreview(
   //   enabled: !kReleaseMode,
@@ -36,7 +44,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: "Ankur ",
+      title: "Ankur",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),

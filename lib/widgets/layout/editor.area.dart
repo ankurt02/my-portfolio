@@ -1,13 +1,6 @@
-// ignore_for_file: unused_import
-
-import 'package:ankur_portfolio/screens/defaulteditor.screen.dart';
-import 'package:ankur_portfolio/screens/links/github.card.dart';
-import 'package:ankur_portfolio/screens/links/linkedin.card.dart';
-import 'package:ankur_portfolio/screens/links/socials.dart';
-import 'package:ankur_portfolio/screens/misc/miscellaneous.screen.dart';
+import 'package:ankur_portfolio/widgets/layout/tab.bar.dart';
+// import 'package:ankur_portfolio/widgets/layout/tab_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:ankur_portfolio/models/editor.tab.dart';
-import 'package:ankur_portfolio/screens/links/twitter.screen.dart';
 
 class EditorArea extends StatelessWidget {
   final Widget child;
@@ -19,10 +12,23 @@ class EditorArea extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Material(
-      color: const Color(0xFF000C18),
+      color: const Color(0xFF1E1E1E),
       child: Container(
         width: screenWidth * (1540 / 1920),
-        child: Center(child: child),
+        child: Column(
+          children: [
+            // Tab bar
+            const EditorTabBar(),
+            
+            // Editor content
+            Expanded(
+              child: Container(
+                color: const Color(0xFF000C18),
+                child: Center(child: child),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -33,64 +33,81 @@ class _InfoCardState extends State<InfoCard> {
       cursor: SystemMouseCursors.click,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
+        curve: Curves.easeOut,
         transform: _isHovered
             ? (Matrix4.identity()
               ..translate(0, -8, 0)
               ..scale(1.05))
             : Matrix4.identity(),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: widget.gradientColors,
-          ),
-          borderRadius: BorderRadius.circular(16),
-        ),
         margin: const EdgeInsets.all(8),
-        child: InkWell(
-          onTap: widget.onTap,
-          borderRadius: BorderRadius.circular(14),
-          child: Container(
-            margin: const EdgeInsets.all(2.25), // Border thickness
-            decoration: BoxDecoration(
-              color: const Color(0xFF121212),
-              borderRadius: BorderRadius.circular(14),
+        child: Stack(
+          children: [
+            // Gradient border layer with animated opacity
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeOut,
+              opacity: _isHovered ? 1.0 : 0.0,
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: widget.gradientColors,
+                  ),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
             ),
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ClipRRect(
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(8)),
-                  child: Image.asset(
-                    widget.imagePath,
-                    fit: BoxFit.cover,
-                    height: 240,
-                    width: double.infinity,
+            
+            // Content container with margin for border
+            Container(
+              margin: const EdgeInsets.all(2.25),
+              child: InkWell(
+                onTap: widget.onTap,
+                borderRadius: BorderRadius.circular(14),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF121212),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ClipRRect(
+                        borderRadius:
+                            const BorderRadius.vertical(top: Radius.circular(8)),
+                        child: Image.asset(
+                          widget.imagePath,
+                          fit: BoxFit.cover,
+                          height: 240,
+                          width: double.infinity,
+                        ),
+                      ),
+                      const Gap(12),
+                      Text(
+                        widget.title,
+                        style: GoogleFonts.jetBrainsMono(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const Gap(8),
+                      Text(
+                        widget.description,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.spaceGrotesk(
+                          fontSize: 12,
+                          color: Colors.white70,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
                   ),
                 ),
-                const Gap(12),
-                Text(
-                  widget.title,
-                  style: GoogleFonts.jetBrainsMono(
-                    fontSize: 16,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Gap(8),
-                Text(
-                  widget.description,
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.spaceGrotesk(
-                    fontSize: 12,
-                    color: Colors.white70,
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
