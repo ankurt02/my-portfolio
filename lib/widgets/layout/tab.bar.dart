@@ -1,6 +1,7 @@
 import 'package:ankur_portfolio/providers/tab.management.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +17,7 @@ class EditorTabBar extends StatelessWidget {
         }
 
         return Container(
-          height: 35,
+          height: 30,
           decoration: const BoxDecoration(
             color: Color(0xFF2D2D30),
             border: Border(
@@ -112,7 +113,7 @@ class _TabItemState extends State<_TabItem> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 6),
             child: Row(
               children: [
                 // Icon
@@ -121,14 +122,13 @@ class _TabItemState extends State<_TabItem> {
                   height: 16,
                   width: 16,
                 ),
-                const SizedBox(width: 8),
-                
+                Gap(8),
                 // Title
                 Expanded(
                   child: Text(
                     widget.tab.title,
                     style: TextStyle(
-                      fontSize: 13,
+                      fontSize: 12,
                       color: widget.isActive
                           ? Colors.white
                           : Colors.white70,

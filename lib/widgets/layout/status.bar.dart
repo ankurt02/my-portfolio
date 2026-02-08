@@ -134,14 +134,14 @@ class _StatusBarState extends State<StatusBar> {
           // Gap(8),
           Row(
             children: [
-              Text(
-                "Spaces : 2",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.white,
-                  letterSpacing: 0,
-                ),
-              ),
+              // Text(
+              //   "Spaces : 2",
+              //   style: TextStyle(
+              //     fontSize: 12,
+              //     color: Colors.white,
+              //     letterSpacing: 0,
+              //   ),
+              // ),
 
               Gap(20),
               Text(
