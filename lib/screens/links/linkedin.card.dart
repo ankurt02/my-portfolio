@@ -62,7 +62,7 @@ class LinkedInCard extends StatelessWidget {
           ),
           child: LayoutBuilder(
             builder: (context, constraints) {
-              final bannerHeight = constraints.maxWidth / 4.0;
+              final bannerHeight = constraints.maxWidth / 4.5;
           
               return Column(
                 mainAxisSize: MainAxisSize.min,
@@ -77,7 +77,7 @@ class LinkedInCard extends StatelessWidget {
             },
           ),
         ),
-        Gap(12),
+        Gap(8),
         LinkedinButton(text: 'Visit Profile', url: 'https://www.linkedin.com/in/ankur-tiwary-393479230/',),
         Spacer(),
       ],
@@ -101,7 +101,7 @@ class LinkedInCard extends StatelessWidget {
               height: bannerHeight,
               child: Image.network(
                 profile.bannerImageUrl,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
                     color: const Color(0xff2d3b51),
@@ -186,51 +186,51 @@ class LinkedInCard extends StatelessWidget {
 
           Spacer(),
 
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Image.asset(
-                    "assets/images/42GearsLogo01.png",
-                    height: 40,
-                    fit: BoxFit.contain,
-                    // Add this line
-                    filterQuality: FilterQuality.high,
-                  ),
-                  Gap(6),
-                  Text("Android Engineer @42Gears", style: GoogleFonts.robotoCondensed(
-                    fontSize: 16, 
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w500
-                  ),),
-                ],
-              // ),
-              // Gap(18),
-              // Row(
-              //   crossAxisAlignment: CrossAxisAlignment.center,
-              //   mainAxisAlignment: MainAxisAlignment.start,
-              //   children: [
-              //     Image.asset(
-              //       "assets/images/image.png",
-              //       height: 40,
-              //       fit: BoxFit.contain,
-              //       // Add this line
-              //       filterQuality: FilterQuality.high,
-              //     ),
-              //     Gap(6),
-              //     Text("Nitte Meenakshi Institute of\nTechnology", style: GoogleFonts.robotoCondensed(
-              //       fontSize: 16, 
-              //       color: Colors.black87,
-              //       fontWeight: FontWeight.w500
-              //     ),),
-              //   ],
-              ),
-            ],
-          ),
+          // Column(
+          //   mainAxisAlignment: MainAxisAlignment.start,
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     Row(
+          //       crossAxisAlignment: CrossAxisAlignment.center,
+          //       mainAxisAlignment: MainAxisAlignment.start,
+          //       children: [
+          //         Image.asset(
+          //           "assets/images/42GearsLogo01.png",
+          //           height: 40,
+          //           fit: BoxFit.contain,
+          //           // Add this line
+          //           filterQuality: FilterQuality.high,
+          //         ),
+          //         Gap(6),
+          //         Text("Android Engineer @42Gears", style: GoogleFonts.robotoCondensed(
+          //           fontSize: 16, 
+          //           color: Colors.black87,
+          //           fontWeight: FontWeight.w500
+          //         ),),
+          //       ],
+          //     // ),
+          //     // Gap(18),
+          //     // Row(
+          //     //   crossAxisAlignment: CrossAxisAlignment.center,
+          //     //   mainAxisAlignment: MainAxisAlignment.start,
+          //     //   children: [
+          //     //     Image.asset(
+          //     //       "assets/images/image.png",
+          //     //       height: 40,
+          //     //       fit: BoxFit.contain,
+          //     //       // Add this line
+          //     //       filterQuality: FilterQuality.high,
+          //     //     ),
+          //     //     Gap(6),
+          //     //     Text("Nitte Meenakshi Institute of\nTechnology", style: GoogleFonts.robotoCondensed(
+          //     //       fontSize: 16, 
+          //     //       color: Colors.black87,
+          //     //       fontWeight: FontWeight.w500
+          //     //     ),),
+          //     //   ],
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );

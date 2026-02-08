@@ -129,7 +129,7 @@ class SocialsService {
             name: 'Ankur Tiwary',
             profilePicUrl:
                 "https://resume-hosting-f1c9d.web.app/filBangaloreOrange.jpg",
-            workingat: 'Android Device Platform Engineer @42Gears',
+            workingat: 'Android Developer (Java/Kotlin) | Flutter',
             location: 'Bengaluru, India',
             connections: '100+ connections',
             bannerImageUrl:
