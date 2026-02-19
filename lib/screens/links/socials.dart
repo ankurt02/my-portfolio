@@ -88,14 +88,8 @@ class GitHubProfile extends SocialProfile {
 }
 
 class SocialsService {
-  // static final String _githubToken = const String.fromEnvironment(
-  //   'TOKEN_GITHUB',
-  // );
 
   static Future<List<SocialProfile>> fetchProfiles() async {
-    // if (_githubToken.isEmpty) {
-    //   throw Exception('TOKEN_GITHUB not found in .env file.');
-    // }
 
     final String jsonString = await rootBundle.loadString(
       'assets/socials.json',
@@ -155,7 +149,6 @@ class SocialsService {
           login
           avatarUrl
           location
-          # CORRECTED: This now only counts repositories you own and are not forks.
           repositories(ownerAffiliations: OWNER) {
             totalCount
           }
