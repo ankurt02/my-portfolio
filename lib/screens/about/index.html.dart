@@ -77,7 +77,7 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
               ],
             ),
           ),
-          Gap(18),
+          Gap(14),
           Row(
             children: [
               // Gap(16),
@@ -90,7 +90,7 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
               //   ],
               //   size: 9,
               // ),
-              Gap(8),
+              Gap(6),
               ShaderMask(
                 shaderCallback: (Rect bounds) {
                   return const LinearGradient(
@@ -116,7 +116,7 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
               ),
             ],
           ),
-          Gap(32),
+          Gap(28),
           Padding(
             padding: EdgeInsets.only(left: 16.0),
             child: Column(
@@ -128,15 +128,15 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
                     Icon(
                       FontAwesome.angle_right_solid,
                       color: Colors.grey,
-                      size: 34,
+                      size: 24,
                     ),
-                    Gap(4),
+                    Gap(6),
                     Text(
                       "Ankur Tiwary",
                       style: GoogleFonts.spaceMono(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
-                        fontSize: 32,
+                        fontSize: 28,
                       ),
                     ),
                     Gap(6),
@@ -150,7 +150,7 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
                     ),
                   ],
                 ),
-                Gap(16),
+                Gap(10),
                 
                 FractionallySizedBox(
                   alignment: Alignment.center,

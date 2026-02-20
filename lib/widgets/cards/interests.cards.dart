@@ -37,7 +37,7 @@ class _InfoCardState extends State<InfoCard> {
         transform: _isHovered
             ? (Matrix4.identity()
               ..translate(0, -8, 0)
-              ..scale(1.05))
+              ..scale(1.025)) // CONTROLS THE RATIO OF SCALE ON-HOVER
             : Matrix4.identity(),
         margin: const EdgeInsets.all(8),
         child: Stack(
@@ -59,7 +59,13 @@ class _InfoCardState extends State<InfoCard> {
             
             // Content container with margin for border
             Container(
-              margin: const EdgeInsets.all(2.25),
+              // decoration: BoxDecoration(
+              //   border: Border.all(
+              //     color: Colors.yellow
+              //   )
+              // ),
+              // height: 320,
+              margin: const EdgeInsets.all(1.75),
               child: InkWell(
                 onTap: widget.onTap,
                 borderRadius: BorderRadius.circular(14),
@@ -67,8 +73,11 @@ class _InfoCardState extends State<InfoCard> {
                   decoration: BoxDecoration(
                     color: const Color(0xFF121212),
                     borderRadius: BorderRadius.circular(14),
+                    // border: Border.all(
+                    //   color: Colors.pink
+                    // )
                   ),
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(6),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -78,7 +87,7 @@ class _InfoCardState extends State<InfoCard> {
                         child: Image.asset(
                           widget.imagePath,
                           fit: BoxFit.cover,
-                          height: 240,
+                          height: 200,
                           width: double.infinity,
                         ),
                       ),

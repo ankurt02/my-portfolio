@@ -91,7 +91,7 @@ class _TimelineScreenState extends State<TimelineScreen> {
                 style: GoogleFonts.spaceGrotesk(
                   fontSize: 32,
                   fontWeight: FontWeight.w500,
-                  color: Colors.grey,
+                  color: Colors.white,
                 ),
               ),
             ),
@@ -147,8 +147,8 @@ class TimelineItem extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: event.color.withOpacity(0.5),
-            blurRadius: 5,
-            spreadRadius: 1,
+            blurRadius: 4,
+            spreadRadius: 0.45,
           ),
         ],
       ),
@@ -218,7 +218,7 @@ class EventCard extends StatelessWidget {
           top: (60 - screenHeight/6) / 2, // (cardHeight - boxHeight) / 2
           child: Container(
             height: screenHeight/6,
-            width: 16, // colored-box width
+            width: 12, // colored-box width
             decoration: BoxDecoration(
               color: event.color,
               borderRadius: BorderRadius.circular(12),
@@ -274,7 +274,7 @@ class EventCard extends StatelessWidget {
       height: screenHeight/5,
       decoration: BoxDecoration(
         color: const Color(0xFF1E1E1E),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.grey.withOpacity(0.2), width: 1),
       ),
       child: Row(

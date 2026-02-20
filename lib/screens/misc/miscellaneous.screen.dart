@@ -36,18 +36,20 @@ class _MiscellaneousScreenState extends State<MiscellaneousScreen> {
             Expanded(
               child: GridView.count(
                 crossAxisCount: 4,
-                crossAxisSpacing: 8,
+                crossAxisSpacing: 16,
                 mainAxisSpacing: 8,
-                childAspectRatio: 0.7,
+                childAspectRatio: 0.9,
                 children: [
                   InfoCard(
                     imagePath: 'assets/images/anime01.jpg',
                     title: 'Anime',
                     description: 'My late-night watchlist of Anime',
                     gradientColors: [
-                      const Color.fromARGB(255, 250, 120, 163),
-                      Colors.pinkAccent,
-                      const Color.fromARGB(255, 236, 7, 179),
+                      // const Color.fromARGB(255, 250, 120, 163),
+                      // Colors.pinkAccent,
+                      // const Color.fromARGB(255, 236, 7, 179),
+                      Colors.grey.shade800,
+                      Colors.grey.shade800,
                     ],
                     onTap: () {},
                   ),
@@ -55,7 +57,12 @@ class _MiscellaneousScreenState extends State<MiscellaneousScreen> {
                     imagePath: 'assets/images/movie.jpeg',
                     title: 'Movies',
                     description: 'Weekend escapes with Snacks and beverages.',
-                    gradientColors: [Colors.orangeAccent, Colors.redAccent],
+                    gradientColors: [
+                      // Colors.orangeAccent, 
+                      // Colors.redAccent,
+                      Colors.grey.shade800,
+                      Colors.grey.shade800,
+                    ],
                     onTap: () {},
                   ),
                   InfoCard(
@@ -63,8 +70,10 @@ class _MiscellaneousScreenState extends State<MiscellaneousScreen> {
                     title: 'Music',
                     description: '...',
                     gradientColors: [
-                      const Color.fromARGB(255, 5, 202, 126),
-                      const Color.fromARGB(255, 24, 193, 255),
+                      // const Color.fromARGB(255, 5, 202, 126),
+                      // const Color.fromARGB(255, 24, 193, 255),
+                      Colors.grey.shade800,
+                      Colors.grey.shade800,
                     ],
                     onTap: () {},
                   ),
@@ -74,10 +83,12 @@ class _MiscellaneousScreenState extends State<MiscellaneousScreen> {
                     description:
                         'Things I Googled too much — turned into research.',
                     gradientColors: [
-                      const Color.fromARGB(255, 96, 151, 247),
-                      const Color.fromARGB(255, 59, 92, 235),
-                      Colors.deepPurpleAccent,
-                      const Color.fromARGB(255, 84, 32, 225),
+                      // const Color.fromARGB(255, 96, 151, 247),
+                      // const Color.fromARGB(255, 59, 92, 235),
+                      // Colors.deepPurpleAccent,
+                      // const Color.fromARGB(255, 84, 32, 225),
+                      Colors.grey.shade800,
+                      Colors.grey.shade800,
                     ],
                     onTap: () {
                       context.go('/misc/research');
