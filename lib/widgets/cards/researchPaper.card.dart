@@ -64,24 +64,24 @@ class _ResearchPaperCardState extends State<ResearchPaperCard> {
                   child: Image.asset(
                     widget.imagePath,
                     fit: BoxFit.cover,
-                    height: 360,
+                    height: 220,
                     width: double.infinity,
                   ),
                 ),
-                const Gap(12),
+                const Gap(24),
                 Text(
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   widget.title,
                   style: GoogleFonts.jetBrainsMono(
-                    fontSize: 16,
+                    fontSize: 12,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
 
-                Gap(24),
+                Gap(32),
 
                 Text(
                   widget.conference,

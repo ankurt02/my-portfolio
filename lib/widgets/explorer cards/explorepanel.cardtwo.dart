@@ -20,7 +20,7 @@ class ExplorePanelCardTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color iconColor = customColor ?? Colors.white70;
+    // final Color iconColor = customColor ?? Colors.white70;
     const selectedColor = Color(0xFF37373D);
 
     return Material(

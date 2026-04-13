@@ -1,4 +1,4 @@
-import 'package:ankur_portfolio/models/editor.tab.dart';
+import 'package:ankur_portfolio/providers/tab.management.dart';
 import 'package:ankur_portfolio/screens/links/socials.dart';
 import 'package:ankur_portfolio/widgets/layout/activity.bar.dart';
 import 'package:ankur_portfolio/widgets/layout/editor.area.dart';
@@ -6,7 +6,8 @@ import 'package:ankur_portfolio/widgets/layout/explorer.panel.dart';
 import 'package:ankur_portfolio/widgets/layout/status.bar.dart';
 import 'package:ankur_portfolio/widgets/layout/task.bar.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart'; 
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart'; 
 
 class HomeScreenExp extends StatefulWidget {
   final List<SocialProfile> profiles;
@@ -32,6 +33,7 @@ class _HomeScreenExpState extends State<HomeScreenExp> {
   }
 
   void _navigateToHome() {
+    context.read<TabManager>().clearTabs();
    while (context.canPop()) {
       context.pop();
     }

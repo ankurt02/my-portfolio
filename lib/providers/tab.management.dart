@@ -103,4 +103,10 @@ class TabManager extends ChangeNotifier {
       orElse: () => _tabs.first,
     );
   }
+
+  void clearTabs() {
+  _tabs.clear();
+  _activeTabId = null;
+  notifyListeners();
+}
 }
