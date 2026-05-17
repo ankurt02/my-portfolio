@@ -130,6 +130,17 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
                   ),
                 ),
                 ExplorePanelCardTwo(
+                  assetPath: "assets/svg/kotlin01.svg",
+                  tabName: "CorporateAi.kt",
+                  isSelected: currentLocation == "/projects/corporateAi",
+                  onTap: () => _handleFileTap(
+                    context,
+                    routePath: '/projects/corporateAi',
+                    title: 'CorporateAi.kt',
+                    iconPath: 'assets/svg/kotlin01.svg',
+                  ),
+                ),
+                ExplorePanelCardTwo(
                   assetPath: "assets/svg/jupyter.svg",
                   tabName: "PriceLens.ipynb",
                   isSelected: currentLocation == "/projects/priceLense",

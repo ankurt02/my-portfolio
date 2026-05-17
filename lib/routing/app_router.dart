@@ -14,6 +14,7 @@ import 'package:ankur_portfolio/screens/pdf/certificate.azure.dart';
 import 'package:ankur_portfolio/screens/pdf/certificate.oracle.dart';
 import 'package:ankur_portfolio/screens/pdf/certificateAI.oracle.dart';
 import 'package:ankur_portfolio/screens/pdf/resume.view.dart';
+import 'package:ankur_portfolio/screens/projects/corporate.filter.dart';
 import 'package:ankur_portfolio/screens/projects/encrypt.it.dart';
 import 'package:ankur_portfolio/screens/projects/price.lense.dart';
 import 'package:ankur_portfolio/screens/projects/shikamaru.ai.dart';
@@ -69,6 +70,10 @@ final router = GoRouter(
         GoRoute(
           path: '/projects/shikamaruAi',
           pageBuilder: (context, state) => NoTransitionPage(child:  ShikamaruAI()),
+        ),
+        GoRoute(
+          path: '/projects/corporateAi',
+          pageBuilder: (context, state) => NoTransitionPage(child:  CorporateFilterScreen()),
         ),
         GoRoute(
           path: '/projects/priceLense',
