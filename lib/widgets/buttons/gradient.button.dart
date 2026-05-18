@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GradientBorderButton extends StatefulWidget {
   final String title;
@@ -70,8 +71,8 @@ class _GradientBorderButtonState extends State<GradientBorderButton>
               ),
               child: Container(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 12,
+                  horizontal: 20,
+                  vertical: 10,
                 ),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -87,16 +88,16 @@ class _GradientBorderButtonState extends State<GradientBorderButton>
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    widget.icon,
-                    const SizedBox(width: 8),
                     Text(
                       widget.title,
-                      style: TextStyle(
+                      style: GoogleFonts.spaceGrotesk(
                         color: Colors.grey[900],
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
+                    const SizedBox(width: 4),
+                    widget.icon,
                   ],
                 ),
               ),

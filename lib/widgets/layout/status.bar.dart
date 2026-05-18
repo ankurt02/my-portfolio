@@ -107,7 +107,7 @@ class _StatusBarState extends State<StatusBar> {
           Row(
             children: [
               Text(
-                "v1.30.15-release",
+                "v1.45.02-release",
                 style: GoogleFonts.robotoMono(
                   fontSize: 12,
                   color: Colors.grey.shade300,

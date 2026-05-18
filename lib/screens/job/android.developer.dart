@@ -92,39 +92,39 @@ class _AndroidDev42GearsState extends State<AndroidDev42Gears> {
             ],
           ),
 
-          const Gap(8),
+          // const Gap(8),
 
-          Row(
-            children: [
-              Text(
-                "Duration: ",
-                style: GoogleFonts.robotoMono(
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
-              ),
-              const Gap(12),
-              Text(
-                "Oct 2025 - Feb 2026",
-                style: GoogleFonts.robotoMono(
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
-              ),
+          // Row(
+          //   children: [
+          //     Text(
+          //       "Duration: ",
+          //       style: GoogleFonts.robotoMono(
+          //         color: Colors.white,
+          //         fontSize: 16,
+          //       ),
+          //     ),
+          //     const Gap(12),
+          //     Text(
+          //       "Oct 2025 - Feb 2026",
+          //       style: GoogleFonts.robotoMono(
+          //         color: Colors.white,
+          //         fontSize: 16,
+          //       ),
+          //     ),
 
-              // Gap(12),
+          //     // Gap(12),
 
-              // GlowingBlinkingDot(
-              //   colors: [
-              //     Color.fromARGB(255, 167, 255, 109),
-              //     Color.fromARGB(255, 48, 255, 7),
-              //     Color.fromARGB(255, 35, 202, 2),
-              //     Color.fromARGB(255, 0, 148, 57),
-              //   ],
-              //   size: 9,
-              // )
-            ],
-          ),
+          //     // GlowingBlinkingDot(
+          //     //   colors: [
+          //     //     Color.fromARGB(255, 167, 255, 109),
+          //     //     Color.fromARGB(255, 48, 255, 7),
+          //     //     Color.fromARGB(255, 35, 202, 2),
+          //     //     Color.fromARGB(255, 0, 148, 57),
+          //     //   ],
+          //     //   size: 9,
+          //     // )
+          //   ],
+          // ),
 
           const Gap(8),
 
@@ -158,9 +158,9 @@ class _AndroidDev42GearsState extends State<AndroidDev42Gears> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _experienceBullet(
-                  "Worked as an Android Device Platform Engineer at 42Gears Mobility System, building native Android services and platform-level features for enterprise device management.",
+                  "Android Device Platform Engineer at 42Gears Mobility System, building native Android services and platform-level features for enterprise device management.",
                 ),
-                const Gap(12),
+                const Gap(8),
                 _experienceBullet(
                   "Focused on Flutter–Android interoperability, automated device provisioning, and resolving production issues in large-scale deployments.",
                 ),
