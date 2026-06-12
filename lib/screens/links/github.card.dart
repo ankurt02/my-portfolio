@@ -26,7 +26,7 @@ class GitHubCard extends StatefulWidget {
 class _GitHubCardState extends State<GitHubCard> {
   late Future<Map<String, dynamic>> _githubData;
   // final String githubToken = const String.fromEnvironment('TOKEN_GITHUB');
-// 
+  //
   @override
   void initState() {
     super.initState();
@@ -35,18 +35,23 @@ class _GitHubCardState extends State<GitHubCard> {
 
   // Fetch both profile and contribution data together from GitHub GraphQL API
   // Fetch both profile and contribution data from Vercel proxy API
-Future<Map<String, dynamic>> _fetchAllGitHubData() async {
-  final now = DateTime.now();
-  final startDate = DateTime(now.year, 1, 1);
-  final endDate = DateTime(now.year, 12, 31);
+  Future<Map<String, dynamic>> _fetchAllGitHubData() async {
+    final now = DateTime.now();
 
-  final String query = """
+    // FIX 1: Use UTC to prevent timezone boundary shifting issues with GitHub's servers
+    final startDate = DateTime.utc(now.year, 1, 1);
+
+    // (stops fetching data past today):
+    final endDate = DateTime.utc(now.year, now.month, now.day, 23, 59, 59);
+
+    // FIX 2: Added ownerAffiliations and privacy arguments to repositories
+    final String query = """
     query(\$from: DateTime!, \$to: DateTime!) {
       viewer {
         login
         name
         avatarUrl
-        repositories {
+        repositories(ownerAffiliations: [OWNER], privacy: PUBLIC) {
           totalCount
         }
         followers {
@@ -67,67 +72,76 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
     }
   """;
 
-  // Changed: Use Vercel API instead of GitHub directly
-  final response = await http.post(
-    Uri.parse('https://git-hub-proxy-mu.vercel.app/api/github'),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: jsonEncode({
-      'query': query,
-      'variables': {
-        'from': startDate.toIso8601String(),
-        'to': endDate.toIso8601String(),
-      },
-    }),
-  );
+    final response = await http.post(
+      Uri.parse('https://git-hub-proxy-mu.vercel.app/api/github'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'query': query,
+        'variables': {
+          'from': startDate.toIso8601String(),
+          'to': endDate.toIso8601String(),
+        },
+      }),
+    );
 
-  if (response.statusCode == 200) {
-    final data = jsonDecode(response.body);
-    
-    // Check if there's an error in the response
-    if (data['errors'] != null) {
-      throw Exception('GraphQL Error: ${data['errors']}');
-    }
-    
-    final viewer = data['data']['viewer'];
-    final calendar = viewer['contributionsCollection']['contributionCalendar'];
-    final weeks = calendar['weeks'];
-    
-    // Parse contribution data
-    final Map<DateTime, int> datasets = {};
-    for (var week in weeks) {
-      for (var day in week['contributionDays']) {
-        final date = DateTime.parse(day['date']);
-        final count = day['contributionCount'];
-        datasets[date] = count;
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+
+      // Check if there's an error in the response
+      if (data['errors'] != null) {
+        throw Exception('GraphQL Error: ${data['errors']}');
       }
+
+      final viewer = data['data']['viewer'];
+
+      // // ADDED: Log the profile data in a beautifully formatted JSON
+      // final prettyJson = const JsonEncoder.withIndent('  ').convert(viewer);
+      // print('======== GITHUB PROFILE JSON DATA ========');
+      // print(prettyJson);
+      // print('==========================================');
+
+      final calendar =
+          viewer['contributionsCollection']['contributionCalendar'];
+      final weeks = calendar['weeks'];
+
+      // Parse contribution data
+      final Map<DateTime, int> datasets = {};
+      // Inside your for loops in _fetchAllGitHubData:
+      for (var week in weeks) {
+        for (var day in week['contributionDays']) {
+          final date = DateTime.parse(day['date']);
+
+          // Skip future dates
+          if (date.isAfter(DateTime.now())) continue;
+
+          final count = day['contributionCount'];
+          datasets[date] = count;
+        }
+      }
+
+      // Create profile object
+      final profile = GitHubProfile(
+        username: viewer['login'] ?? 'user',
+        name: viewer['name'] ?? 'User',
+        profilePicUrl: viewer['avatarUrl'] ?? '',
+        totalRepos: viewer['repositories']['totalCount'] ?? 0,
+        followers: viewer['followers']['totalCount'] ?? 0,
+        totalContributions: null,
+      );
+
+      // Create contribution data object
+      final contributionData = ContributionData(
+        datasets: datasets,
+        totalContributions: calendar['totalContributions'] ?? 0,
+      );
+
+      return {'profile': profile, 'contributionData': contributionData};
+    } else {
+      throw Exception(
+        'Failed to load GitHub data: ${response.statusCode} - ${response.body}',
+      );
     }
-
-    // Create profile object
-    final profile = GitHubProfile(
-      username: viewer['login'] ?? 'user',
-      name: viewer['name'] ?? 'User',
-      profilePicUrl: viewer['avatarUrl'] ?? '',
-      totalRepos: viewer['repositories']['totalCount'] ?? 0,
-      followers: viewer['followers']['totalCount'] ?? 0,
-      totalContributions: null,
-    );
-
-    // Create contribution data object
-    final contributionData = ContributionData(
-      datasets: datasets,
-      totalContributions: calendar['totalContributions'] ?? 0,
-    );
-
-    return {
-      'profile': profile,
-      'contributionData': contributionData,
-    };
-  } else {
-    throw Exception('Failed to load GitHub data: ${response.statusCode} - ${response.body}');
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -148,13 +162,11 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
               return Container(
                 height: screenHeight,
                 child: const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
-                  ),
+                  child: CircularProgressIndicator(color: Colors.white),
                 ),
               );
             }
-            
+
             // Error state
             if (snapshot.hasError) {
               return Container(
@@ -164,11 +176,7 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.error_outline,
-                        color: Colors.red,
-                        size: 48,
-                      ),
+                      Icon(Icons.error_outline, color: Colors.red, size: 48),
                       Gap(16),
                       Text(
                         'Error loading GitHub data',
@@ -189,7 +197,7 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
                 ),
               );
             }
-            
+
             // No data state
             if (!snapshot.hasData) {
               return Container(
@@ -205,7 +213,8 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
 
             // Success state - extract data
             final profile = snapshot.data!['profile'] as GitHubProfile;
-            final contributionData = snapshot.data!['contributionData'] as ContributionData;
+            final contributionData =
+                snapshot.data!['contributionData'] as ContributionData;
 
             return _buildContent(
               context,
@@ -227,15 +236,14 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
     DateTime currentYearStart,
     double screenHeight,
   ) {
-    // Dynamic Color Calculation Logic 
-    final maxCount = (contributionData.datasets.values.isNotEmpty)
-        ? contributionData.datasets.values.reduce((a, b) => a > b ? a : b)
-        : 0;
+    // Dynamic Color Calculation Logic
+    final maxCount =
+        (contributionData.datasets.values.isNotEmpty)
+            ? contributionData.datasets.values.reduce((a, b) => a > b ? a : b)
+            : 0;
 
     // Dynamic colors based on contribution thresholds
-    final Map<int, Color> dynamicColors = {
-      1: const Color(0xFF0E4429),
-    };
+    final Map<int, Color> dynamicColors = {1: const Color(0xFF0E4429)};
 
     if (maxCount > 0) {
       dynamicColors[(maxCount * 0.25).ceil()] = const Color(0xFF006D32);
@@ -275,7 +283,7 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
               ),
             ),
             Gap(16),
-            
+
             // Profile and Heatmap Section
             Container(
               height: screenHeight / 2,
@@ -288,13 +296,19 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
                       children: [
                         CircleAvatar(
                           radius: 36,
-                          backgroundImage: profile.profilePicUrl.isNotEmpty
-                              ? NetworkImage(profile.profilePicUrl)
-                              : null,
+                          backgroundImage:
+                              profile.profilePicUrl.isNotEmpty
+                                  ? NetworkImage(profile.profilePicUrl)
+                                  : null,
                           backgroundColor: const Color(0xFF24292e),
-                          child: profile.profilePicUrl.isEmpty
-                              ? Icon(Icons.person, size: 36, color: Colors.white54)
-                              : null,
+                          child:
+                              profile.profilePicUrl.isEmpty
+                                  ? Icon(
+                                    Icons.person,
+                                    size: 36,
+                                    color: Colors.white54,
+                                  )
+                                  : null,
                         ),
                         Gap(18),
                         Column(
@@ -318,7 +332,7 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
                           ],
                         ),
                         Spacer(),
-                        
+
                         // Stats Row
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -345,9 +359,9 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
                       ],
                     ),
                     Gap(12),
-                    const Divider(color: Colors.white24, height: 1.6,),
+                    const Divider(color: Colors.white24, height: 1.6),
                     Gap(12),
-                    
+
                     // Contribution Heatmap
                     HeatMap(
                       datasets: contributionData.datasets,
@@ -373,10 +387,7 @@ Future<Map<String, dynamic>> _fetchAllGitHubData() async {
             Spacer(),
 
             // Carousel Section
-            Container(
-              height: 60,
-              child: CarouselScreen(),
-            ),
+            Container(height: 60, child: CarouselScreen()),
 
             Gap(36),
           ],

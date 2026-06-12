@@ -6,4 +6,5 @@ class Links {
   static const String corporateAiLink = "https://ankurt02.github.io/corporatify-it/";
   static const String shikamaruProjectLink = "https://ankurt02.github.io/flutter_anime_recom/";
   static const String encryptItProjectLink = "https://ankurt02.github.io/Encryptit/";
+  static const String twitterProfileLink = "https://x.com/_ankur2_";
 }
