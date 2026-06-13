@@ -1,6 +1,8 @@
+import 'package:ankur_portfolio/widgets/bg/grid.painter.dart';
 import 'package:ankur_portfolio/widgets/clock/current.time.dart';
 import 'package:ankur_portfolio/widgets/clock/date.timec.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,99 +15,76 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    // final double screenWidth = MediaQuery.of(context).size.width;
-    // final double screenHeight = MediaQuery.of(context).size.height;
+    double sWidth = 272;
 
-    double sWidth = 272;   
-
-    return Container(
-      decoration: BoxDecoration(
-        color: Color(0xFF121212),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+    return Scaffold(
+      backgroundColor: const Color(0xFF121212), // Main dark background color
+      body: Stack(
         children: [
+          // LAYER 1: The Grid Background
+          const Positioned.fill(
+            child: CustomPaint(
+              painter: GridBackgroundPainter(),
+            ),
+          ),
           
-          // column - 2 - time and clob
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: EdgeInsets.all(4),
-                height: 472,
-                width: sWidth,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  // border: Border.all(color: Colors.blue, width: 2),
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                child: Stack(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: Center(
-                        child: ClipRRect(
-                          borderRadius: BorderRadiusGeometry.circular(10),
-                          child: Image(image: NetworkImage("https://resume-hosting-f1c9d.web.app/background001.jpeg")),
+          // LAYER 2: Your Content
+          Positioned.fill(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                  alignment: Alignment.center,
+                  height: 172,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF121212), // Gives the code container a solid back so grid lines don't slice through text
+                    border: Border.all(color: const Color(0xFF24273A), width: 1.5),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal, 
+                    child: SelectableText.rich(
+                      TextSpan(
+                        style: const TextStyle(
+                          fontFamily: 'Courier', 
+                          fontSize: 14,
+                          height: 1.25,
                         ),
-                      ),
-                    ),
-
-                    // for time and clock
-                    Container(
-                      // padding: EdgeInsets.only(top: 10),
-                      // height: 1,
-                      width: sWidth,
-                      decoration: BoxDecoration(
-                        // border: Border.all(color: Colors.red, width: 2),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          const TextSpan(text: "1     ", style: TextStyle(color: Colors.grey)),
+                          TextSpan(text: "const ", style: GoogleFonts.spaceMono(color: const Color(0xFFC6A0D7))),
+                          TextSpan(text: "developer", style: GoogleFonts.spaceMono(color: const Color(0xFFE8B96B), fontStyle: FontStyle.italic)),
+                          const TextSpan(text: " = ", style: TextStyle(color: Colors.white)),
+                          const TextSpan(text: "{\n", style: TextStyle(color: Color(0xFFEE99A0))),
                           
-                          Container(
-                            padding: EdgeInsets.all(8),
-                            child: Column(
-                              children: [
-                                LiveClock(),
-                                Text.rich(
-                                  TextSpan(
-                                    text: '+05:30 GMT, ', 
-                                    style: GoogleFonts.jetBrainsMono(
-                                    color: Colors.grey.shade800,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                    children: <InlineSpan>[
-                                      TextSpan(
-                                        text: 'India',
-                                        style: GoogleFonts.jetBrainsMono(
-                                    color: Colors.grey.shade800,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Spacer(),
-                          Column(
-                            children: [
-                              Spacer(),
-                              DateContainer(),
-                            ],
-                          ),
+                          const TextSpan(text: "2     ", style: TextStyle(color: Colors.grey)),
+                          TextSpan(text: "\t\t\t\t\t\tname: ", style: GoogleFonts.spaceMono(color: const Color(0xFF8AADF4), fontStyle: FontStyle.italic)),
+                          TextSpan(text: "'Ankur Tiwary',\n", style: GoogleFonts.spaceMono(color: const Color(0xFFA6DA95))),
+                          
+                          const TextSpan(text: "3     ", style: TextStyle(color: Colors.grey)),
+                          TextSpan(text: "\t\t\t\t\t\tlocation: ", style: GoogleFonts.spaceMono(color: const Color(0xFF8AADF4), fontStyle: FontStyle.italic)),
+                          TextSpan(text: "'India',\n", style: GoogleFonts.spaceMono(color: const Color(0xFFA6DA95))),
+                          
+                          const TextSpan(text: "4     ", style: TextStyle(color: Colors.grey)),
+                          TextSpan(text: "\t\t\t\t\t\tstack: ", style: GoogleFonts.spaceMono(color: const Color(0xFF8AADF4), fontStyle: FontStyle.italic)),
+                          TextSpan(text: "['Flutter', 'AI/ML', 'Python'],\n", style: GoogleFonts.spaceMono(color: const Color(0xFFA6DA95))),
+                          
+                          const TextSpan(text: "5     ", style: TextStyle(color: Colors.grey)),
+                          TextSpan(text: "\t\t\t\t\t\tpassion: ", style: GoogleFonts.spaceMono(color: const Color(0xFF8AADF4), fontStyle: FontStyle.italic)),
+                          TextSpan(text: "'Crafting seamless digital experiences',\n", style: GoogleFonts.spaceMono(color: const Color(0xFFA6DA95))),
+                          
+                          const TextSpan(text: "6     ", style: TextStyle(color: Colors.grey)),
+                          TextSpan(text: "}\t;", style: TextStyle(color: const Color(0xFFEE99A0))),
                         ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ],
+                const Gap(32),
+              ],
+            ),
           ),
         ],
       ),

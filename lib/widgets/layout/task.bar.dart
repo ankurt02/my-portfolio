@@ -20,7 +20,7 @@ class _TaskBarState extends State<TaskBar> {
       height: 32,
       width: screenWidth,
       decoration: BoxDecoration(
-        color: const Color(0xFF252526)
+        color: const Color(0xFF1E2030)
       ),
 
 

@@ -19,10 +19,10 @@ class EditorTabBar extends StatelessWidget {
         return Container(
           height: 30,
           decoration: const BoxDecoration(
-            color: Color(0xFF2D2D30),
+            color: Color(0xFF1E2030),
             border: Border(
               bottom: BorderSide(
-                color: Color(0xFF1E1E1E),
+                color: Color(0xFF1E2030),
                 width: 1,
               ),
             ),
@@ -95,18 +95,18 @@ class _TabItemState extends State<_TabItem> {
           ),
           decoration: BoxDecoration(
             color: widget.isActive
-                ? const Color(0xFF1E1E1E)
+                ? const Color(0xFF24273A)
                 : _isHovered
                     ? const Color(0xFF2A2D2E)
-                    : const Color(0xFF2D2D30),
+                    : const Color(0xFF1E2030),
             border: Border(
               right: const BorderSide(
-                color: Color(0xFF1E1E1E),
+                color: Color(0xFF24273A),
                 width: 1,
               ),
               top: widget.isActive
                   ? const BorderSide(
-                      color: Color(0xFF007ACC),
+                      color: Color(0xFFC6A0F6),
                       width: 2,
                     )
                   : BorderSide.none,

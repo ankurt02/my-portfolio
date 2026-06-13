@@ -18,7 +18,7 @@ class _MiscellaneousScreenState extends State<MiscellaneousScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF121212),
+      backgroundColor: const Color(0xFF24273A),
       body: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(16.0),

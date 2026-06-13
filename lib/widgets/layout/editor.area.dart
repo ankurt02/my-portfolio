@@ -12,7 +12,7 @@ class EditorArea extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Material(
-      color: const Color(0xFF1E1E1E),
+      color: const Color(0xFF24273A),
       child: Container(
         width: screenWidth * (1540 / 1920),
         child: Column(
@@ -23,7 +23,7 @@ class EditorArea extends StatelessWidget {
             // Editor content
             Expanded(
               child: Container(
-                color: const Color(0xFF000C18),
+                color: const Color(0xFF24273A),
                 child: Center(child: child),
               ),
             ),

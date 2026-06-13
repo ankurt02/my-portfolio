@@ -26,7 +26,7 @@ class _ActivityBarState extends State<ActivityBar> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      decoration: const BoxDecoration(color: Color(0xFF333333)),
+      decoration: const BoxDecoration(color: Color(0xFF181926)),
       width: screenWidth * (60 / 1920),
       child: Padding(
         padding: const EdgeInsets.only(

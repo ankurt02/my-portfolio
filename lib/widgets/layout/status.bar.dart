@@ -15,7 +15,7 @@ class _StatusBarState extends State<StatusBar> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      decoration: BoxDecoration(color: const Color(0xFF007ACC)),
+      decoration: BoxDecoration(color: const Color(0xFF181926)),
       height: 24,
       width: screenWidth,
 
@@ -107,7 +107,7 @@ class _StatusBarState extends State<StatusBar> {
           Row(
             children: [
               Text(
-                "v1.45.02-release",
+                "v1.55.06-release",
                 style: GoogleFonts.robotoMono(
                   fontSize: 12,
                   color: Colors.grey.shade300,

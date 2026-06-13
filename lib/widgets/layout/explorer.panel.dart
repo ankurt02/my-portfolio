@@ -44,7 +44,7 @@ class _ExplorerPanelState extends State<ExplorerPanel> {
     final String currentLocation = GoRouterState.of(context).uri.toString();
 
     return Container(
-      decoration: const BoxDecoration(color: Color(0xFF252526)),
+      decoration: const BoxDecoration(color: Color(0xFF1E2030)),
       width: screenWidth * (320 / 1920),
       height: screenHeight - 48,
       child: SingleChildScrollView(
