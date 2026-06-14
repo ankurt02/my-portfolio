@@ -17,6 +17,7 @@ import 'package:ankur_portfolio/screens/pdf/resume.view.dart';
 import 'package:ankur_portfolio/screens/projects/corporate.filter.dart';
 import 'package:ankur_portfolio/screens/projects/encrypt.it.dart';
 import 'package:ankur_portfolio/screens/projects/price.lense.dart';
+import 'package:ankur_portfolio/screens/projects/projects.json.dart';
 import 'package:ankur_portfolio/screens/projects/shikamaru.ai.dart';
 import 'package:ankur_portfolio/screens/skills/my.skills.dart';
 import 'package:ankur_portfolio/screens/splash.screen.dart';
@@ -67,21 +68,25 @@ final router = GoRouter(
           path: '/experience/android',
           pageBuilder: (context, state) => NoTransitionPage(child: const AndroidDev42Gears()),
         ),
+        // GoRoute(
+        //   path: '/projects/shikamaruAi',
+        //   pageBuilder: (context, state) => NoTransitionPage(child:  ShikamaruAI()),
+        // ),
+        // GoRoute(
+        //   path: '/projects/corporateAi',
+        //   pageBuilder: (context, state) => NoTransitionPage(child:  CorporateFilterScreen()),
+        // ),
+        // GoRoute(
+        //   path: '/projects/priceLense',
+        //   pageBuilder: (context, state) => NoTransitionPage(child:  PriceLense()),
+        // ),
+        // GoRoute(
+        //   path: '/projects/encryptIt',
+        //   pageBuilder: (context, state) => NoTransitionPage(child:  EncryptIt()),
+        // ),
         GoRoute(
-          path: '/projects/shikamaruAi',
-          pageBuilder: (context, state) => NoTransitionPage(child:  ShikamaruAI()),
-        ),
-        GoRoute(
-          path: '/projects/corporateAi',
-          pageBuilder: (context, state) => NoTransitionPage(child:  CorporateFilterScreen()),
-        ),
-        GoRoute(
-          path: '/projects/priceLense',
-          pageBuilder: (context, state) => NoTransitionPage(child:  PriceLense()),
-        ),
-        GoRoute(
-          path: '/projects/encryptIt',
-          pageBuilder: (context, state) => NoTransitionPage(child:  EncryptIt()),
+          path: '/projects',
+          pageBuilder: (context, state) => NoTransitionPage(child:  ProjectsJsonScreen()),
         ),
         GoRoute(
           path: '/social/linkedin',

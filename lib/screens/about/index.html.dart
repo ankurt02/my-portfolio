@@ -94,7 +94,8 @@ class _IndexDotHtmlState extends State<IndexDotHtml> {
                   return const LinearGradient(
                     colors: [
                       Colors.green, 
-                      Colors.lightGreen, 
+                      Colors.lightGreenAccent, 
+                      Colors.yellow, 
                       Colors.blue, 
                       Colors.blueAccent
                     ],
