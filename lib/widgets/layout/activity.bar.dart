@@ -53,6 +53,22 @@ class _ActivityBarState extends State<ActivityBar> {
               ),
             ),
 
+            Gap(24),
+
+            SideTooltip(
+              message: "Terminal · Coming soon",
+              child: GestureDetector(
+                onTap: () {},
+                child: Icon(
+                  Bootstrap.terminal,
+                  weight: 1,
+                  fill: 1,
+                  color: widget.isOpen ? Colors.white : Colors.grey.shade200,
+                  size: 26,
+                ),
+              ),
+            ),
+
             const Spacer(), 
 
             // --- Accounts / Home Icon ---
