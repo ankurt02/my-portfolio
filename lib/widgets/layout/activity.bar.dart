@@ -56,7 +56,8 @@ class _ActivityBarState extends State<ActivityBar> {
             Gap(24),
 
             SideTooltip(
-              message: "Terminal · Coming soon",
+              message: "Terminal · ",
+              messageStatus: "Build Pipeline Active",
               child: GestureDetector(
                 onTap: () {},
                 child: Icon(
@@ -86,7 +87,8 @@ class _ActivityBarState extends State<ActivityBar> {
             ),
             Gap(16),
             SideTooltip(         
-              message: "Settings",
+              message: "Settings · ",
+              messageStatus: "Feature Upcoming",
               child: GestureDetector(
                 onTap: widget.onHomeTap,
                 child: SvgPicture.asset(

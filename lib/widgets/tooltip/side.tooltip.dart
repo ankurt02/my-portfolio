@@ -4,11 +4,13 @@ enum TooltipDirection { top, bottom, left, right }
 
 class SideTooltip extends StatefulWidget {
   final String message;
+  final String? messageStatus;
   final Widget child;
   final TooltipDirection direction;
 
   const SideTooltip({
     required this.message,
+    this.messageStatus,
     required this.child,
     this.direction = TooltipDirection.right,
   });
@@ -67,7 +69,10 @@ class SideTooltipState extends State<SideTooltip> {
                         minWidth: 0,
                         maxWidth: 220,
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: const Color(0xFF1E1E1E),
                         borderRadius: BorderRadius.circular(8),
@@ -83,12 +88,36 @@ class SideTooltipState extends State<SideTooltip> {
                           ),
                         ],
                       ),
-                      child: Text(
-                        widget.message,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
+                      child: Transform.translate(
+                        offset: Offset(0, 1),
+                        child: Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                text: widget.message,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.2, // important
+                                ),
+                              ),
+                              if (widget.messageStatus != null)
+                                TextSpan(
+                                  text: widget.messageStatus!,
+                                  style: const TextStyle(
+                                    color: Color(0xFFFFE082),
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                    height: 1.2,
+                                  ),
+                                ),
+                            ],
+                          ),
+                          strutStyle: const StrutStyle(
+                            forceStrutHeight: true,
+                            height: 1.2,
+                          ),
                         ),
                       ),
                     ),
