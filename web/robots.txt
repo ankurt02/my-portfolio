@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ankur-portfolio-d873f.web.app/sitemap.xml
